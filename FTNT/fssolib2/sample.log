@@ -1,0 +1,8 @@
+HQ-NGFW-1 # diagnose debug authd fsso  list
+
+
+----FSSO logons----
+IP: 10.0.11.50  User: ADUSER1  Groups: training.lab/Users  Workstation: C7280677811.training.lab MemberOf: Training 
+Total number of logons listed: 1, filtered: 0
+----end of FSSO logons----
+

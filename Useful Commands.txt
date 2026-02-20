@@ -1,0 +1,21 @@
+
+git status        # Check sync state
+git pull          # Download updates
+git push          # Upload changes
+git fetch         # Check remote changes only
+git log --oneline # Verify commits
+
+
+# Pull Changes (GitHub → Local)
+
+git pul
+
+
+# Push Changes (Local → GitHub)
+
+git add .
+git commit -m "Your commit message"
+git push
+
+
+
