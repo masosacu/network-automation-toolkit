@@ -1,0 +1,2 @@
+# FortiAnalyzer devices
+10.25.0.49
