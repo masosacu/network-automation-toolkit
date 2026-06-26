@@ -1,0 +1,21 @@
+Cisco AP RMA
+----------
+
+AP is not powering on. No LED activity, no PoE draw, and not detected via CDP or WLC. 
+
+Troubleshooting completed:
+
+- Verified switch port and PoE configuration
+- Tested with known-good cable and alternate PoE ports
+- Confirmed no PoE power allocation from switch
+- Checked logs and physical connections
+
+Device remains unresponsive and appears to be hardware failure.
+
+Requesting RMA replacement.
+
+AP is not powering on. No LED activity, no PoE draw, and not detected via CDP, WLC, or console.
+
+
+INC0961729 - Navigator - 2960
+Pending maintenance windows to replace device.

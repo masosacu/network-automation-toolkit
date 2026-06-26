@@ -1,0 +1,8 @@
+# Prompt to document ServiceNow change.
+
+I am creating a ServiceNow change to replace a member switch on a stack of Cisco switches model 2960 in NCLH Navigator ship HUB NAV-HUB407B to remediate PoE issue. Change is related to incident INC0961729.
+Could you generate a "Short description ", "Description ", "Justification ", "Implementation plan ", "Backout plan " and "Test plan" for this change?
+
+
+
+

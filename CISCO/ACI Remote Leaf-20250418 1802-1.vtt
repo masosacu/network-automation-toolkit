@@ -1,0 +1,1029 @@
+WEBVTT
+
+1 "Manuel _ NCL" (1129693440)
+00:00:00.000 --> 00:00:19.923
+Okay, this is the topology that we plan to implement, right?
+
+2 "JT Stamm" (3076394496)
+00:00:19.923 --> 00:00:21.826
+Okay.
+
+3 "Manuel _ NCL" (1129693440)
+00:00:21.826 --> 00:00:49.580
+So we are going to use the the ACI fabric that we have in discovery lab, and we have two spine with one apic. And we have like six leaves there in discovery lab, right? We have right now they are in in discovery lab is the ACI fabric in this way. From the spines we.
+
+4 "Manuel _ NCL" (1129693440)
+00:00:49.580 --> 00:00:55.219
+To run a cable to the future switch that we have there.
+
+5 "JT Stamm" (3076394496)
+00:00:55.219 --> 00:00:56.358
+Yep. Yep.
+
+6 "Manuel _ NCL" (1129693440)
+00:00:56.358 --> 00:01:11.420
+And the future also connect the the SDA fabric from a spine 111 connection to future and from spine two one connection to future. For zone.
+
+7 "Manuel _ NCL" (1129693440)
+00:01:11.420 --> 00:01:16.445
+Reason the this link doesn't want to coming up. I don't know what is happening there.
+
+8 "JT Stamm" (3076394496)
+00:01:16.445 --> 00:01:20.803
+Hello. Interesting. We bought the guy.
+
+9 "Manuel _ NCL" (1129693440)
+00:01:20.803 --> 00:01:26.402
+No, it doesn't like it. I don't know what happened there.
+
+10 "JT Stamm" (3076394496)
+00:01:26.402 --> 00:01:34.217
+Out of curiosity, did you get a chance to try different physical interfaces perhaps on either the fusion or the spine one oh two?
+
+11 "Manuel _ NCL" (1129693440)
+00:01:34.217 --> 00:01:40.544
+We're going to troubleshoot that in on Monday to see where it's coming.
+
+12 "JT Stamm" (3076394496)
+00:01:40.544 --> 00:01:42.906
+Okay. One of.
+
+13 "Manuel _ NCL" (1129693440)
+00:01:42.906 --> 00:02:03.810
+In future, we have another connection that go to the SD WAN appliance. We use silver peak in the SD WAN appliance, and what we did that we finished today morning is a OSPF running here. All the green circle here is OSPF.
+
+14 "Manuel _ NCL" (1129693440)
+00:02:03.810 --> 00:02:09.570
+In area zero, in area zero. Yep. Gotcha.
+
+15 "JT Stamm" (3076394496)
+00:02:09.570 --> 00:02:16.911
+And perfect yep we'll need, we'll need that for the underlay reachability, so that's perfect. And I see you have that also on the remote end as well.
+
+16 "Manuel _ NCL" (1129693440)
+00:02:16.911 --> 00:02:42.597
+Exactly and we have another side of the SD one CBP, CBP connect to another switch that is layer three switch here. And from there we put the, the remote leaf. In this case we are going to only have one remote leaf here at this moment, this is the information that we have, right?
+
+17 "JT Stamm" (3076394496)
+00:02:42.597 --> 00:02:50.071
+Good to know, good to know. Okay I'll talk a little bit about that once we get to yeah when I do the session. Okay.
+
+18 "Manuel _ NCL" (1129693440)
+00:02:50.071 --> 00:03:03.654
+Yeah, so so far we only have one interface here, let me remove this and put extra cable there. It's only one. Right, so far we have this.
+
+19 "JT Stamm" (3076394496)
+00:03:03.654 --> 00:03:08.231
+Yep, and have you wrong?
+
+20 "Manuel _ NCL" (1129693440)
+00:03:08.231 --> 00:03:35.472
+And so OSPF is already running here, in OSPF everything looked like fine so far and ok and what else that we plan to do and from here we are going to put let's see how the table to here and we are going to have a layer three out here running BGP. Okay.
+
+21 "JT Stamm" (3076394496)
+00:03:35.472 --> 00:03:42.376
+Okay so far, so far we are trying to implement the remote.
+
+22 "Manuel _ NCL" (1129693440)
+00:03:42.376 --> 00:03:44.256
+This part.
+
+23 "JT Stamm" (3076394496)
+00:03:44.256 --> 00:03:59.915
+Oh, gotcha. Just out of curiosity, besides that link being down, are you having any other barriers that's preventing you from deploying it or is it just a matter of you're, you're in the process and it'll that part hasn't come up yet?
+
+24 "Manuel _ NCL" (1129693440)
+00:03:59.915 --> 00:04:15.840
+No, I said we we start this implementation this week practically, and the issue that we found was with the OSPF. I was trying to use the network point to point here.
+
+25 "Manuel _ NCL" (1129693440)
+00:04:15.840 --> 00:04:37.700
+So when I set up the interfaces for then between and between the catalogs and the appliance, I set up a network type point to point, right? And all the links here. And for the reason that doesn't like.
+
+26 "Manuel _ NCL" (1129693440)
+00:04:37.700 --> 00:04:52.257
+Into the same big supply, and I figured out that today morning. I have removed the point to point and leave that in being broadcasts and everything is working fine right now, yeah. We can talk OSPF.
+
+27 "JT Stamm" (3076394496)
+00:04:52.257 --> 00:05:14.887
+And just out of curiosity, sorry I'm not an SD WAN expert. Is it effectively the same OSPF area that just, and it's that OSPF area is going over the SD WAN network or are we doing like redistribution from OSPF on one side into SD WAN and the redistribution from SD WAN into OSPF on the remote.
+
+28 "Manuel _ NCL" (1129693440)
+00:05:14.887 --> 00:05:25.216
+Side. That is correct. We have we have OSPF here with redistribute in SD one and then from redistributing OSPF.
+
+29 "JT Stamm" (3076394496)
+00:05:25.216 --> 00:05:26.159
+Sorry.
+
+30 "Manuel _ NCL" (1129693440)
+00:05:26.159 --> 00:05:31.976
+Sure and both and both sides they are both sides.
+
+31 "Manuel _ NCL" (1129693440)
+00:05:31.976 --> 00:05:42.795
+And all, all this link they have 1600 eh NTU, all these local links here.
+
+32 "JT Stamm" (3076394496)
+00:05:42.795 --> 00:05:45.193
+Perfect yeah that's my covered.
+
+33 "Manuel _ NCL" (1129693440)
+00:05:45.193 --> 00:05:52.109
+Yeah, I'm also here you see NTU 1600 1600.
+
+34 "JT Stamm" (3076394496)
+00:05:52.109 --> 00:06:15.529
+Sure you guys are way ahead of the game. This is, yeah, you I'm gonna talk about some other things. Maybe it'll bring up some points that we need to take a closer look at, but I think you addressed pretty much all or at least most of the like things that you would need for this remote leaf. We call it interpod network or inter site network depending on who you ask, but yeah, this looks.
+
+35 "JT Stamm" (3076394496)
+00:06:15.529 --> 00:06:16.673
+Very good.
+
+36 "Manuel _ NCL" (1129693440)
+00:06:16.673 --> 00:06:27.275
+We assigned this we we're trying to review some documentation and we assigned the segment for extended.
+
+37 "Eng. Socrates Romay, MBA." (2890409216)
+00:06:27.275 --> 00:06:35.137
+No, another question and the the leaf have to be in discovery mode, NO? Or you had to connect the V four.
+
+38 "JT Stamm" (3076394496)
+00:06:35.137 --> 00:06:46.991
+It will have to be, you can think of it as that leaf should be completely white when you discover it so like fresh out of the box type configuration.
+
+39 "Eng. Socrates Romay, MBA." (2890409216)
+00:06:46.991 --> 00:07:07.112
+Yeah, we just put it, we just put it the the before was a regular nexus with the Nexus configuration and then we just loaded the the email for the leaf, you know, for the same email as ACI and right now when you log in there they say discovery.
+
+40 "Manuel _ NCL" (1129693440)
+00:07:07.112 --> 00:07:09.904
+Remote but you know.
+
+41 "Eng. Socrates Romay, MBA." (2890409216)
+00:07:09.904 --> 00:07:26.597
+I'm not sure that we have to do something else where they can see one to another because it's under different, you know, I don't know how the traffic will be go back and forth to to discovery the ACI or the app epic server can discovery that leaf.
+
+42 "JT Stamm" (3076394496)
+00:07:26.597 --> 00:07:48.419
+Perfect. I say perfect because I am absolutely going to cover how that discovery process works. So, it sounds like your leaf is in the good state. What model it probably doesn't matter, but I'm just curious, what model of remote leaf did you choose for this? If you know off the top of your head, it's not.
+
+43 "Manuel _ NCL" (1129693440)
+00:07:48.419 --> 00:07:57.178
+You take the pictures? You have the picture with the serial number. Remember for the white paper in the back?
+
+44 "Eng. Socrates Romay, MBA." (2890409216)
+00:07:57.178 --> 00:08:00.320
+Okay, let me look in that one. Hold on.
+
+45 "JT Stamm" (3076394496)
+00:08:00.320 --> 00:08:11.910
+Yeah, essentially, I'll talk about hardware compatibility but it's pretty much any hardware within the past like eight years or so we'll support remotely, but I'm just kind of curious.
+
+46 "Luis Mujica" (2159095040)
+00:08:11.910 --> 00:08:13.158
+I believe.
+
+47 "Eng. Socrates Romay, MBA." (2890409216)
+00:08:13.158 --> 00:08:14.459
+Yeah, so.
+
+48 "Luis Mujica" (2159095040)
+00:08:14.459 --> 00:08:18.835
+Like Any.
+
+49 "Eng. Socrates Romay, MBA." (2890409216)
+00:08:18.835 --> 00:08:22.398
+YC-EF Yeah yc.
+
+50 "Luis Mujica" (2159095040)
+00:08:22.398 --> 00:08:24.049
+D-FX.
+
+51 "JT Stamm" (3076394496)
+00:08:24.049 --> 00:08:31.515
+I see f that's ok yeah EX. Right.
+
+52 "Eng. Socrates Romay, MBA." (2890409216)
+00:08:31.515 --> 00:08:45.016
+Got it. Yeah. Yes. There's a9KC9193180 yc, like a jankie Charlie-echo x ray. Yep.
+
+53 "JT Stamm" (3076394496)
+00:08:45.016 --> 00:08:53.857
+Yeah, well familiar with that one. So, yeah, that's totally supported for remote leaf, so that's perfect. Let me ask you.
+
+54 "Manuel _ NCL" (1129693440)
+00:08:53.857 --> 00:09:17.419
+We need one standard step here, a pool, right? Yes. And for the another site, we normally use one a production tab here and pool here, right? And normally when you deploy the ACI, we are going to, for this remote leaf, we are going to need the standard and in the another site we are going.
+
+55 "Manuel _ NCL" (1129693440)
+00:09:17.419 --> 00:09:19.414
+You need another step?
+
+56 "JT Stamm" (3076394496)
+00:09:19.414 --> 00:09:49.096
+Correct. Yeah, I would that external tap I think if you read documentation we say it's recommended, but it's like heavily recommended at this point. So it's good that you carved that out, and you're correct. The remote leaf switch, where you have your ten.two 50 five.1/ 24 remote pool, you will need that as well. So it's good that you have that carved out. So, I'll I'll talk about those tep ranges, but yeah, that looks good.
+
+57 "Eng. Socrates Romay, MBA." (2890409216)
+00:09:49.096 --> 00:10:05.364
+We don't show the the ACI or he can see it, you know, because we haven't got the ground and he can help with the discovery because you know.
+
+58 "Manuel _ NCL" (1129693440)
+00:10:05.364 --> 00:10:08.626
+Or you you want to do the the configuration now?
+
+59 "Eng. Socrates Romay, MBA." (2890409216)
+00:10:08.626 --> 00:10:13.364
+Why NO? We can we can do the the 1st part.
+
+60 "Manuel _ NCL" (1129693440)
+00:10:13.364 --> 00:10:17.522
+Yes, because we have the one link down, NO? I don't know if that is going to affect.
+
+61 "Eng. Socrates Romay, MBA." (2890409216)
+00:10:17.522 --> 00:10:29.303
+It doesn't matter. One Is it can be one. You only need to connect it to one connected to both spine. We can do it now.
+
+62 "JT Stamm" (3076394496)
+00:10:29.303 --> 00:10:38.860
+Okay, well, I I do have to be just fully transparent here. I'm not really authorized to do like live configuration type stuff. Well it's a lab, right?
+
+63 "Eng. Socrates Romay, MBA." (2890409216)
+00:10:38.860 --> 00:10:41.581
+This is the.
+
+64 "Manuel _ NCL" (1129693440)
+00:10:41.581 --> 00:10:46.359
+It's it's a lab but it's not a production lab. It's really.
+
+65 "Eng. Socrates Romay, MBA." (2890409216)
+00:10:46.964 --> 00:10:50.542
+It's still as a lab, but don't worry.
+
+66 "Manuel _ NCL" (1129693440)
+00:10:50.542 --> 00:10:53.292
+We can show.
+
+67 "Eng. Socrates Romay, MBA." (2890409216)
+00:10:53.292 --> 00:11:07.507
+Show you there because they asked some question there and now we had to fill it out some purple thing and I want to understand, you know, we don't put it just to understand the process because you know they had like a quick set up there.
+
+68 "JT Stamm" (3076394496)
+00:11:07.507 --> 00:11:10.371
+Yeah, I understand. Yeah.
+
+69 "Eng. Socrates Romay, MBA." (2890409216)
+00:11:10.371 --> 00:11:15.695
+And how you call the, the, the help set up or whatever?
+
+70 "Manuel _ NCL" (1129693440)
+00:11:15.695 --> 00:11:22.413
+Okay, do you want to share your screen? Because I am over the phone. My connection is terrible here.
+
+71 "Eng. Socrates Romay, MBA." (2890409216)
+00:11:22.413 --> 00:11:26.054
+My either man, let me see.
+
+72 "Manuel _ NCL" (1129693440)
+00:11:26.054 --> 00:11:29.452
+Ree, are you there?
+
+73 "Luis Mujica" (2159095040)
+00:11:29.452 --> 00:11:31.291
+Yes I'm here.
+
+74 "Manuel _ NCL" (1129693440)
+00:11:31.291 --> 00:11:35.507
+Are you can share?
+
+75 "Luis Mujica" (2159095040)
+00:11:35.507 --> 00:11:37.893
+To show what, to show.
+
+76 "Eng. Socrates Romay, MBA." (2890409216)
+00:11:40.366 --> 00:11:46.480
+We got you, please. Let me see let me let me put my computer. Yeah.
+
+77 "Manuel _ NCL" (1129693440)
+00:11:46.480 --> 00:11:51.373
+Yeah and i'm connecting the phone instead of.
+
+78 "Luis Mujica" (2159095040)
+00:11:51.373 --> 00:11:53.954
+Yeah.
+
+79 "JT Stamm" (3076394496)
+00:11:53.954 --> 00:12:23.050
+And one thing I wanted to offer is I was gonna go over like the theory and configuration of remote leaf in more like slide deck form and I also have my lab as well. But what would the thought be if I covered like do a little bit of like an education session and then we can do this. I don't know if we'll have time to do both, but if we want to schedule something for next Friday, we could have a follow up session and then we can focus on the lab. Does that sound good?
+
+80 "Eng. Socrates Romay, MBA." (2890409216)
+00:12:23.050 --> 00:12:38.791
+We will need it to do it before the last week, the next Friday but you know we we had to finish on Monday but it's ok, you wanna.
+
+81 "JT Stamm" (3076394496)
+00:12:38.791 --> 00:12:50.851
+Let me, Yeah, let me check Monday if maybe we can pin something down for Monday.
+
+82 "Alejandro Power" (4080968192)
+00:12:50.851 --> 00:12:51.973
+Okay.
+
+83 "Luis Mujica" (2159095040)
+00:12:51.973 --> 00:12:53.415
+Yeah.
+
+84 "JT Stamm" (3076394496)
+00:12:53.415 --> 00:13:00.176
+I'm a little I'm a little tight on my availability. I got a, I got an eleven.
+
+85 "Luis Mujica" (2159095040)
+00:13:00.176 --> 00:13:03.874
+A M Eastern time slot and a 03:00 p.m..
+
+86 "JT Stamm" (3076394496)
+00:13:03.874 --> 00:13:11.070
+3pM. Eastern time slot each for an hour if that works.
+
+87 "Eng. Socrates Romay, MBA." (2890409216)
+00:13:11.070 --> 00:13:20.335
+At 03:00 P.M. on Monday that's fine. I don't know many, are you ok with 03:00 p.m. Monday? Anytime, I can't.
+
+88 "Manuel _ NCL" (1129693440)
+00:13:20.335 --> 00:13:23.271
+Everything that I have in my cancel.
+
+89 "Luis Mujica" (2159095040)
+00:13:23.271 --> 00:13:27.233
+Okay.
+
+90 "Manuel _ NCL" (1129693440)
+00:13:27.233 --> 00:13:29.375
+Yeah, 3 min away. Both of them.
+
+91 "Luis Mujica" (2159095040)
+00:13:29.375 --> 00:13:39.667
+In the lab. You want me to hear a.
+
+92 "Manuel _ NCL" (1129693440)
+00:13:39.667 --> 00:13:44.433
+Oh, we can review the theory 1st and then we can jump to the lab?
+
+93 "JT Stamm" (3076394496)
+00:13:44.433 --> 00:13:58.813
+Yeah, whatever time we have have left, I'll try to get through the the education content as quickly as possible. We can try to address what we can in the lab today and then if not anything we don't cover, we can cover it 03:00 P.M. on that Monday.
+
+94 "Manuel _ NCL" (1129693440)
+00:13:58.813 --> 00:14:02.273
+Okay invite to the.
+
+95 "JT Stamm" (3076394496)
+00:14:02.273 --> 00:14:10.236
+Same group and yeah you guys will get that in your inbox during or after this session.
+
+96 "JT Stamm" (3076394496)
+00:14:10.236 --> 00:14:21.578
+Okay, so let me dive into the education session I have one sec.
+
+97 "Alejandro Power" (4080968192)
+00:14:21.578 --> 00:14:28.855
+Okay.
+
+98 "JT Stamm" (3076394496)
+00:14:28.855 --> 00:14:56.079
+All right, so, yeah, it's slides unfortunately, but I think it's gonna cover some really important concepts. So Manuel, it seems like they're very well versed in the requirements for the iPN/ISN that network between the remote leaf and the ACI fabric, but I, we could use this as an opportunity to level set everyone just in case we need to catch up everyone on the terms.
+
+99 "JT Stamm" (3076394496)
+00:14:56.079 --> 00:15:30.589
+We're talking about. Anyway, so I'll talk it quickly about remote leaf use cases, like why would we use it? I will say up front, you guys being shipboard, that's a very interesting scenario, totally valid for this use case. I it's just I'm definitely not gonna be covering shipboard deployments of remote leaf specifically, but you know it's a a network's network here. Then we'll talk about the architecture. That's where we're gonna go a little bit deeper. So we're gonna talk about those inter pod inter site network requirements, also like the remote leaf requirements and also the home.
+
+100 "JT Stamm" (3076394496)
+00:15:30.589 --> 00:15:52.549
+Main ACI fabric, and then we'll talk about the configuration. I do have a recorded demo of what the setup looks like. And so we'll take a look at that and then afterwards we can take a look at the lab. So let's dive into remote leaf use cases. So I'll quickly go through this. You guys are already going with remote leaf.
+
+101 "JT Stamm" (3076394496)
+00:15:52.549 --> 00:16:12.549
+So it's a little pointless for me to be going over this, but nonetheless, remote leaf is all about inter data center connectivity. So we essentially need to extend ACI policy outside of the ACI fabric to some remote location, but it's in a location where we don't necessarily need to or want to invest in a.
+
+102 "JT Stamm" (3076394496)
+00:16:12.549 --> 00:16:34.889
+Whole ACI fabric. So like in your case across that SD WAN network, you know, you already have an ACI fabric on the ship, you probably don't need to deploy another one on another part of the ship, so remote leaf makes total sense in that case if you just need to deploy ACI policy and get that VXLAN data plane reachability.
+
+103 "JT Stamm" (3076394496)
+00:16:34.889 --> 00:16:53.039
+Just to like a, a smaller location elsewhere. So I mean that's basically it. Oh, actually let me go back. Main point about this centralized management, so just in case there's any doubt, remote leaf is considered a leaf in ACI, it's.
+
+104 "JT Stamm" (3076394496)
+00:16:53.039 --> 00:17:13.039
+You're gonna be managing it from the APEC that you already use to manage the ACI fabric. There's NO separate controller. There's NO separate window that you open up to manage the remote leaf. It for all intents and purposes, it appears as a standard ACI leaf switch. There's a couple of considerations.
+
+105 "JT Stamm" (3076394496)
+00:17:13.039 --> 00:17:31.889
+It's like we'll talk about it as we go along, but think of it as just like any other leaf switch. Now some other use case scenarios not applicable to you, we might use this, well actually you guys are kind of using this as a what we say as a satellite data center, so it's just a smaller ACI footprint elsewhere like I was discussing.
+
+106 "JT Stamm" (3076394496)
+00:17:31.889 --> 00:17:51.889
+But telecommunications providers like with five G towers might find use of this if we need to extend ACI say services hosted in ACI in our main data center to say like cell towered locations where we can deploy a pair of remote leaf switches. I know you guys just have the one. Typically we'll deploy.
+
+107 "JT Stamm" (3076394496)
+00:17:51.889 --> 00:18:12.499
+Anyway, telco providers might opt for that direction and an interesting use case is migration purposes. So if we're trying to like start bringing workloads into ACI at a remote location, remote leaf can be an effective way to do that. And interestingly, also disaster recovery. So.
+
+108 "JT Stamm" (3076394496)
+00:18:12.499 --> 00:18:37.349
+So if we have services in ACI that we want to have a little bit more redundancy, we might be able to put them off in the remote leaf location. So couple use cases there. All right, now let's talk about the solution itself. So the architecture. Now, I believe Minwell, what you are showing is more detailed than this diagram that I have here, but it is essentially the same. So the whole idea of.
+
+109 "JT Stamm" (3076394496)
+00:18:37.349 --> 00:18:57.349
+Well, ok, before I go in there, let me just kind of level set here. Remote leaf switches are going to be like the same N9K hardware that you use those leaf switches in ACI. I'll have a complete hardware compatibility list. We already know you're using the EX switch which is compatible with remote leaf, so NO worries there. But we're gonna deploy that in our.
+
+110 "JT Stamm" (3076394496)
+00:18:57.349 --> 00:19:15.719
+Remote leaf location. Now it's important to keep in mind that from aci's perspective, we think of that remote leaf location as kind of like an extension of our main ACI data center or pod. Now, you guys just have a single pod, a single ACI site. You.
+
+111 "JT Stamm" (3076394496)
+00:19:15.719 --> 00:19:34.379
+Or I think like couple months back, like when we kicked off that original series, I talked about multi site and multi pod to a very brief extent. You may have heard of those terms as well. If you do have those types of deployments, if you ever encounter that in your future careers, you.
+
+112 "JT Stamm" (3076394496)
+00:19:34.379 --> 00:19:54.379
+You have to essentially anchor the remote leaf switches to the site or pod that you that is logically the closest to essentially. We're not gonna have to worry about that here. You have a single site, single location, but again, the remote leaf location is an extension of that main ACI data center/pod.
+
+113 "JT Stamm" (3076394496)
+00:19:54.379 --> 00:20:14.509
+And then of course we have that IPN ISN network that we're gonna talk about that's also important for this and that you pretty much already have fully configured, which is great. Alright, now in the olden days of remote leaf, we used to have some traffic paths. I'm not gonna cover it, but we had some traffic paths between remote leaf locations, like let's say we.
+
+114 "JT Stamm" (3076394496)
+00:20:14.509 --> 00:20:45.799
+Deploy multiple pairs of remote leaf switches or we have multiple relief remote leaf switches out there in different locations so they're not like locally connected to each other or anything like that. In the past we would sometimes for certain traffic flows have to hairpin off of the main ACI data center. That just came down to our control plane forwarding, but we've optimized that and essentially since ACI five.O, we're always going to have this behavior. Now, not applicable for you guys at this point unless you do deploy.
+
+115 "JT Stamm" (3076394496)
+00:20:45.799 --> 00:21:05.799
+Like another set of remotely switches in your environment, but in that case traffic will flow directly between those remote leaf switches if you have endpoints or virtual machines or containers, what have you, that that L three out that you were talking about, that can flow directly between the remote leaf locations.
+
+116 "JT Stamm" (3076394496)
+00:21:05.799 --> 00:21:23.039
+But for your case, you know, you're pretty much gonna have traffic doing this type of thing, you know, going between the main ACI data center or pod to the remote leaf location or if you have services in this remote leaf location, of course, they're just gonna forward directly off of that remotely switch that you're deploying.
+
+117 "JT Stamm" (3076394496)
+00:21:23.039 --> 00:21:44.779
+Multi pod multi site, I'll go ahead and skip over that, NO need to cover that. Scalability. So now we get into the fun numbers and requirements that we need for remote leaf. So essentially like nowadays on the current, the most recent recommended ACI release, the golden star release that is six.oh eight, we saw.
+
+118 "JT Stamm" (3076394496)
+00:21:44.779 --> 00:22:08.599
+Support up to 200 leaf switches, which is quite a bit, it's quite of it's quite a large number of remote leaf switches I've never seen anything close to that. Usually it's like a pair or two or three or something like that. So you can have basically as many remote leafs to your heart's content. Four two to five 228 and then, you know, we had pretty low scale.
+
+119 "JT Stamm" (3076394496)
+00:22:08.599 --> 00:22:18.809
+Scale numbers still generous given how many remotely people usually deployed but we've significantly increased our scale over time.
+
+120 "JT Stamm" (3076394496)
+00:22:18.809 --> 00:22:38.809
+Okay, now this is probably the densest slide that I have for you today, but it is important and I think you check pretty much everything here off that I can recall after what you showed me here. Nonetheless, let's just go ahead and double check things. So we require ACI version three.one or later for remote.
+
+121 "JT Stamm" (3076394496)
+00:22:38.809 --> 00:23:00.019
+Leaf support. We need what we call second generation leaf switches and spines, but that EX hardware that you have that is supported with remote leaf. I do have the complete hardware compatibility list here, just like I I could tell this is updated but we do have cisco.com that you can reference if we're ever in doubt.
+
+122 "JT Stamm" (3076394496)
+00:23:00.019 --> 00:23:23.999
+However, right there we have the YCX switch that is supported at the remote leaf location. Okay, so don't need to worry about that one. Now for those ISN IPN devices, like if I go back a little bit here, like the devices in this IP network here, like what do we need for that?
+
+123 "JT Stamm" (3076394496)
+00:23:23.999 --> 00:23:39.239
+It's pretty generous here and what I mean is most like WAN devices, routers can support this. So basic WAN functionality, basically we're just looking for an IP transport network. I'll get to MTU in a moment.
+
+124 "JT Stamm" (3076394496)
+00:23:39.239 --> 00:23:59.239
+Now, remember ACI at its heart is a VXLAN fabric. So what that means is we have underlay tunnel endpoints that we need to consider. So all of our leaf switches and all of our spine switches and all of our remote leaf switches, those are going to be tunnel endpoints from a VXLAN perspective.
+
+125 "JT Stamm" (3076394496)
+00:23:59.239 --> 00:24:19.489
+Meaning they're pretty much going to be building tunnels amongst each other dynamically given the required traffic flow that needs to happen. So those tabs are represented as IPs, and so those IPs need to be able to reach another reach one another from a routing table perspective. So we.
+
+126 "JT Stamm" (3076394496)
+00:24:19.489 --> 00:24:53.179
+We need a control plane protocol in the form of OSPF or BGP, so essentially the remote leaf can find the TAP addresses of the home pod and vice versa. So the home pod can find the TAP address of the, of the remote leaf switch and send it to the correct next hop. So we're doing that with most commonly OSPF, which is what you've deployed or alternatively we do support BGP for the underlay that's a relatively, it's probably been a few years, but relatively newer edition, we launched with OSPF BGP came afterwards, but both are fully supported.
+
+127 "JT Stamm" (3076394496)
+00:24:53.179 --> 00:25:09.119
+And then I think you asked about this, like how does the, how does the remotely switch get discovered? It's, it gets kick started. Yeah, it gets kick started with DHCP relay.
+
+128 "JT Stamm" (3076394496)
+00:25:09.119 --> 00:25:29.119
+And so I'll go in depth on that. Now, so it does literally Dora, discover offer requests and acknowledgement. So we'll go through that. We need to configure this DHCP relay on our iPN/ISN devices. I'll show what that example.
+
+129 "JT Stamm" (3076394496)
+00:25:29.119 --> 00:25:51.834
+What configuration should look like. Now as far as like a latency and bandwidth perspective, 300 milliseconds latency, pretty generous like for low bandwidth networks 10 mbps minimum bandwidth as of the four.424 release, so we've had that for quite a while. Now NTU, you guys are set on this, you pointed out that it's a.
+
+130 "Eng. Socrates Romay, MBA." (2890409216)
+00:25:51.834 --> 00:25:55.090
+You have a 1600.
+
+131 "JT Stamm" (3076394496)
+00:25:55.090 --> 00:26:11.969
+Yes. Perfect yep so we recommend a minimum of 1550, that's because this is vxlan encapsulated traffic, so we add like 50 to 54 bytes. So you guys doing the 1600 bytes is you know you guys are more than good on that.
+
+132 "JT Stamm" (3076394496)
+00:26:11.969 --> 00:26:31.969
+We do recommend deploying VPC pairs. I remember, I recall you guys are only going to have the single device. That's totally fine. It's just if you ever do add that second remote leaf switch, we do recommend deploying a VPC on that, even if your end devices like that L three out or if you ever deploy any servers over there where.
+
+133 "JT Stamm" (3076394496)
+00:26:31.969 --> 00:26:51.835
+We have your remote leaf switches are single homed, like not VPC attached to the two, remote leaf switches. We still recommend doing VPC regardless. That just enhances traffic flow. It optimizes the potential traffic flow between the two devices, but we.
+
+134 "Eng. Socrates Romay, MBA." (2890409216)
+00:26:51.835 --> 00:26:59.564
+Yeah, we have two device there but we only want to move big one at a time but yes, we have two device there is a.
+
+135 "JT Stamm" (3076394496)
+00:26:59.564 --> 00:27:01.435
+The case that requires.
+
+136 "Eng. Socrates Romay, MBA." (2890409216)
+00:27:01.435 --> 00:27:05.115
+And anything the same device.
+
+137 "JT Stamm" (3076394496)
+00:27:05.115 --> 00:27:17.491
+Gotcha. Okay perfect. Yeah, so when once that second device comes online, I would strongly consider setting up a a VPC for that one. Licensing wise we required the day.
+
+138 "Manuel _ NCL" (1129693440)
+00:27:17.491 --> 00:27:30.912
+2nd 2nd device has another fusion, it's going to have another fusion there. It's going to provide some internet locally there in the data center.
+
+139 "Eng. Socrates Romay, MBA." (2890409216)
+00:27:30.912 --> 00:27:35.253
+Yeah, but it's ok. We have another parent in the in the.
+
+140 "Manuel _ NCL" (1129693440)
+00:27:35.253 --> 00:27:37.432
+Remember? Because.
+
+141 "Eng. Socrates Romay, MBA." (2890409216)
+00:27:37.432 --> 00:27:48.893
+Okay yeah ok because anyway hand I want to add another ones and now we can work in with that one and we have two more in the warehouse.
+
+142 "JT Stamm" (3076394496)
+00:27:48.893 --> 00:28:22.939
+Gotcha, gotcha. Alright, so yeah later on strongly consider VPC essentially. Licensing wise required the DCN advantage licensed here yeah Cisco licensing, I know. Now, when we were talking about those tech pools I think you guys are set on this from what you showed me, so this is great. We need, ok, so we need at least one of these tep pools and the other one is basically strongly recommended. So the 1st one is for the.
+
+143 "JT Stamm" (3076394496)
+00:28:22.939 --> 00:28:36.013
+Remotely tests themselves. So just like how the ACI fabric, when you originally spin that up, you have to give it, I think it's like a minimum of a/sixteen for that or maybe it's a minimum of a/twenty.
+
+144 "Eng. Socrates Romay, MBA." (2890409216)
+00:28:36.013 --> 00:28:55.556
+So yeah we created one as ten.two 54 for the original one from the when we do the the 1st deployment is last 16 yes and 2nd one we do the to the 02:55 for the remote but I we still need another one.
+
+145 "JT Stamm" (3076394496)
+00:28:55.556 --> 00:29:25.469
+Yeah, yeah, you actually had it on the topology. I I believe that you showed me. We we can take a look at that. In fact, let me cover these two and then maybe could you pull up the topology again and then I can probably make a little bit more sense of these. So, the 1st one is gonna be for remote leaf in this case are remote leaves once you have those deployed. These serve the exact same function as like the TAP address pool that you give the ACI fabric itself.
+
+146 "JT Stamm" (3076394496)
+00:29:25.469 --> 00:29:41.879
+This is so they get TAP addresses and that we can, and so that we can, you know, forward, all that good stuff. That should be a minimum of a/twenty four network or like a/what 2322, et cetera. 24 is usually more than good for that. Now.
+
+147 "JT Stamm" (3076394496)
+00:29:41.879 --> 00:29:58.469
+This one's a little, this one's a little tricky to explain because this is an additional pool for the main ACI pod and it's something that we strongly recommend configuring going forward. Just about since like four.12 as I have listed here.
+
+148 "JT Stamm" (3076394496)
+00:29:58.469 --> 00:30:18.469
+So this is what we call the routable tap pool. And so think about it from the like ISN perspective or IPN perspective. So in this network, we want to make sure that addresses between this pod and between the remote leaf location are routable. So, some.
+
+149 "JT Stamm" (3076394496)
+00:30:18.469 --> 00:30:38.469
+Times we might choose like an RFC 1918 class type of network for our underlay teps here in the main ACI data center. And our IPN ISN may not like that too much or like the, our WAN provider may not like that too much. So what we recommend is allocating an external routable tep pool.
+
+150 "JT Stamm" (3076394496)
+00:30:38.469 --> 00:31:00.679
+That gets assigned to, it's it's not everything here, but it's going to be devices that need to communicate with the remote leaf essentially. We can allocate a pool that is routable over the IP network here. So if we're running like the ten, like it's very common to run a, like ten.zero.0.zero/sixteen network for our underlay here.
+
+151 "JT Stamm" (3076394496)
+00:31:00.679 --> 00:31:20.205
+May not like that or our wind provider may not like that so we can provide a, a routable for that. I think I talked more about that later on. In fact, maybe we could take this opportunity. Manuel, would you be able to re share that topology that you were showing me in your environment if I were to stop sharing.
+
+152 "Manuel _ NCL" (1129693440)
+00:31:20.205 --> 00:31:23.082
+Yeah, yeah, sure. Let me check.
+
+153 "JT Stamm" (3076394496)
+00:31:23.082 --> 00:31:29.922
+Yep, thank you. I just wanted to point out cause I think you guys are good on this.
+
+154 "Alejandro Power" (4080968192)
+00:31:29.922 --> 00:31:33.442
+Okay.
+
+155 "Manuel _ NCL" (1129693440)
+00:31:33.442 --> 00:31:35.665
+Okay.
+
+156 "JT Stamm" (3076394496)
+00:31:35.665 --> 00:31:38.021
+Yeah, so.
+
+157 "Manuel _ NCL" (1129693440)
+00:31:38.021 --> 00:31:50.920
+So this is the the this put it in black here, you're going to see it. It was the original that we have.
+
+158 "Manuel _ NCL" (1129693440)
+00:31:50.920 --> 00:32:16.258
+The 02:54, the ten 02:54 and 00/sixteen, then we assign one here for external 24. Yep and 02:55 00/twenty four and and then I take another one just in case I assign the 02:55 one.zero 24 in this area. Is this one that you.
+
+159 "JT Stamm" (3076394496)
+00:32:16.258 --> 00:32:52.522
+It is, yeah, that is absolutely one. So you definitely need that remote pool, so that remote that ten.two 50 five.one.0/ 24, that is what the remote leaf switch is going to pull its tep address from. And that external tep pool over on your main data center side, that's just to ensure that the main ACI site is routable. But we do recommend that going forward in this configuration. So, yeah, you checked both boxes there. You have your external tech pool and you have your remote leaf tep pool. You're good for IPL.
+
+160 "Manuel _ NCL" (1129693440)
+00:32:52.522 --> 00:33:02.040
+Yeah, what I understand from the documentation is like the communication is going to be between IPs in this pool and this is.
+
+161 "JT Stamm" (3076394496)
+00:33:02.040 --> 00:33:05.557
+Correct.
+
+162 "Manuel _ NCL" (1129693440)
+00:33:05.557 --> 00:33:12.778
+I know he works momentarily. And then here is going to be like a nap.
+
+163 "JT Stamm" (3076394496)
+00:33:12.778 --> 00:33:29.689
+To this IP? Yes, it is. Yeah, so it's like the one time and only time as far as I know in ACI where we are doing network address translation. We don't do it for any like like user tenant facing services, but we do use it in this use case. We do nat.
+
+164 "JT Stamm" (3076394496)
+00:33:29.689 --> 00:33:35.756
+One to one NAT on the spine switches. So I'll show that, I'll show how that works.
+
+165 "Manuel _ NCL" (1129693440)
+00:33:35.756 --> 00:33:38.259
+Actually here in a moment. Okay I messed up.
+
+166 "JT Stamm" (3076394496)
+00:33:38.259 --> 00:33:45.676
+Yep. All right, thanks for showing that. Let me go ahead and bring up the slide deck again.
+
+167 "Alejandro Power" (4080968192)
+00:33:45.676 --> 00:33:50.838
+Okay.
+
+168 "JT Stamm" (3076394496)
+00:33:50.838 --> 00:34:13.489
+Okay, so that pretty much covers this slide, so probably the densest one. All right, now let's talk about some configuration here and we're talking about the, that iPN/ISN network here. So we have to consider the connection, we have to, well you have to consider all the connections, right? But we have to particularly consider the connections between the spine switches in our main.
+
+169 "JT Stamm" (3076394496)
+00:34:13.489 --> 00:34:47.959
+In data center or pod and the next top devices connected to those spines what their interface configuration is. So let's say e.g. this link right here between this router and our IP network and this spine switch, just picking on this one. This would apply to all four of these interfaces on the IP network side, by the way. But just looking at one of them, so we're actually gonna be deploying a sub interface and we're always going to be using it's like a preserved VLAN VLAN ID four. So in this configuration, we have our.
+
+170 "JT Stamm" (3076394496)
+00:34:47.959 --> 00:35:07.959
+Our parent interface just eth 01:49. Now switch ports operating now three. I'm using MTU 9150 in this example, but of course you have your 1600 byte, and then for our sub interface, we're gonna use encapsulation.1Q4. We'll go ahead and assign we'll we'll assign an IP address to that that we're actually.
+
+171 "JT Stamm" (3076394496)
+00:35:07.959 --> 00:35:29.918
+Can they configure an L three out on the spine interestingly enough, but we want to make sure, you know, those are on the same network. This is using OSPF point to point in this case we're running OSPF on this interface and we'll configure the OSPF protocol here. So I'm using error zero in this example as well. So pretty straight.
+
+172 "Eng. Socrates Romay, MBA." (2890409216)
+00:35:29.918 --> 00:35:33.410
+We do the same with the.
+
+173 "JT Stamm" (3076394496)
+00:35:33.410 --> 00:35:51.139
+Everything yeah. Perfect yep so yeah that's one prerequisite, so good you got that knocked out. Now this one is a little bit more in depth because now we have to add DHCP relay to the equation. Again DHCP relay is how the switches the remotely switch gets discovered.
+
+174 "JT Stamm" (3076394496)
+00:35:51.139 --> 00:36:02.107
+So now we're taking a look at the opposite then. We're taking a look at the IP network in I I think you have like a catalyst switch.
+
+175 "Manuel _ NCL" (1129693440)
+00:36:02.107 --> 00:36:05.320
+For this in your topology, now we're looking at devices.
+
+176 "JT Stamm" (3076394496)
+00:36:05.320 --> 00:36:28.289
+Is ok yeah we're looking at the devices connected to the remote leaf switches now. So on from the remote leaf perspective, by the way, this is gonna be their fabric interfaces. So kind of like on a regular ACI leaf switch, we have your spine connections. It's usually like the last six interfaces. If you're looking at the front panel ports, it's like the far right, if you were to be looking at that.
+
+177 "JT Stamm" (3076394496)
+00:36:28.289 --> 00:36:48.289
+So those connect up to the IPN just like a spine effectively. Now we're gonna be taking a look at ETH 01:49 in this example on this IPN device. So we need to configure IPDHCP relay, same story here with that sub interface, so we're using eth 01:49 MTU, got all that.
+
+178 "JT Stamm" (3076394496)
+00:36:48.289 --> 00:37:14.579
+That we got our sub interface with.1Q encapsulation, but what we're going to be adding here is IPD relay and then we have these addresses here. Now I'll explain how you figure out what IP addresses to add here, but in short, these are the IP addresses of the apex in the main data center from a infrastructure like underlay perspective. So the.
+
+179 "JT Stamm" (3076394496)
+00:37:14.579 --> 00:37:30.149
+Apex are ACI controllers are acting as DHCP servers, and they're going to be the ones responsible for allocating addresses to the remote leaf switches. So that's why we're using DHCP relay on these interfaces.
+
+180 "JT Stamm" (3076394496)
+00:37:30.149 --> 00:37:46.979
+When these remotely switches come up, like when you power on that remotely switch that you have or maybe it's already powered up, but assuming it is powered up right now, it should be sending out DHCP requests or discovered excuse me, so it's gonna be doing Dora.
+
+181 "JT Stamm" (3076394496)
+00:37:46.979 --> 00:38:02.849
+And we'll walk through that. It's gonna do Dora and try to get an IP address and we're expecting these IPN devices to relay those requests over to, the apex. And again, I'll show you how you figure out what IP addresses to use here.
+
+182 "JT Stamm" (3076394496)
+00:38:02.849 --> 00:38:22.849
+But, this is probably number one, the main thing that will prevent a remote leaf discovery is if we don't have our DHCP relay configured or at least configured properly. So alright, routable, so I already covered this, I don't think I really need to cover it.
+
+183 "JT Stamm" (3076394496)
+00:38:22.849 --> 00:38:51.290
+More in depth, but yeah, again, we highly recommend having that runnable tap goal here. I'll leave the slide in here and I will share out the slide deck, by the way. Okay, so how do we figure out what DHCP relay address to use? So, this is a different example. This is actually from my lab that I kind of coupled together. So here on my ISN note here taking a look at Eth 01:53 in this case, that is connected to my.
+
+184 "JT Stamm" (3076394496)
+00:38:51.290 --> 00:39:07.830
+Remote leaf switches or rather Eth 01:53 on this guy is connected to a remote leaf 2013 in my lab environment. And we've configured IPDHCP relay address 172 sixteen.1. 02:31. So where do I get that IP from?
+
+185 "JT Stamm" (3076394496)
+00:39:07.830 --> 00:39:23.790
+Again that belongs to the APIC, but if you look at the apic, in this case, like if you run an IP address, like it's just a Linux box, the APIC, so if you run IP address and then you dump all the interface IPs.
+
+186 "JT Stamm" (3076394496)
+00:39:23.790 --> 00:39:43.050
+You'll see the infra IP ten.one.0.one, which certainly is not that. Well, what's happening is we kind of talked about it is the spines are running nat. So you can run a show NAT table. It's just a two keyword command here on the spine CLI.
+
+187 "JT Stamm" (3076394496)
+00:39:43.050 --> 00:40:00.180
+And you can see the mapping between the, we'll call it the private IP in this case, that ten.one.0.1I should have highlighted it there. We see that's on the apic. And then the IP that's being added to is this 172.sixteen.1. 02:31.
+
+188 "JT Stamm" (3076394496)
+00:40:00.180 --> 00:40:20.180
+So that is the IP address that we're using for our DHCP relay. That's because we're using that routed, that routable address pool. So I think in your case it was the ten.two 50 five.zero.0/ 24 network. So your DHCP relay address is gonna be coming out of that IP allocation.
+
+189 "JT Stamm" (3076394496)
+00:40:20.180 --> 00:40:41.370
+Now how do you figure now how do you figure this out more easily? Well, you could run the CLI command on the spines, but the most easy way of doing it is actually, if you go into the APIC and you you go to system controllers and then you click right on the apic. Actually you click on interfaces. Is that interface?
+
+190 "JT Stamm" (3076394496)
+00:40:41.370 --> 00:41:00.090
+Sorry, you click on the node and then it's I just realized I cut it off I apologize. One of the tabs I think is like general or IP configuration, you can see the routable IP that was allocated to that apic, and the infra IP that was allocated. So that infra, again.
+
+191 "JT Stamm" (3076394496)
+00:41:00.090 --> 00:41:18.870
+Belongs directly on that Linux box essentially, and then that routable IP that is being added on the spine switches. So in short, look at the APIC, the routable IP here, so.two 31, and then set that as your DHCP relay address for the remote leaf switches.
+
+192 "JT Stamm" (3076394496)
+00:41:18.870 --> 00:41:35.514
+Like I said, this is probably like number one, one of the main things that can prevent a successful remote leaf discovery outside of, you know, like just general IP reachability in the IPN ISN. Any questions on that?
+
+193 "Alejandro Power" (4080968192)
+00:41:35.514 --> 00:41:36.751
+Okay.
+
+194 "Manuel _ NCL" (1129693440)
+00:41:36.751 --> 00:41:40.596
+No, I already so far.
+
+195 "JT Stamm" (3076394496)
+00:41:40.596 --> 00:42:00.290
+Yes. Okay, awesome. Okay, like I said, this is just the DHCP process. Probably, yeah, we pretty much already covered this, but it's it's your classic DHCP Dora here. So when that remote leaf comes up on its fabric interface, it sends that to our DHCP relay, that 1st hop.
+
+196 "JT Stamm" (3076394496)
+00:42:00.290 --> 00:42:20.822
+The ISN IPN node gets sent over to the main fabric, the apex, whichever one it sends it to, is gonna send out a DGP offer, like, hey, you want this IP address. And I think it's also in the offer more in, if you were curious on how the remote leaf gets its initial configuration, we actually have a TFTP server.
+
+197 "Eng. Socrates Romay, MBA." (2890409216)
+00:42:20.822 --> 00:42:33.450
+Oh, sorry, was there a question? Yeah, another question the discovery because we never, you know, keeping the discovery for, for, for hours, is as an expiration or or NO?
+
+198 "Eng. Socrates Romay, MBA." (2890409216)
+00:42:33.450 --> 00:42:48.921
+All the time he tried to do the discovery, the nexus, you know, in this case because we left the Nexus in the office in discovery mode, but it's all the time will be in discovery mode. Just to me.
+
+199 "JT Stamm" (3076394496)
+00:42:48.921 --> 00:43:18.806
+Yeah, that's a great question. I would expect it to continuously be sending out discover request just waiting for a response. If for some reason it's not doing that, which I don't expect to be the case, you can always just reboot that remote leaf. It only needs to do this once, once it gets its IP address and its configuration, it operates as like a regular leaf switch. But yeah, that's a, that's a great question. I know it's not the great greatest response, but I do expect it to be.
+
+200 "Eng. Socrates Romay, MBA." (2890409216)
+00:43:18.806 --> 00:43:27.387
+Something else discovers. No, NO NO, thank you. Yeah, because we don't know we left there and we we need to go there back to the office to reload it or do it.
+
+201 "JT Stamm" (3076394496)
+00:43:27.387 --> 00:43:48.800
+Do you think you know what I mean? Yeah, yeah, understood. Yeah, I I mean that's that's pretty much it. The one thing I just wanted to add in here, add a little bit more color to this is, in addition to the IP address, actually, I think it's in the DHCP offer. We actually send a tftp's, server information so that a.
+
+202 "JT Stamm" (3076394496)
+00:43:48.800 --> 00:44:05.880
+Tech also acts as a TFTP server for this workflow. The APIC will basically offer up via TFTP a basic configuration file like a bootstrap file to the remote leaf, and then the remote leaf can use that to.
+
+203 "JT Stamm" (3076394496)
+00:44:05.880 --> 00:44:25.880
+Bootstrap itself as a remote leaf, so it assigns additional IP information and policy, and then once that comes up, then it really does operate like a regular leaf switch. So all this configuration is done through API at that point between the APIC and the remote leaf switch. That's not really critical for the process you're gonna go through, but just like.
+
+204 "JT Stamm" (3076394496)
+00:44:25.880 --> 00:44:30.720
+Letting you know what's happening behind the scenes here.
+
+205 "Manuel _ NCL" (1129693440)
+00:44:30.720 --> 00:44:34.967
+Alright, and you say that the configuration is coming by the.
+
+206 "JT Stamm" (3076394496)
+00:44:34.967 --> 00:44:51.110
+So the DHCP it's kind of like oh like a power on auto provisioning for nexus. So not only can DHCP provide an IP address to the remote leaf.
+
+207 "JT Stamm" (3076394496)
+00:44:51.110 --> 00:45:04.386
+It can also give the remote leaf a, a TFTP address to access. So it's kind of like DHCP is telling the remote leaf, like, hey, you may want to pull this TFTP file as well once you get.
+
+208 "Manuel _ NCL" (1129693440)
+00:45:04.386 --> 00:45:05.848
+Their IP address assigned.
+
+209 "JT Stamm" (3076394496)
+00:45:05.848 --> 00:45:27.170
+Okay. Yep. Some updates, some product updates. We've, you know, as as usual, we'll have occasional feature enhancements, so like we've recently supported back to back connections between remotely switches as of the 521 release, some failover op.
+
+210 "JT Stamm" (3076394496)
+00:45:27.170 --> 00:45:54.960
+Options 424 introduced the 10 mbps for like lower bandwidth, inter site interpod networks and also Q and Q tunnels. And then the most recent edition is as of the 611 release, this is actually our newest train, at least last time I checked on cisco.com. It's not even a gold star release at this point. This is part of our feature train, but in certain cases, it's.
+
+211 "JT Stamm" (3076394496)
+00:45:54.960 --> 00:46:10.350
+It's kind of a niche feature, but what you can do is deploy a user tenant L three out on the same interfaces connected to that ISN device. So if that ISN device is pulling double duty of not just doing.
+
+212 "JT Stamm" (3076394496)
+00:46:10.350 --> 00:46:30.350
+Not just providing connectivity for the remote leaf switch, but it's also handling user services. You can actually deploy L three outs on the, on the remote leaf switches. So this is actually a very new feature as far as I'm aware. So, anyway, those are just some enhancements. Now configuration wise, of course you do need those required.
+
+213 "JT Stamm" (3076394496)
+00:46:30.350 --> 00:46:51.390
+Requirements, you need to have like allocated those tap address pools, so you already have that written down, that's great. Basically, what we're gonna do is use a wizard to configure this. So it's gonna guide us through the configuration. Now you do need to make sure access policies are in place so and by access policies, I mean like if I go back a bit.
+
+214 "JT Stamm" (3076394496)
+00:46:51.390 --> 00:47:12.600
+I'll pick on this diagram as an example. We do need to configure the access policies for the spines here, so for these interfaces, so just like you would on a leaf switch, it's just gonna be for a spine and then likewise for the remote leaf switches. So in fact, we're actually deploying L three outs on those interfaces from an infra perspective.
+
+215 "JT Stamm" (3076394496)
+00:47:12.600 --> 00:47:30.990
+Yeah, but yeah, so this is gonna guide us through the configuration. This is just the start of it. Here's the steps. I have a recording, I'll try to get through that recording really quick. I know we're running out of time here but essentially.
+
+216 "JT Stamm" (3076394496)
+00:47:30.990 --> 00:47:49.320
+We'll kick off the the wizard, we'll allocate our pod IDs and tep pools that we've already set aside we'll configure it as L three outside I was talking about, and then if all our stuff is configured properly, sometimes it takes a little bit of tuning.
+
+217 "JT Stamm" (3076394496)
+00:47:49.320 --> 00:48:09.320
+If our DHCP relay is functional, we have IP reachability, then essentially what we should see is the remote leaf get discovered. In fact, you can pre provision the remote leaf if you like, you can punch in the serial number if you have it, you can assign it a type IP oh actually type IP excuse me, is dynamically.
+
+218 "JT Stamm" (3076394496)
+00:48:09.320 --> 00:48:35.010
+Allocated and you can assign it a, a node ID, so just like our regular leaf switches and spine switches, the remote leaf also gets a node ID out of that. So you can assign that ahead of time or you can just go ahead and let DHCP discover the device and then you'll see a blank leaf switch pop up in your fabric inventory and then you can provide your configuration parameters set.
+
+219 "JT Stamm" (3076394496)
+00:48:35.010 --> 00:48:50.790
+But then from that point, basically hit finish, do some verifications say hey the the leaf switch is online. And then again, we do recommend VPC. Of course, you guys won't be doing that at this point, but eventually down the road, when you get the chance, VPC would be recommended.
+
+220 "JT Stamm" (3076394496)
+00:48:50.790 --> 00:49:10.790
+Additionally, afterwards, we really try to come to that VPC point, I apologize. Make sure you assign out of band IP addresses to your remote leaf switches or in this case your remote leaf switch that's done in the management tenant. That way in case you ever need to directly access that leaf switch, you have that connectivity.
+
+221 "JT Stamm" (3076394496)
+00:49:10.790 --> 00:49:30.790
+Sure NTP is synced, you can run a show NTP peer status on the CLI, that's quick way of verifying that or you keep an eye out for any faults. If NTP is not working on that remote leaf switch, we will kick a fault for that. Attach your services, your hypervisors, your bare metals to the leaf switches. In your case you have that L three out and then do.
+
+222 "JT Stamm" (3076394496)
+00:49:30.790 --> 00:50:07.030
+Deploy your access policies as needed to support those like that L three out. Basically, treat it like a, a regular leaf switch at that point. So, I do have well I did have a quick demo here, but over there, so we'll kind of see what the setup process looks like. This is a slightly older version, but we're here under fabric and then fabric inventory. We'll go to quick start and then add remote leaf switch and this is.
+
+223 "Manuel _ NCL" (1129693440)
+00:50:07.030 --> 00:50:14.694
+Go ahead. You need to change the NTU for the control plan.
+
+224 "JT Stamm" (3076394496)
+00:50:14.694 --> 00:50:16.890
+Great.
+
+225 "JT Stamm" (3076394496)
+00:50:16.890 --> 00:50:36.890
+Yeah, in fact, I think you had pointed that out on your documentation, but, that is something you want to consider. Let me see if I can show that in my lab real quick. And I apologize I do have a hard stop in a couple of minutes here, so maybe we'll have to continue some of this on the Monday session and I will send out an invite for that.
+
+226 "JT Stamm" (3076394496)
+00:50:36.890 --> 00:50:40.080
+System settings.
+
+227 "JT Stamm" (3076394496)
+00:50:40.080 --> 00:51:00.080
+Control plane MTU. Yeah, so we we actually dove this down pretty far. So, like, you could set this to like 1500 e.g.. So this is the control plane MTU policy, it's applied fabric wide.
+
+228 "JT Stamm" (3076394496)
+00:51:00.080 --> 00:51:14.258
+And so this is going to ensure that like OSPF isn't going to send a, like, LS update any larger than whatever we set here because the default, I can't remember what the default is, but like if it.
+
+229 "Eng. Socrates Romay, MBA." (2890409216)
+00:51:14.258 --> 00:51:18.677
+It's 9000 for instance, then there's a chance then.
+
+230 "JT Stamm" (3076394496)
+00:51:18.677 --> 00:51:40.520
+Yeah, so if you're limiting your MTU over that over your IPN ISN to like say 1600 bytes and then OSPF decides to send a jumbo sized LS update, then well that's not gonna work very well for OSPF. So yeah, you want to tune this down 1500 would be.
+
+231 "JT Stamm" (3076394496)
+00:51:40.520 --> 00:51:43.097
+What you'd want to select in that case.
+
+232 "Manuel _ NCL" (1129693440)
+00:51:43.097 --> 00:51:49.802
+Okay, and to do a change that is going to be directive for the fire.
+
+233 "JT Stamm" (3076394496)
+00:51:49.802 --> 00:52:14.086
+I would definitely schedule a change window. I don't think it's going to affect the protocol, but let me get confirmation on that. Nonetheless, this is a fabric wide change so we would highly recommend doing a change window regardless. As far as impacts, I'll I'll have to get back to you unfortunately on that one. I'll need to do some.
+
+234 "Manuel _ NCL" (1129693440)
+00:52:14.086 --> 00:52:15.987
+Research.
+
+235 "Eng. Socrates Romay, MBA." (2890409216)
+00:52:15.987 --> 00:52:36.143
+Okay, and now that we are another question on on the remote leaf, any port on the back and on the side will be like the same part of the fabric, you know, port because right at this point we cannot configure any other port to fabric roll.
+
+236 "JT Stamm" (3076394496)
+00:52:36.143 --> 00:52:49.023
+Yeah, so you can think of it as like the same ports on the switch that you would normally use to connect to a spine, the fabric ports. That's what you wanna use for your ISN.
+
+237 "Eng. Socrates Romay, MBA." (2890409216)
+00:52:49.023 --> 00:52:52.264
+Connectivity. Okay, just to verify that.
+
+238 "JT Stamm" (3076394496)
+00:52:52.264 --> 00:52:55.986
+Follow me. Okay, thanks. Yeah.
+
+239 "Alejandro Power" (4080968192)
+00:52:55.986 --> 00:52:57.964
+Okay.
+
+240 "JT Stamm" (3076394496)
+00:52:57.964 --> 00:53:24.780
+Alright, yeah, I know we're we're kind of coming up at the end of time here and unfortunately I wasn't really able to show the the whole process for discovery, but needless to say this is a fairly guided process. It's basically step by step, and you you can get like a summary up here so we'll even give you some nice diagrams showing you like where your configuration is going to be applied.
+
+241 "JT Stamm" (3076394496)
+00:53:24.780 --> 00:53:42.360
+So like we're showing the IPN here, all that stuff, and then like what your routing protocol options are. Of course you're using OSPF it'd be OSPF area zero, but you would basically select the pods that we're gonna be attaching these leaf switches to routing protocol configuration, that's your OSPF configuration.
+
+242 "JT Stamm" (3076394496)
+00:53:42.360 --> 00:54:06.087
+The remote leaf side of the connection and then basically we end with a confirmation. So I think we can take a closer look at that on the Monday session. So any questions? I'm sure there's a lot of questions, but any questions that you think we could we can cover in the time that we have left?
+
+243 "Manuel _ NCL" (1129693440)
+00:54:06.087 --> 00:54:10.668
+No, let's see and on monday.
+
+244 "JT Stamm" (3076394496)
+00:54:10.668 --> 00:54:37.230
+How does it go? Okay, sounds good. I think just in preparation for Monday, of course I'm sure someone will be able to share their screen. Will, on the off chance that we need connection to the remote leaf switch, are you able to provide console access? It's normally not needed, but I'm just curious if that would be an option or is it pretty much already in a closet somewhere and we.
+
+245 "Manuel _ NCL" (1129693440)
+00:54:37.230 --> 00:54:42.047
+Can't access it easily.
+
+246 "Eng. Socrates Romay, MBA." (2890409216)
+00:54:42.047 --> 00:54:45.550
+Console access there. Yeah, we had to have some.
+
+247 "Manuel _ NCL" (1129693440)
+00:54:45.550 --> 00:54:52.768
+Somebody there and somebody on the other side, you know? No, let me.
+
+248 "JT Stamm" (3076394496)
+00:54:52.768 --> 00:55:10.030
+Okay. Like I said, not needed, but if it does get to the point where we, we have to get eyes on that switch, we might have to send a runner or someone who can access that that console. But otherwise generally speaking, we shouldn't need.
+
+249 "Manuel _ NCL" (1129693440)
+00:55:10.030 --> 00:55:16.548
+Yeah. Okay, and another thing is the interview.
+
+250 "JT Stamm" (3076394496)
+00:55:16.548 --> 00:55:17.869
+Case that is going.
+
+251 "Manuel _ NCL" (1129693440)
+00:55:17.869 --> 00:55:19.650
+Yes.
+
+252 "JT Stamm" (3076394496)
+00:55:19.650 --> 00:55:29.790
+I'll send you an update before I'm west Coast, but I'll send a, an update to you before I close out for today. So it might come a little.
+
+253 "Manuel _ NCL" (1129693440)
+00:55:29.790 --> 00:55:34.950
+Bit in the evening for you though. Okay, that's great.
+
+254 "JT Stamm" (3076394496)
+00:55:34.950 --> 00:55:50.151
+Alright, unfortunately I do have a hard stop at this time so thank you very much everyone, and I'll send out the I'll send you information on the MTU and I'll send out a Webex invite for Monday at three.
+
+255 "Manuel _ NCL" (1129693440)
+00:55:50.151 --> 00:55:52.269
+Eastern.
+
+256 "JT Stamm" (3076394496)
+00:55:52.269 --> 00:55:54.890
+Okay, ok, thank you. All right.
+
+257 "Manuel _ NCL" (1129693440)
+00:55:54.890 --> 00:55:59.736
+Thanks everyone, have a great weekend. Bye. Thank you.

@@ -1,0 +1,26 @@
+Write a short, professional and providing detail that beside some of our devices are running a code that is affected by this vulnerability, we were not expoused to FortiBleed data leak event. This information was already provided on last January to Security Team when we initially receive notification of this vulnerability. 
+
+The vulnerability will affect Fortinet customers that use FortiCloud SSO for VPN or device authentication. On NCL, the feature to use FortiCloud SSO is disable, additionally our Fortinet devices are not expoused to Internet.
+
+FortiManager
+- Version 7.4.10, No affected
+
+FortiAnalyzer
+- Version 7.4.6, Affected, Devices are not expoused to Internet and not using FortiCloud SSO.
+
+FortiOS
+- Version 7.4.6, Affected, Devices are not expoused to Internet and not using FortiCloud SSO.
+- Version 7.4.11, running on new firewalls (DD and New Builds), no affected.
+
+
+Include on the email the following documentation:
+
+Fortinet CVE-2026-24858
+https://thehackernews.com/2026/01/fortinet-patches-cve-2026-24858-after.html
+
+https://www.fortinet.com/blog/psirt-blogs/analysis-of-reported-credential-compromise-of-fortigate-devices
+
+https://www.fortiguard.com/psirt/FG-IR-26-060
+
+
+

@@ -1,0 +1,36 @@
+FortiGate FortiLink
+-------------------
+
+Check compativility matrix between FortiOS (FW) and FortiSwicthOS.
+
+Protocols:
+- FortiLink (Discovery)
+- LLDP
+- CAPWAP
+- DHCP
+- DNS
+- NTP
+- HTTPS
+- SSH
+
+
+FW#
+get system info					! used to get the interface info.
+execute factoryreset			! factory reset
+execute ping www.fortinet.com	! test dns resolution and connectivity
+get hardware status				! to het hardware detail including model
+
+
+! check if switch-controller is enable: set switch-controller enable
+config system global
+  show
+
+! To verify the switch asociation
+execute switch-controller get-conn-status
+
+SW#
+! to identify what ports support auto-discovery-fortilink
+config switch interface
+ show
+
+ 

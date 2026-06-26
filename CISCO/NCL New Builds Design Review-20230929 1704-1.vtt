@@ -1,0 +1,2697 @@
+WEBVTT
+
+1 "" (0)
+00:00:00.000 --> 00:00:03.230
+Okay.
+
+2 "Aian Denis" (3928268288)
+00:00:03.230 --> 00:00:07.050
+Thank you for making it, uh, for this meeting.
+
+3 "Aian Denis" (3928268288)
+00:00:07.050 --> 00:00:13.379
+Rather large crowd um, the idea here is, uh, to.
+
+4 "Aian Denis" (3928268288)
+00:00:13.379 --> 00:00:17.189
+Basically continue the training on the knowledge transfer.
+
+5 "Aian Denis" (3928268288)
+00:00:17.189 --> 00:00:37.189
+To the short side team and team for new deployments no implementation. So I'm just gonna do a quick set of introductions myself, so we don't waste too much time on it from from the, from the Cisco side. Right? We have keyhole Omar and heavier, uh, these guys, Alicia, all 3 of, em, uh, I've been heavily involved with.
+
+6 "Aian Denis" (3928268288)
+00:00:37.189 --> 00:00:44.340
+Builds deployment since the times of premium, right? So, basically, they've, they've seen in cinema they saw prima.
+
+7 "Aian Denis" (3928268288)
+00:00:44.340 --> 00:00:49.200
+And they were heavily involved and they, they assistant and on, um.
+
+8 "Aian Denis" (3928268288)
+00:00:49.200 --> 00:00:53.370
+Can vouch for the the work.
+
+9 "Aian Denis" (3928268288)
+00:00:53.370 --> 00:01:02.130
+Shoulder to shoulder with within sales team so they were on site they were since day 1. uh, so they are heavily familiar with with, uh.
+
+10 "Aian Denis" (3928268288)
+00:01:02.130 --> 00:01:22.130
+Jordan apologies. So so that's from from the, from the Cisco side uh, those 3 guys from, from the Cisco guys that are not familiar with the side of the house of using product for the 1st time. Alicia Alicia is basically hamlet's pier. She's the same level. So, just senior manager, but Alicia handles short side.
+
+11 "Aian Denis" (3928268288)
+00:01:22.130 --> 00:01:27.750
+Everything the same that handle handles on on the vessels, but she also handles.
+
+12 "Aian Denis" (3928268288)
+00:01:27.750 --> 00:01:35.730
+Uh, she board operations, so she, her team handles the support of these implementations alisha. Correct me? If I'm wrong there.
+
+13 "Aian Denis" (3928268288)
+00:01:35.730 --> 00:01:41.880
+All right. Okay so, basically, uh, this team will be supporting.
+
+14 "Aian Denis" (3928268288)
+00:01:41.880 --> 00:01:45.073
+These these new deployments, so.
+
+15 "Alicia Greyner" (2871030528)
+00:01:45.073 --> 00:01:50.460
+Telling you that we have is that this is, as you all know it is a new technology.
+
+16 "Alicia Greyner" (2871030528)
+00:01:50.460 --> 00:01:56.275
+Now, we're not implemented, but with that, we will have to support. Exactly. You guys aren't here.
+
+17 "Aian Denis" (3928268288)
+00:01:56.275 --> 00:02:18.710
+Something that you do not implement, but we'll have to support. Right? So, the idea the idea here is to do a knowledge transfer from hamlet's team to alicia's team. And it's not obviously this is not the only session that people don't freak out. We don't expect you to do everything in 2 hours. Uh, there's actually a program that we have in place you and I talked about it before we already have.
+
+18 "Aian Denis" (3928268288)
+00:02:18.710 --> 00:02:38.710
+2 weeks worth of training, uh, 1 for 1 for SDA. So the engineers in this call should be at this point, familiar with the constructs of the paradigms of this software defines, uh, solutions. Right? Uh, basically as the so they, they know they should know.
+
+19 "Aian Denis" (3928268288)
+00:02:38.710 --> 00:02:55.740
+The the concepts and the concepts, so that was the phase 1 of our plan. The 2nd phase was it's exactly what we're doing right now. Basically have this or more than 1 sessions where we go over an actual implementation now that we know the concerts. We'll see.
+
+20 "Aian Denis" (3928268288)
+00:02:55.740 --> 00:03:13.080
+What was and why things were implemented the way they were implemented right? And then the 3rd phase nothing to do with the advanced service guys or Omar shithole and Javier we're gonna have Alicia. Remember we have a pool of of asked the experts credits that we can have sessions where we can.
+
+21 "Aian Denis" (3928268288)
+00:03:13.080 --> 00:03:17.160
+Bring all the resources and then ask questions on once your team started.
+
+22 "Aian Denis" (3928268288)
+00:03:17.160 --> 00:03:20.370
+Getting more worse than start.
+
+23 "Aian Denis" (3928268288)
+00:03:20.370 --> 00:03:30.870
+Poking around a little bit and then see, we can have these older sessions where we can tap into these old sort of resources and experts to ask questions and probably have 12 hour sessions with them. Okay.
+
+24 "Aian Denis" (3928268288)
+00:03:30.870 --> 00:03:38.130
+So that's the plan with that being said, uh, the, I want to leave the floor to see who is the 1 who.
+
+25 "Aian Denis" (3928268288)
+00:03:38.130 --> 00:03:58.130
+He's the architect that, uh, from the from the CX team, like I said, that what's important is the base of he was also involved in and, uh, and and, uh, she has the presentation that he's gonna go over the idea when she and I talked about this presentation was to initially go over the design.
+
+26 "Aian Denis" (3928268288)
+00:03:58.130 --> 00:04:04.980
+At a high level, and then start drilling down a little bit to a lower level more technical conversation.
+
+27 "Aian Denis" (3928268288)
+00:04:04.980 --> 00:04:17.310
+Focused on operations, uh, basically on on templates, they in operation how things are for operation stand done. Right? So, that's that's the idea. But at any given.
+
+28 "Aian Denis" (3928268288)
+00:04:17.310 --> 00:04:29.729
+Point in time you can stop and ask questions again. We have subsequent subsequent sessions and follow up sessions to this 1. we can we can go deeper on other areas as as needed. Okay.
+
+29 "Aian Denis" (3928268288)
+00:04:29.729 --> 00:04:35.969
+So, uh, with, uh, no producer, the floor is yours.
+
+30 "Aian Denis" (3928268288)
+00:04:35.969 --> 00:04:41.189
+Okay, sure, let me share my screen.
+
+31 "Aian Denis" (3928268288)
+00:04:47.609 --> 00:04:55.379
+Okay, so I had just had my deck, uh, brought up. So please let me know if it does not come through.
+
+32 "Aian Denis" (3928268288)
+00:04:55.379 --> 00:05:00.089
+I put it in the presentation mode.
+
+33 "Aian Denis" (3928268288)
+00:05:00.089 --> 00:05:20.089
+Okay, yeah. Hello everyone Thank you for the opening activity. Uh, my name is and I was and then involved in, uh, uh, deployment and design for stuff. And, and I think that, uh, some of the, uh.
+
+34 "Aian Denis" (3928268288)
+00:05:20.089 --> 00:05:40.089
+Individuals, I think like Gordon, Jonathan familiar with some deployment and then I would just, uh, today focus on a, the high level design and some of the topics that will.
+
+35 "Aian Denis" (3928268288)
+00:05:40.089 --> 00:05:49.709
+By the interest of interest to the day to, uh, support team. So here is the.
+
+36 "Aian Denis" (3928268288)
+00:05:49.709 --> 00:06:09.709
+The topics that I'll try to cover, I'm going to a talk about the overall design from a topology point of view, and I'm going to go over, like, the deployment process. I think that some of them I think you should be.
+
+37 "Aian Denis" (3928268288)
+00:06:09.709 --> 00:06:18.749
+Familiar with the other ships and then, but I just like focus on the SDA deployment for these ships.
+
+38 "Aian Denis" (3928268288)
+00:06:18.749 --> 00:06:38.749
+And I'm going to go into IP addressing both from the DNA center as well as the user perspective. And then you'll see these address pools and then you'll see where these tools are full. And in what VMs.
+
+39 "Aian Denis" (3928268288)
+00:06:38.749 --> 00:07:00.319
+They belong, and I'm going to talk about configurations, uh, basic configuration, both on the border and the fusion. I think that then go into the hub, which, and the set, the edges and Kevin switches these extended notes.
+
+40 "Aian Denis" (3928268288)
+00:07:00.319 --> 00:07:15.539
+Onboarding when you go into DNA, you're going to see a different templates that that that are configure currently in your DNA center. I'm going to briefly explain what these templates for.
+
+41 "Aian Denis" (3928268288)
+00:07:15.539 --> 00:07:35.539
+And I know that many of you have gone through the SDA training, but I believe the next 2 topics, I think that they have not covered, which NCA used in these 3 sheets. These are the separate zones and.
+
+42 "Aian Denis" (3928268288)
+00:07:35.539 --> 00:07:50.309
+To which we also cause that I, I'm going to spend a little bit more time to explain the concepts as well as the, the configurations.
+
+43 "Aian Denis" (3928268288)
+00:07:50.309 --> 00:08:10.309
+And specifically, with these 3 shifts, you have the inaugural use cases, and I'm going to go into explained what are the requirements for these use cases and then how they were implemented with DNA center, you, you.
+
+44 "Aian Denis" (3928268288)
+00:08:10.309 --> 00:08:30.309
+On the ships that we implement DNA center, air gap mode and so I think that most likely you're going to go into DNA center upgrade at some point of time and I'm going to go into what the required steps for the DNA center upgrade in.
+
+45 "Aian Denis" (3928268288)
+00:08:30.309 --> 00:08:50.309
+Which is a different from when they are in the, when the DNA center connected online. And I think that also as, say, a day 2 support team, I believe that you, you might get into at some point of time. Like a, when the device that becomes.
+
+46 "Aian Denis" (3928268288)
+00:08:50.309 --> 00:09:10.309
+Uh, defective and need to be replaced and then I'm going to pick 2 typical, which is like, a mostly use platforms to show you how we do how you run the D. N. A. the. I. M. A. workflow to replace them that are going to be AP.
+
+47 "Aian Denis" (3928268288)
+00:09:10.309 --> 00:09:13.349
+Uh, as well as a Kevin switch.
+
+48 "Aian Denis" (3928268288)
+00:09:13.349 --> 00:09:33.349
+Okay, so these are the topics that I'll try to cover today if you have any questions feel free to stop me and I'll try to answer and also with Harvey and Omar, with me, they also involved in the configurations in the deployment. So they can.
+
+49 "Aian Denis" (3928268288)
+00:09:33.349 --> 00:09:37.049
+I mean, if I miss anything.
+
+50 "Aian Denis" (3928268288)
+00:09:37.049 --> 00:09:41.442
+Okay, so any questions before I move on.
+
+51 "Aian Denis" (3928268288)
+00:09:41.442 --> 00:09:48.689
+Hey, Joe, I just wanted to add a Alicia comments here. Basically the 1 thing I forgot to mention at the beginning is basically that.
+
+52 "Aian Denis" (3928268288)
+00:09:48.689 --> 00:10:03.989
+The intent of the session today will be SDA centric. We can have follow ups with the advanced service guys for. I figured we start with it's fabric size, wide size, size, white. It's basically like.
+
+53 "Aian Denis" (3928268288)
+00:10:03.989 --> 00:10:23.989
+98% of the topology right now the topic is very small. It's it's fairly straightforward. Fda is where most of the challenges were encountered right? And probably worth most of the troubleshooting time would be spent. So but again, that's that's just an today's session is FDA centric.
+
+54 "Aian Denis" (3928268288)
+00:10:23.989 --> 00:10:31.529
+Probably, we'll have to have more than 1, uh, on SDA and then probably we'll have, uh, 1 for right which is.
+
+55 "Aian Denis" (3928268288)
+00:10:31.529 --> 00:10:51.529
+The data center side of the house. Okay, cool. Thank you. And so, uh, with that, I'm going to dig in. So, this is a in a very high level a logical topology on what what has been, uh, deployed on the ships.
+
+56 "Aian Denis" (3928268288)
+00:10:51.529 --> 00:11:11.529
+Right. So, at the center, we are going to see the fusion router and then on the fusion it is deployed as a is like a stack wise virtual, uh, basically is 2 physical 9,500 switches and then they are.
+
+57 "Aian Denis" (3928268288)
+00:11:11.529 --> 00:11:31.529
+Configure as say asset wise, virtual and then it's as 1 logical switch. So, um, so from the configuration, I mean, from like a logical point of view, you can consider that as 1 fusion switch, but it does provide redundancy both on the.
+
+58 "Aian Denis" (3928268288)
+00:11:31.529 --> 00:11:39.209
+Level as well, as Lang level as you can see, we have a box level and level redundancy for Fusion.
+
+59 "Aian Denis" (3928268288)
+00:11:39.209 --> 00:11:59.209
+Academy the same concept on the also use us that wise ratio for our border and control plane note. So, as you have seen in the FDA training, the FDA fabric, we need a border and control point.
+
+60 "Aian Denis" (3928268288)
+00:11:59.209 --> 00:12:19.209
+And then, in this case, it's called Co located so on the same logical box and this is this, that wise virtual, a 9,600 as a border and control plane a note. And then it is a, uh, as 1 logical box. But in reality.
+
+61 "Aian Denis" (3928268288)
+00:12:19.209 --> 00:12:38.039
+Is 2 physical boxes are providing box level redundancy as well as lane level redundancy using fabric, uh, using port channels, connecting to the fusion as well as into your house.
+
+62 "Aian Denis" (3928268288)
+00:12:38.039 --> 00:12:58.039
+In in, you have the edges and then with the with we call it the hub, these are the edges. So this could be either a 949,410 or 94 old 7.
+
+63 "Aian Denis" (3928268288)
+00:12:58.039 --> 00:13:01.859
+Um, so a, from each, uh.
+
+64 "Aian Denis" (3928268288)
+00:13:01.859 --> 00:13:14.789
+Hub, we have a port channel going into the border control a plane note and then again, we have a level redundancy for these.
+
+65 "Aian Denis" (3928268288)
+00:13:14.789 --> 00:13:34.789
+Now, from the hub or the edges, uh, we connect into our extended note and then in this case, and you call that Kevin switches, these are 3560 and the hub can also connect.
+
+66 "Aian Denis" (3928268288)
+00:13:34.789 --> 00:13:54.789
+A access point, and some other, uh, end points immediate and so from the Kevin switches, you can connect whatever, um, the, uh, the TV and, uh, access point and phones, um, things like that.
+
+67 "Aian Denis" (3928268288)
+00:13:54.789 --> 00:14:15.169
+So, that completes the fabric and, of course, in some cases on the extended node, which is, uh, you also have a, um, a cascade, another extended.
+
+68 "Aian Denis" (3928268288)
+00:14:15.169 --> 00:14:30.899
+It's like, mostly use, like, a live scenario where you have a top switch in the bottom switch and that is just like your connect a, another extended note to this extent didn't know and then follow the same logic.
+
+69 "Aian Denis" (3928268288)
+00:14:30.899 --> 00:14:51.979
+Now, from the fusion of the connect to the, um, the, and that that goes into the fabric within the right we have, uh, the, which is the wireless LAN controller. Um.
+
+70 "Aian Denis" (3928268288)
+00:14:51.979 --> 00:15:09.659
+Configure which is like a like a redundancy and then acting as 1 logical box as well. And we also have the apex. Is that 3 apex configure as H. H.
+
+71 "Aian Denis" (3928268288)
+00:15:09.659 --> 00:15:27.749
+And now we also have the ice deployment over there. We have a full ice boxes, uh, 2 panels and 2, and the DNA center. It is, say, 3 appliance, a cluster.
+
+72 "Aian Denis" (3928268288)
+00:15:27.749 --> 00:15:47.749
+So, provide a redundancy for the DNA center so, Fusion besides, uh, besides connecting to the I also connect with the firewall and then you have your Internet connectivity. I write a new there, but I believe that styling.
+
+73 "Aian Denis" (3928268288)
+00:15:47.749 --> 00:15:54.569
+Into place, but the same logic, right? That's where I provide the Internet connectivity for.
+
+74 "Aian Denis" (3928268288)
+00:15:54.569 --> 00:16:00.329
+So that is a high level, uh, topology.
+
+75 "Aian Denis" (3928268288)
+00:16:00.329 --> 00:16:03.869
+Uh, for the, uh, SDA deployment.
+
+76 "Aian Denis" (3928268288)
+00:16:03.869 --> 00:16:25.459
+So, basically, what I just talk about is a multi domain deployment, right? So we have as a besides SDA. We also have the we also have our eyes and then we also have wireless. Right? So, in terms of equipment was, I'm just like, giving Veeva as an example.
+
+77 "Aian Denis" (3928268288)
+00:16:25.459 --> 00:16:45.459
+So, we have 96, 6 as a border we have a 9,500 as a fusion. Uh, we have, uh, FDA edges, which is your hubs and we also have your Kevin switches, which is extended nodes. And so.
+
+78 "Aian Denis" (3928268288)
+00:16:45.459 --> 00:17:05.459
+And the center is the Excel model is is is a large, a large form factor, um, DNA center appliance to accommodate the number of endpoints and pull off devices to provide a scalability.
+
+79 "Aian Denis" (3928268288)
+00:17:05.459 --> 00:17:15.569
+And we also have a different types of access points. Um, we have a pair of 9,698, 180, uh.
+
+80 "Aian Denis" (3928268288)
+00:17:15.569 --> 00:17:29.549
+Uh, to, uh, pen to, and then we have, uh, spine leads as well as apex to form the fabric. So.
+
+81 "Aian Denis" (3928268288)
+00:17:29.549 --> 00:17:37.739
+Again, that is, that's the logical the presentation of the connectivity.
+
+82 "Aian Denis" (3928268288)
+00:17:41.129 --> 00:17:50.309
+So, the, uh, the deployment process, right? So, I'm going to just focus on the, uh, uh.
+
+83 "Aian Denis" (3928268288)
+00:17:50.309 --> 00:18:10.309
+Uh, uh, um, uh, deployment, right? So we have the Miami lab, uh, on the left and then we have the, the, uh, ships in Italy on the right? So, like, for some typical, a, uh, network devices, such as the controllers eyes.
+
+84 "Aian Denis" (3928268288)
+00:18:10.309 --> 00:18:30.309
+Uh, DNA center and the right the, as well as apex. And, uh, they initially set up in the Miami lab and with Fusion border edges and extended notes in a smaller scale.
+
+85 "Aian Denis" (3928268288)
+00:18:30.309 --> 00:18:50.309
+That 1st, initially you set up and test it in the Miami in the meanwhile the equipments are being shipped to Italy and then they were like a connected and, like, initially configured. Right? So, basically, after that is done the.
+
+86 "Aian Denis" (3928268288)
+00:18:50.309 --> 00:19:05.909
+Process is that going to be, uh, we agree that is going to disconnect the equipment that is set up in Miami and then those equipments that need to be shipped to Italy.
+
+87 "Aian Denis" (3928268288)
+00:19:05.909 --> 00:19:15.749
+And then once it arrives, and then they're going to get a rack and stack and then they'll get a connected.
+
+88 "Aian Denis" (3928268288)
+00:19:15.749 --> 00:19:35.749
+Um, the devices are connected, and then the, um, with the equipment that is shipped from, uh, Miami to these controllers, seem to be a configure as a high availability for all the controllers. And I've finished the configuration. I mean, like these.
+
+89 "Aian Denis" (3928268288)
+00:19:35.749 --> 00:19:55.749
+Task is called, uh, DC merged and then when the main task has been completed, it's going to a run a test for the network because that is a shortfall network for ready test. So it's going to pass the.
+
+90 "Aian Denis" (3928268288)
+00:19:55.749 --> 00:20:15.749
+Network equipment is going to test, or the redundancies is going to test, fail over and also test the end points the applications. And then once everything has been tested and ready to go a, at the ship is ready to go live for a commercial.
+
+91 "Aian Denis" (3928268288)
+00:20:15.749 --> 00:20:25.709
+Voyage, so so, in a high level, this is the, uh, the deployment workflow for SDA.
+
+92 "Aian Denis" (3928268288)
+00:20:33.179 --> 00:20:41.129
+Addressing so, uh, what I'm showing here is the addressing for DNA center.
+
+93 "Aian Denis" (3928268288)
+00:20:41.129 --> 00:21:01.129
+Um, I'm giving an example of vivo and the other 2 ships follow the same logic that just that for a premium is going to use 10 dot 72 for Vista is going to use 10.73 and 4 we use 10 dollars.
+
+94 "Aian Denis" (3928268288)
+00:21:01.129 --> 00:21:21.529
+74, so, for a DNA center, there's a couple of 3 main interface we use, which is the at the enterprise interface. That is the interface that is facing the, the fabric. And that is what, uh, network.
+
+95 "Aian Denis" (3928268288)
+00:21:21.529 --> 00:21:28.379
+Devices contact, uh, to these IP address space um, and then there's a zip.
+
+96 "Aian Denis" (3928268288)
+00:21:28.379 --> 00:21:48.379
+Uh, which is a virtual I T, address that is going to be configured for that all 3 DNS. Again, as I mentioned, this is a DNA cluster as a high vulnerability. And as so, these virtual VIP address is owned by all 3.
+
+97 "Aian Denis" (3928268288)
+00:21:48.379 --> 00:21:55.289
+Uh, DNA center, and of course, each DNA center is, it's going to have its own physical address.
+
+98 "Aian Denis" (3928268288)
+00:21:55.289 --> 00:22:15.289
+And the cluster interface is the 1 that is used for inter communication for the services in between the DNA center. And then also, as a management interface that can be used, and on the table on the right hand side uh, we listed some of the, the information.
+
+99 "Aian Denis" (3928268288)
+00:22:15.289 --> 00:22:35.289
+Shouldn't be put in during the configurations, like a container supplier net and cluster subnets and things like that. So, normally, uh, once you a, once this is deployed, you don't, you don't need to change it, but I'm going to just try to show it here.
+
+100 "Aian Denis" (3928268288)
+00:22:35.289 --> 00:22:51.719
+Uh, to show you what you're going to see in, uh, in case that you have for whatever need you need to get into the list or update commands to see what these have been configured.
+
+101 "Aian Denis" (3928268288)
+00:22:51.719 --> 00:22:59.429
+As, as I mentioned, that is not, I mean, like, you don't normally change these often.
+
+102 "Aian Denis" (3928268288)
+00:23:03.659 --> 00:23:18.239
+So, what this table shows here are the, like, the VMs retro neighborhood also, like, is called verve. So, like, listed some of the verbs that you are using.
+
+103 "Aian Denis" (3928268288)
+00:23:18.239 --> 00:23:30.509
+And as well, as the, the, which is, like, corresponds to the I T, address pools that, uh, locate to each a.
+
+104 "Aian Denis" (3928268288)
+00:23:30.509 --> 00:23:50.509
+Each, uh, the end and the associate number. Um, so like these in most cases, these, the length or, uh, located into the fabric zone. And again, I'm thinking to spend a.
+
+105 "Aian Denis" (3928268288)
+00:23:50.509 --> 00:24:01.049
+A more time to talk about the fabric zones, and then how the fabric zones are located corresponds to the tech level.
+
+106 "Aian Denis" (3928268288)
+00:24:05.669 --> 00:24:16.649
+This table is exported from Viva so these are the I. T. address pools that has been configured.
+
+107 "Aian Denis" (3928268288)
+00:24:16.649 --> 00:24:25.829
+Um, on the global level, and then, like, allow you while you, um.
+
+108 "Aian Denis" (3928268288)
+00:24:25.829 --> 00:24:45.829
+Um, locate these IP address pools is going to get reserved into each in each VMs. So, so that what is showing you is the, I add the name of the pool and the VIP address.
+
+109 "Aian Denis" (3928268288)
+00:24:45.829 --> 00:25:06.889
+Uh, just pool and the mask for some of the pools Gateway is required, especially for the user, just for the users and as well as the HTP server and the server.
+
+110 "Aian Denis" (3928268288)
+00:25:06.889 --> 00:25:18.329
+Needed are you going to go over adding new IP pools if we have to, during like, after the shifts already in production if we have to add a new.
+
+111 "Aian Denis" (3928268288)
+00:25:18.329 --> 00:25:23.459
+Like, pool, Gateway and such, that doesn't already exist on the ship.
+
+112 "Aian Denis" (3928268288)
+00:25:23.459 --> 00:25:43.919
+Um, I mean, in this deck, I have not a put in the adding IP address pool here. If time permits I mean, I can do a, uh, a quick demo in in my, in my lab.
+
+113 "Aian Denis" (3928268288)
+00:25:43.919 --> 00:25:47.039
+Um, if if, uh.
+
+114 "Aian Denis" (3928268288)
+00:25:47.039 --> 00:25:52.169
+I mean, I, I can, I mean, if time permits, I can do a quick demo on it.
+
+115 "Aian Denis" (3928268288)
+00:25:52.169 --> 00:25:55.289
+Um, yeah.
+
+116 "Aian Denis" (3928268288)
+00:25:55.289 --> 00:26:05.669
+Or, if it is still not clear, I mean, we can, we can do a follow up session to, uh, on that specific topic. Yeah.
+
+117 "Aian Denis" (3928268288)
+00:26:05.669 --> 00:26:12.119
+Okay okay thanks. Bye. Bye.
+
+118 "Aian Denis" (3928268288)
+00:26:12.119 --> 00:26:32.119
+Thank you, I'm going to move on so I'm going to talk about configurations. Right? Basically I'm going to talk about the fusion and and the border initial configuration, as I mentioned that both fusion and borders.
+
+119 "Aian Denis" (3928268288)
+00:26:32.119 --> 00:26:53.629
+Uh, they, they were formed in the that wise virtual, and then when when the equipment is shipped from a Miami onto the ship, right? So we begin to build that. So these are the initial configurations to.
+
+120 "Aian Denis" (3928268288)
+00:26:53.629 --> 00:27:13.629
+The, the, um, the stack wise virtual, in terms of connectivity in between these 2 switches. I think that in my 3 of you in my, the, the logical connectivity I show a channel, and actually, besides.
+
+121 "Aian Denis" (3928268288)
+00:27:13.629 --> 00:27:29.969
+The portion that we also have link for the keep alive link so that you can see that is going to be due active detection. So that is going to be a used for that purposes.
+
+122 "Aian Denis" (3928268288)
+00:27:29.969 --> 00:27:50.069
+To avoid a split brain scenario. So this is the configuration for fusion and then for very similar situation being followed for the border and as this is the initial configuration for the border.
+
+123 "Aian Denis" (3928268288)
+00:27:53.909 --> 00:28:13.909
+So, once the, um, the border and the fusion's are built and configured, we need to onboard the, your edges, which is the hub and extended notes, which is the Kevin switches. So I'm going to talk about.
+
+124 "Aian Denis" (3928268288)
+00:28:13.909 --> 00:28:23.129
+Uh, what is specific for this, uh, your environment to onboard the, uh, the hubs and Kevin switches.
+
+125 "Aian Denis" (3928268288)
+00:28:23.129 --> 00:28:43.129
+So, for the hub, these are the 9,400, which is what I'm showing here is a template so for both the 949,410 and 9,407.
+
+126 "Aian Denis" (3928268288)
+00:28:43.129 --> 00:29:03.129
+And they pretty much follow the exact same template, except for the uploading interface interfaces. So, on the table on the right as kind of showed the differences, this is because of the numbers of the slots right? Because of the number of.
+
+127 "Aian Denis" (3928268288)
+00:29:03.129 --> 00:29:23.129
+Uh, port number is going to get change a little bit so I kind of light in the premises. Um, I just show the differences. So this is a little bit different from what you might have learned in your.
+
+128 "Aian Denis" (3928268288)
+00:29:23.129 --> 00:29:43.129
+The a class, right in your class I believe they might have I taught you a land automation right? And automation is pretty much a process whereby you select a primary seed and a secondary seed and then you are before the switches and.
+
+129 "Aian Denis" (3928268288)
+00:29:43.129 --> 00:30:03.129
+The switches is going to get on boarded in this scenario we use something called manual underway meaning that the switches is on boarded kind of mentally meaning that the link between the, the.
+
+130 "Aian Denis" (3928268288)
+00:30:03.129 --> 00:30:22.739
+And border control play note is going to, uh, get configured manually using this template. So you're going to a enter a, uh, the host name you're looking to enter the VIP address and.
+
+131 "Aian Denis" (3928268288)
+00:30:22.739 --> 00:30:42.739
+For the channel as well as for the loop, right? So this is a score manual underlay uh, the the reason for doing that is because of the SFP of the speed and then, like, whereby if we do.
+
+132 "Aian Denis" (3928268288)
+00:30:42.739 --> 00:31:02.739
+And automation, the uplink cannot be detected, um, efficiently or correctly so, whereby we use the, uh, the templates to build the hubs to onboard them and once, uh, these, uh, inputted.
+
+133 "Aian Denis" (3928268288)
+00:31:02.739 --> 00:31:23.824
+And configure DNA center is going to be able to have rigidity into each of these hubs and then going to get a manager as well as putting it into the fabric fabric edges, depending on the.
+
+134 "Aian Denis" (3928268288)
+00:31:23.824 --> 00:31:39.509
+The only thing I'd like to other issue is that using templates even labeled as quote unquote manual it's an automated process, right? Basically, we're not leveraging the intended workflow, which is, as you mentioned, automation, because we run into.
+
+135 "Aian Denis" (3928268288)
+00:31:39.509 --> 00:31:53.669
+Challenge with dual speed as a piece, right on the on negotiation lack of our negotiation capability of the fiber channel. Right? That doesn't exist. The doesn't include it. So so the team alisha resources back to these other method that is also.
+
+136 "Aian Denis" (3928268288)
+00:31:53.669 --> 00:32:00.869
+An automation method, which is being that brings to a table that is over template. So basically, they with these templates, they basically.
+
+137 "Aian Denis" (3928268288)
+00:32:00.869 --> 00:32:20.869
+Uh, automated the overlay deployment, uh, to a certain degree. Right? Automation would have been the idea. That's that's the workflow. That was originally intended to automate. The underlay built up of a Greenfield SDA deployment, but again, we run into a layer 1 problem with the dual speed as a piece. And, and there was another tool at our disposal.
+
+138 "Aian Denis" (3928268288)
+00:32:20.869 --> 00:32:28.739
+Which is the, the templates template in DNA and that's what we leveraged, right? You? Yes, absolutely. Absolutely.
+
+139 "Aian Denis" (3928268288)
+00:32:28.739 --> 00:32:32.669
+Okay, great Thank you.
+
+140 "Aian Denis" (3928268288)
+00:32:32.669 --> 00:32:54.139
+So, I just cover the hub on boarding of the hubs and then I'm going to talk about the Kevin switches. So, which is the extended notes. So I'm going to highlight a, uh, some of the things that you, um, that the specific.
+
+141 "Aian Denis" (3928268288)
+00:32:54.139 --> 00:33:16.249
+To this environment, so, as we know that when we are on boarded the extended note, we I think we need a at the server to assign IP address to the extended notes. So this server is a configure on the fusion.
+
+142 "Aian Denis" (3928268288)
+00:33:16.249 --> 00:33:36.249
+Saying that 1 reason for that is that so the network team has a much better control on the creation and manage of the IP addresses. So, um, the HTP server is configure on the fusion. And then what I'm showing here are the.
+
+143 "Aian Denis" (3928268288)
+00:33:36.249 --> 00:33:56.249
+Like, some basic configurations for it, and then this fusion Fusion, the HTP server keep track of the IV address and Mac address all of the leases. So that, like, the best the best case scenario is.
+
+144 "Aian Denis" (3928268288)
+00:33:56.249 --> 00:34:16.249
+That when we associate on that address to the VIP address, so they'll always come up to the, the same IP address. So, this is when ever you want I mean, it's not likely.
+
+145 "Aian Denis" (3928268288)
+00:34:16.249 --> 00:34:32.099
+I mean, in case that this, uh, the fusion's, I need to be replaced, uh, you might also backup and, like, save this database in the boot flash.
+
+146 "Aian Denis" (3928268288)
+00:34:32.099 --> 00:34:53.299
+Okay, so this is how on the, uh, the server is configure so I'm going to highlight, uh, 1 thing that you might have learned in your SDA class that we do it differently on these.
+
+147 "Aian Denis" (3928268288)
+00:34:53.299 --> 00:35:13.299
+Please ships on the Kevin switch on boarding right? You might have remember that in the class. They might tell you to just on the edge, create a port channel. And then, like, when the, the Kevin switches when the.
+
+148 "Aian Denis" (3928268288)
+00:35:13.299 --> 00:35:31.139
+Extended know, get on boarded, you're going to onboard into that port channel, but in this on the ships for the age ships, when the ship yards.
+
+149 "Aian Denis" (3928268288)
+00:35:31.139 --> 00:35:35.849
+Um, install and connect the Kevin.
+
+150 "Aian Denis" (3928268288)
+00:35:35.849 --> 00:35:39.839
+Uh, switches, uh, it is.
+
+151 "Aian Denis" (3928268288)
+00:35:39.839 --> 00:35:59.839
+The challenge is that they might, they might, uh, connect a lot of Kevin switches at the same time. They might all come in at the same time and a port that you, you do not know ahead of time. So that is the nature of the construction on these shifts.
+
+152 "Aian Denis" (3928268288)
+00:35:59.839 --> 00:36:14.099
+So, how do we, how do we address that challenge of, like, not knowing, uh, ahead of time which port these, uh, 9,560 come onto and, uh.
+
+153 "Aian Denis" (3928268288)
+00:36:14.099 --> 00:36:24.419
+And and where and when so we configure a E script on the hubs.
+
+154 "Aian Denis" (3928268288)
+00:36:24.419 --> 00:36:30.419
+What this script does is that when the.
+
+155 "Aian Denis" (3928268288)
+00:36:30.419 --> 00:36:41.429
+Hub sees the Texas neighbors that is coming in to his port is going to create a poor channel.
+
+156 "Aian Denis" (3928268288)
+00:36:41.429 --> 00:36:51.689
+Uh, for it, so basically we do things automatically instead of manually and the do these things at scale.
+
+157 "Aian Denis" (3928268288)
+00:36:51.689 --> 00:37:04.499
+So, uh, so that is so what what that is being used to on board we saw large number of cabins switches.
+
+158 "Aian Denis" (3928268288)
+00:37:04.499 --> 00:37:24.499
+So, with that 1 thing to keep in mind, especially like, is for what they took operation is that when the deployment is done, we remove that script from the hub. That is to.
+
+159 "Aian Denis" (3928268288)
+00:37:24.499 --> 00:37:38.819
+Avoid an issue, whereby when when the ship is doing an indication, right? Because during that time, they might connect some switches that we don't know ahead of time and it could be.
+
+160 "Aian Denis" (3928268288)
+00:37:38.819 --> 00:37:58.819
+Uh, it could be a 3560, and it happens to be that this script is going to try to a on board that that switch as a Kevin switch. So, uh, during the deployment, once we are done, we will move that script from the hub.
+
+161 "Aian Denis" (3928268288)
+00:37:58.819 --> 00:38:06.889
+So, I just make sure that these scripts are not there while the ship is not in the deployment.
+
+162 "Alicia Greyner" (2871030528)
+00:38:06.889 --> 00:38:13.020
+Question, what happens is what happens when we have to replace.
+
+163 "Alicia Greyner" (2871030528)
+00:38:13.020 --> 00:38:16.950
+1 of the of the Gavin switches.
+
+164 "Alicia Greyner" (2871030528)
+00:38:16.950 --> 00:38:38.630
+Right, right yeah. Good question. Um, I do at the end how they, and they work flow that we walk you through, that are replacing a cabin switch. So I think, I mean, I may work flow. We can replace a lot of things, including a.
+
+165 "Alicia Greyner" (2871030528)
+00:38:38.630 --> 00:38:51.420
+A chassis like 9,400 chassis we're placing a supervisor module replacing a line costs and things like that. Um, but I pick a 2 typical a, um, uh.
+
+166 "Alicia Greyner" (2871030528)
+00:38:51.420 --> 00:39:11.420
+I mean, to typical platform, which you use the most 1 is to 353,560. the other 1 is 99,290 9,120 AP. So I show you that workflow. So hopefully be able to address your question. And then hopefully.
+
+167 "Alicia Greyner" (2871030528)
+00:39:11.420 --> 00:39:16.770
+It wouldn't be help while you go into operation. Yeah, absolutely. Awesome.
+
+168 "Alicia Greyner" (2871030528)
+00:39:16.770 --> 00:39:36.770
+Okay, so that that goes into the, um, yeah, that besides the I just talked about the templates so these are the steps of swapping it off the Kevin switches, right? So you connect the for this 160 to the hub you will populate it on and then you.
+
+169 "Alicia Greyner" (2871030528)
+00:39:36.770 --> 00:39:56.770
+Also do a command to clear or the search, the database or commands and the low. So, what this does is that to a, get the 3560 to a cleaned a startup place and then once it is.
+
+170 "Alicia Greyner" (2871030528)
+00:39:56.770 --> 00:40:14.790
+Um, connecting to your hubs with that the, with the templates that I just discussed, um, the 7,560, which is your carbon switch is going to stop the plug and play process to start to get on boarded.
+
+171 "Alicia Greyner" (2871030528)
+00:40:14.790 --> 00:40:34.790
+So so, from, then that point on everything is automated, right? So your DNA center is going to see the 3560 is going to add it to the inventory is going to add it to the same site as your hub and then it's going to edit a.
+
+172 "Alicia Greyner" (2871030528)
+00:40:34.790 --> 00:40:53.700
+To the fabric, right? And then you can just see that that 7,160 in your fabric topology with an X next to it saying that it is onboarded as an extended note.
+
+173 "Alicia Greyner" (2871030528)
+00:40:53.700 --> 00:40:59.190
+Okay, so that is Kevin switch on boarding.
+
+174 "Alicia Greyner" (2871030528)
+00:40:59.190 --> 00:41:21.110
+So, I'm going to talk about the templates. Right? These templates should I mean, the templates that I am going to discussed are the ones that have already being configured on the DNA center. So, if you go to DNA center, if you go to the hamburger menu and scroll to the.
+
+175 "Alicia Greyner" (2871030528)
+00:41:21.110 --> 00:41:41.110
+And then go to the template and then you can browse around and see what the templates that have been configured. And then I'm going to a, in a high level talk about, like, what these templates are for. And I'm going to. I mean, again, right you most likely going to.
+
+176 "Alicia Greyner" (2871030528)
+00:41:41.110 --> 00:42:00.037
+To create some templates and use the templates, uh, in your day to operation. And then I'm going to, uh, walk you through step by step on how to create a template and deploy a template, um, into a a device or.
+
+177 "Aian Denis" (3928268288)
+00:42:00.037 --> 00:42:21.110
+By type, which, by the way Alicia, I mean, uh, just a quick note here. This will not only apply to the new built. Right? Remember prime infrastructure is being replaced by DNA, like DNA center on the old vessels. So, templates are something that are not FDA specific. Is actually something that DNA brings to the table so the, the, the ability of.
+
+178 "Aian Denis" (3928268288)
+00:42:21.110 --> 00:42:31.890
+Leveraging templates for automation purposes will not only apply to the new builds the premium and Brandon right this also apply to, uh, the legacy vessels that are being, uh.
+
+179 "Aian Denis" (3928268288)
+00:42:31.890 --> 00:42:35.790
+Once I hear it with you, right? So that's.
+
+180 "Aian Denis" (3928268288)
+00:42:35.790 --> 00:42:39.030
+I think to keep in mind. Yep.
+
+181 "Aian Denis" (3928268288)
+00:42:39.030 --> 00:42:59.220
+Thank you and for the comment. So so, what I'm showing here is the, uh, the date and templates right? Meaning that the templates can be applied to the devices that has already being a deployed.
+
+182 "Aian Denis" (3928268288)
+00:42:59.220 --> 00:43:05.700
+This is a little bit different from a day 0 template that you might have her and learn your.
+
+183 "Aian Denis" (3928268288)
+00:43:05.700 --> 00:43:24.510
+In your class, right? The 0 template is that when the, when, the devices 1st in play and then once it comes on, it's going to get pushed into it. So, what I'm focusing here is that date and template, which is the ones that you're going to see and use mostly.
+
+184 "Aian Denis" (3928268288)
+00:43:24.510 --> 00:43:42.150
+So, the 1st, 1, I'm showing here is a remove, triple a accounting so this template is going to has been, uh, deployed to your cat 9 case as well as Kevin switches. The purpose here is.
+
+185 "Aian Denis" (3928268288)
+00:43:42.150 --> 00:43:47.408
+You're not sharing the day. I'm not.
+
+186 "Aian Denis" (3928268288)
+00:43:47.408 --> 00:44:01.247
+Sherry, you are you, are you, I think there was some background noise, Mark I think you have some background noise, but oh, okay. Okay. Okay. No, I just see the main the main screen is he sharing the specific template or.
+
+187 "Aian Denis" (3928268288)
+00:44:01.247 --> 00:44:06.390
+No conversation if opportunity here right?
+
+188 "Aian Denis" (3928268288)
+00:44:06.390 --> 00:44:12.780
+Yes, yeah, so so the templates here, I mean, you see that, that the commands.
+
+189 "Aian Denis" (3928268288)
+00:44:12.780 --> 00:44:18.269
+Accounting update new info, periodic 2080.
+
+190 "Aian Denis" (3928268288)
+00:44:18.269 --> 00:44:22.590
+We're not seeing that you were seeing. We're just still seeing the discussion discussion topics.
+
+191 "Aian Denis" (3928268288)
+00:44:22.590 --> 00:44:26.310
+That's that's what that's what I'm seeing anyway.
+
+192 "Aian Denis" (3928268288)
+00:44:26.310 --> 00:44:30.780
+There you go now, I see Dan templates. Now. See the enterprise.
+
+193 "Aian Denis" (3928268288)
+00:44:30.780 --> 00:44:36.607
+Oh, okay. Okay. Okay. Okay. Yeah. Are you still seeing the remove trouble?
+
+194 "Gordon Montgomery" (3032980224)
+00:44:36.607 --> 00:44:39.293
+Come in yes.
+
+195 "Aian Denis" (3928268288)
+00:44:39.293 --> 00:44:42.690
+Yeah, okay. Yeah so.
+
+196 "Aian Denis" (3928268288)
+00:44:42.690 --> 00:45:02.690
+So so this template is pretty much removed the accounting update, right? I mean, like, during the, uh, the initial deployment, we find that, like, all the devices are sending, like, aggressively a accounting updates, which we might not use. Uh, so.
+
+197 "Aian Denis" (3928268288)
+00:45:02.690 --> 00:45:22.690
+To a, to optimize the operation as well as lower the lows on ice. We decided to remove the, the, uh, these updates from the devices. And then these, the templates that was made and push to all these devices and.
+
+198 "Aian Denis" (3928268288)
+00:45:22.690 --> 00:45:42.690
+The 2nd, a template that I'm showing here is to change the name of the Kevin switches, and then add the cabins, which just comes on. They will not I mean, they only have the serial number with it. So, I think, I mean, like this, uh.
+
+199 "Aian Denis" (3928268288)
+00:45:42.690 --> 00:46:02.670
+Uh, push be able to change the cabins, which names according to a location where they are. Right? Whether that happened numbers. Normally 1, Kevin switch service 2 cabins and then you're going to see the numbers of these 2. Kevin.
+
+200 "Aian Denis" (3928268288)
+00:46:02.670 --> 00:46:22.670
+Okay, so these are the 2 templates and then the next 1 I'm going to talk about is the triple a accounting commands. So these templates is going to be used for the cat 9. K and then as well as the Kevin switches.
+
+201 "Aian Denis" (3928268288)
+00:46:22.670 --> 00:46:33.750
+Is this does is to do the triple a accounting commands to put in all these devices so that we have an audit.
+
+202 "Aian Denis" (3928268288)
+00:46:33.750 --> 00:46:50.550
+Um, in ice to see, like, who has a log in and configure, uh, certain commands so that we have an audit trail for it for a operation perspective.
+
+203 "Aian Denis" (3928268288)
+00:46:50.550 --> 00:47:11.570
+And the next template I'm going to talk about is the 1 that I talked previously, and, like, the, after the script has been a deployed to the hub to onboard the Kevin switches a, the, after or the captains, which.
+
+204 "Aian Denis" (3928268288)
+00:47:11.570 --> 00:47:23.730
+Is a happening on boarded in the initial deployment phases we remove them so that so that we have control, uh.
+
+205 "Aian Denis" (3928268288)
+00:47:23.730 --> 00:47:43.730
+Uh, on when it will detect the, the cabin switches so, from the operation operation perspective, most Y, most likely, you're not going to use this template because you are not likely to onboard large number of 7,565.
+
+206 "Aian Denis" (3928268288)
+00:47:43.730 --> 00:48:03.730
+So, in that case, you are likely just going to use the manual method, just like, go to the candidates switches, pick the ports, create a port channel and then when the 760 is going to come get on board and use the commands, I just discussed.
+
+207 "Aian Denis" (3928268288)
+00:48:03.730 --> 00:48:16.468
+To create all the servers or the config and then once they get a plug and play on board, you're going to DNA center is going to discover manage it and then put it into the fabric.
+
+208 "Jose Cristo" (4093508352)
+00:48:16.468 --> 00:48:23.187
+I really caught me for the Kevin switch.
+
+209 "Jose Cristo" (4093508352)
+00:48:23.187 --> 00:48:33.261
+Could you repeat the question? Why is a requirement for for a Kevin switch? Why is.
+
+210 "Jose Cristo" (4093508352)
+00:48:33.261 --> 00:48:38.070
+Why do we need to care for Chanel to onboard? Kevin switch.
+
+211 "Jose Cristo" (4093508352)
+00:48:38.070 --> 00:48:59.150
+Yeah, so for the D. N. A. for our DNA workflow, we have to use a port channel. I mean, like for all the Kevin switches and the, the, which is extended no, it is a requirement to.
+
+212 "Jose Cristo" (4093508352)
+00:48:59.150 --> 00:49:15.999
+Channel, even if it is a 1 link, you create a port channel to to, to trunk or audio V lands because your Kevin switches layer to switch. It does not run a layer 3. so a, for that connectivity, it needs to be.
+
+213 "Aian Denis" (3928268288)
+00:49:15.999 --> 00:49:32.520
+I don't see it as part of the workflow of the, the extended note itself. Dina creates a port channel, just to give you the ability of have layer 1 redundancy. Right? But you can have an individual that are independent right? Basically run the core channel with a single member.
+
+214 "Aian Denis" (3928268288)
+00:49:32.520 --> 00:49:38.310
+Right, but as part of the work flow create the for channel, just to give you the ability of.
+
+215 "Aian Denis" (3928268288)
+00:49:38.310 --> 00:49:46.170
+Add more links to your cabinet switch or do you extend the node as the role and SDA optics right? If you need to add redundancy.
+
+216 "Aian Denis" (3928268288)
+00:49:46.170 --> 00:49:57.570
+So that's a Pre planned as a Pre canned workflow that creates these 4 channels for you. Right? But in your case, I totally you're using a single offering so you have a channel with a single member.
+
+217 "Aian Denis" (3928268288)
+00:49:57.570 --> 00:50:14.670
+Right. Okay so that continue to move on to a day end templates. So this is called a block SS.
+
+218 "Aian Denis" (3928268288)
+00:50:14.670 --> 00:50:18.540
+And then on the, um.
+
+219 "Aian Denis" (3928268288)
+00:50:18.540 --> 00:50:23.430
+On the ship of be fine that, um.
+
+220 "Aian Denis" (3928268288)
+00:50:23.430 --> 00:50:43.430
+That scenario whereby launch a number of packets were generated from the user in this case, and those packets being.
+
+221 "Aian Denis" (3928268288)
+00:50:43.430 --> 00:50:50.310
+Flooded into the CPU of the, um, of the.
+
+222 "Aian Denis" (3928268288)
+00:50:50.310 --> 00:51:04.500
+The border, and then create a high CPU, uh, on the border. And, uh, so what this, uh, this, uh, template does, is that to CRE a.
+
+223 "Aian Denis" (3928268288)
+00:51:04.500 --> 00:51:09.990
+Uh, Rachel and vehicle to block these, uh.
+
+224 "Aian Denis" (3928268288)
+00:51:09.990 --> 00:51:15.750
+Um, packets coming from the clients to protect the CPU.
+
+225 "Aian Denis" (3928268288)
+00:51:15.750 --> 00:51:23.250
+So, these templates are, they're going to be deployed on the fabric.
+
+226 "Aian Denis" (3928268288)
+00:51:23.250 --> 00:51:31.773
+Edges on the, uh, subject edges, which is the, the helps. Okay so we protect, uh, from the.
+
+227 "Alicia Greyner" (2871030528)
+00:51:31.773 --> 00:51:37.320
+Find, can you help me to understand why why we need to do this.
+
+228 "Alicia Greyner" (2871030528)
+00:51:37.320 --> 00:51:41.760
+Understand to protect it by what, what why.
+
+229 "Alicia Greyner" (2871030528)
+00:51:41.760 --> 00:51:49.080
+Um, this we have not been observed in.
+
+230 "Alicia Greyner" (2871030528)
+00:51:49.080 --> 00:51:52.440
+Or the other ships, uh, like, uh, the.
+
+231 "Alicia Greyner" (2871030528)
+00:51:52.440 --> 00:51:56.370
+Uh, Vista and, uh, but.
+
+232 "Alicia Greyner" (2871030528)
+00:51:56.370 --> 00:51:59.370
+I think that for the I. T, TVs.
+
+233 "Alicia Greyner" (2871030528)
+00:51:59.370 --> 00:52:06.810
+Um, I suspect is, I mean, I, I don't have approve yet, I suspect is because of some new firmware.
+
+234 "Alicia Greyner" (2871030528)
+00:52:06.810 --> 00:52:26.810
+From some certain TVs that generate these, these packets and multipath packets, and then we enable multicast for the TVs. So these packets, they are not being used at NCR. H.
+
+235 "Alicia Greyner" (2871030528)
+00:52:26.810 --> 00:52:46.810
+We see them these packets, they flood and then they flip the CPU when the CPU of the border season has to process them. It becomes it's being queued up in the CPU. And then when this large number of these packets comes in, no matter how powerful that.
+
+236 "Alicia Greyner" (2871030528)
+00:52:46.810 --> 00:53:06.810
+Is CPO cannot be kept up with it so the Cisco best practice is that to block them uh, you don't even use them. So, uh, so that's why that's that's the strategy that we put in place to stabilize.
+
+237 "Alicia Greyner" (2871030528)
+00:53:06.810 --> 00:53:26.810
+And protect the CPU on diva and while we have not been seeing in Vista, and, uh, we have discussion and then, uh, NCR H, uh, decides to put that on a, on those ships to protect in case.
+
+238 "Alicia Greyner" (2871030528)
+00:53:26.810 --> 00:53:33.239
+That some other clients comes in at that point so that our, uh.
+
+239 "Aian Denis" (3928268288)
+00:53:33.239 --> 00:53:34.362
+What is solid.
+
+240 "Alicia Greyner" (2871030528)
+00:53:34.362 --> 00:53:37.137
+Yeah, I just want to hear me.
+
+241 "Aian Denis" (3928268288)
+00:53:37.137 --> 00:53:43.890
+Let me add up with something quick before you move to the next topic. I just I just paste it on the best practice for the next 9 days.
+
+242 "Aian Denis" (3928268288)
+00:53:43.890 --> 00:53:51.240
+Uh, Cisco document on on basically, uh, like, she will explain, uh, as simple as, uh.
+
+243 "Aian Denis" (3928268288)
+00:53:51.240 --> 00:53:58.290
+Simple service, it's called simple service called a protocol. I think I believe it's on for basically the end points. In this case. Your.
+
+244 "Aian Denis" (3928268288)
+00:53:58.290 --> 00:54:18.290
+Or rename multiple profit so basically, they send traffic to the multitask group. So what happens is that at the top level they the end routes, right? The multicast routes. They started registering each 1 of your TVs as a source. Right? And at some point, you started bleeding, because normally normally on a multicast multitask group, you have a source.
+
+245 "Aian Denis" (3928268288)
+00:54:18.290 --> 00:54:38.290
+And a bunch of listeners, a bunch of the settings right? But you don't have that many sources in this case if you have, what, 2000 TVs right? You can have 2000 sources right? That that, that the, the multicast process on these guys need to keep track of right? So each 1 of them registers as a source instead of just the TV stream service or server, right? Each 1 of.
+
+246 "Aian Denis" (3928268288)
+00:54:38.290 --> 00:54:43.290
+Is also what's the appraiser as a source for the multicast group? So that's where the control plane.
+
+247 "Aian Denis" (3928268288)
+00:54:43.290 --> 00:54:47.280
+Uh, depletion comes into place. I again, I sent you a link.
+
+248 "Aian Denis" (3928268288)
+00:54:47.280 --> 00:54:53.070
+On on on best practice, because this is a well known issue. And the other thing I wanted to point, this is a.
+
+249 "Aian Denis" (3928268288)
+00:54:53.070 --> 00:55:04.470
+Perfect use case for templates. Sorry this is an issue that didn't happen in premium didn't happen in Visa. It happened on right? And through the templates, the team was able to push the configuration to all the hubs.
+
+250 "Aian Denis" (3928268288)
+00:55:04.470 --> 00:55:12.072
+With, uh, with a few clicks, right, right? You what the problem was, it took a while.
+
+251 "Alicia Greyner" (2871030528)
+00:55:12.072 --> 00:55:20.550
+But, eh, so, from operational perspective, when the CPU is going high, what are the expected issues?
+
+252 "Alicia Greyner" (2871030528)
+00:55:20.550 --> 00:55:28.110
+When the CPU is high, it could cost.
+
+253 "Alicia Greyner" (2871030528)
+00:55:28.110 --> 00:55:48.110
+A lot of issues, I mean, like, what have you seen right? I mean, when the CPU high, you're going to see a slowness, right? Because like, the is queue up. Uh, it cannot handle that. My processes is screen to your console into.
+
+254 "Alicia Greyner" (2871030528)
+00:55:48.110 --> 00:56:02.280
+Your, uh, device is becoming ready, so you type in something and it takes a while to reply back. Even you type you type in something. It's hard to see what is being typed in. And then it start to drop routes.
+
+255 "Alicia Greyner" (2871030528)
+00:56:02.280 --> 00:56:17.252
+Right, and you're going to see, um, uh, the, the, the clients not being able to access even, uh, uh, the its own servers in in, like, uh, you might not be able to ping each other. So.
+
+256 "Alicia Greyner" (2871030528)
+00:56:17.252 --> 00:56:21.130
+Um, so managing managing is.
+
+257 "Aian Denis" (3928268288)
+00:56:21.130 --> 00:56:35.109
+Send packet loss, right? Correct. Deletion. Yeah. Yeah. From from the impact side, there is no different from what you guys are used to. Right basically CPU. You guys got to start back to your management plan 1st, you're controlling later and then ultimately your data plane, right?
+
+258 "Alicia Greyner" (2871030528)
+00:56:35.109 --> 00:56:48.900
+Danny, thank right. I mean, yeah 9,600 is a strong box, a strong CPU, but but when you flip to it, I think that is getting the cradle.
+
+259 "Alicia Greyner" (2871030528)
+00:56:48.900 --> 00:57:10.880
+Okay, so good you're going to move on so smart licensing. So, what this command does is that to let the cat 9 K to get into the, uh, on the onsite Cisco smart Cisco smart software.
+
+260 "Alicia Greyner" (2871030528)
+00:57:10.880 --> 00:57:30.880
+In it so that because again, your DNA center is air gap it does not have Internet access. You have to deploy it on site the CSM. So this allows the catalyst 900 to a register to the CS.
+
+261 "Aian Denis" (3928268288)
+00:57:32.707 --> 00:57:54.410
+The idea here, so she was going over to all the templates for you guys to know the templates are already there, right? The the intention behind each 1 of them and in case, you guys have to modify 1, you know what to look for. Okay. Yeah. I remember this was pushed via template. I need to change this configuration. You don't have to create a new 1 or manually go 1 by 1 you can go to the templates themselves. So.
+
+262 "Aian Denis" (3928268288)
+00:57:54.410 --> 00:58:00.780
+Because when I wanted to walk here, while I'm looking at all the samples, all the samples are already there.
+
+263 "Aian Denis" (3928268288)
+00:58:00.780 --> 00:58:13.680
+In theory you shouldn't have to play with them if everything is it's okay but if you have to change something on the modification on on the 1 of the configuration, the templates and push it, you can, you can certainly do. So right. So, for you to know what's already there.
+
+264 "Aian Denis" (3928268288)
+00:58:13.680 --> 00:58:36.350
+Yep, so yeah, so this template is, uh, is putting the line VP Y, into a Kevin switches. This seems to be this current, a limitation or book on Kevin.
+
+265 "Aian Denis" (3928268288)
+00:58:36.350 --> 00:58:54.420
+Which is that we do not have the configure, uh, for the authentication and authorization these lines are needed so that the, the lock INS control by ice. So, these, uh.
+
+266 "Aian Denis" (3928268288)
+00:58:54.420 --> 00:59:00.660
+Uh, uh, template is going to put these commands into the 7,560.
+
+267 "Aian Denis" (3928268288)
+00:59:00.660 --> 00:59:06.870
+And then they yeah, they already have been deployed.
+
+268 "Aian Denis" (3928268288)
+00:59:06.870 --> 00:59:26.870
+So so I'm gonna go into the workflow, I'll say, creating and deploying a template. Right? So, in your DNA center, in the gooey, you go into twos and then you click on.
+
+269 "Aian Denis" (3928268288)
+00:59:26.870 --> 00:59:48.290
+A template now you select a device type, it is important to a select the correct device type. Remember that I just show you the different templates and where they are deployed. So, like, if you are to create a template, right?
+
+270 "Aian Denis" (3928268288)
+00:59:48.290 --> 00:59:54.330
+You would need to make sure that, you know, what device you are going to, uh.
+
+271 "Aian Denis" (3928268288)
+00:59:54.330 --> 01:00:12.540
+Put the templates on and select the device type because only when you have select the correct device type, will DNA center allow you to put that template into the corresponding device? Doing provisioning.
+
+272 "Aian Denis" (3928268288)
+01:00:12.540 --> 01:00:20.970
+So, you select the device type, whether it's say a 9,400 or 760, uh, at this screen.
+
+273 "Aian Denis" (3928268288)
+01:00:20.970 --> 01:00:36.060
+And then you're going to a, you're going to add, uh, put in the properties, right? Whether it's or like, putting the name and things like that.
+
+274 "Aian Denis" (3928268288)
+01:00:36.060 --> 01:00:56.060
+So you add the properties and then you start to write that template, right? It's just like a, uh, editor. Right? You just add the commands to it and then once you finish typing, make sure that you save and complete 1 a.
+
+275 "Aian Denis" (3928268288)
+01:00:56.060 --> 01:01:16.060
+A mistake that many people make was that they, after they finish writing, they safe, but they do not do the commit if the, the template is not committed, it's not going to be available to the steps that I'm going to talk later on. So, make sure.
+
+276 "Aian Denis" (3928268288)
+01:01:16.060 --> 01:01:20.880
+The ones you finish writing it, you safe and commit.
+
+277 "Aian Denis" (3928268288)
+01:01:20.880 --> 01:01:41.960
+Now, in order for a template to be available, uh, to be provisioned to a device, you need to have a profile right? In a network profile. So this can be fined, uh, under a designed and then network profiles. So you select.
+
+278 "Aian Denis" (3928268288)
+01:01:41.960 --> 01:01:51.120
+You click on the ad profiles, so that whether it's a routing or switching, I think, in most cases, it's going to be in switching. And you said that.
+
+279 "Aian Denis" (3928268288)
+01:01:51.120 --> 01:02:12.320
+And then you type in the name, right? And then you under the device type, right? And then you just select the device type that you have, uh, select previously. So I just mentioned that that is very important. You match for whatever you select and here right?
+
+280 "Aian Denis" (3928268288)
+01:02:12.320 --> 01:02:32.320
+Select the device type and then you a, choose the template once you select the correct device type is going to show all the available, uh, the and templates that you have in DNA, and you select the 1 that you save. And, uh.
+
+281 "Aian Denis" (3928268288)
+01:02:32.320 --> 01:02:40.890
+They did previously and then you're going to show you as a back end templates and then that template is going to show it there.
+
+282 "Aian Denis" (3928268288)
+01:02:40.890 --> 01:02:48.000
+Okay, and then you save and that template is going to be ready to use.
+
+283 "Aian Denis" (3928268288)
+01:02:48.000 --> 01:03:08.670
+Now, you assign that, uh, uh, the, the profile to a site, right? You click on the assigned site and then you just like, in the, the hierarchy, you pick where you want to put it on and then it's going to get assigned.
+
+284 "Aian Denis" (3928268288)
+01:03:08.670 --> 01:03:13.920
+Now, you go back to the inventory.
+
+285 "Aian Denis" (3928268288)
+01:03:13.920 --> 01:03:27.150
+And, uh, like, say, if you want to a provisioned the devices, you select the devices and then you go to action provision and provision device.
+
+286 "Aian Denis" (3928268288)
+01:03:27.150 --> 01:03:31.290
+If you need to a provision, uh.
+
+287 "Aian Denis" (3928268288)
+01:03:31.290 --> 01:03:46.560
+Uh, multiple devices you might, like, go to the filter and search based on whatever name and then you can select multiple ones and then you can provision a multiple, uh, devices at once.
+
+288 "Aian Denis" (3928268288)
+01:03:46.560 --> 01:04:06.560
+So, once I, once you go into the provision device and make sure that it's going to, because it's like, say the 9,400, then you're going to show you the templates that that that is available and then make sure that they selected. And then you go to the next.
+
+289 "Aian Denis" (3928268288)
+01:04:06.560 --> 01:04:13.500
+And a template, and that particular template is going to push to the device this you selected.
+
+290 "Eng. Socrates Romay, MBA." (1616937984)
+01:04:17.803 --> 01:04:21.240
+Um, you can tell.
+
+291 "Eng. Socrates Romay, MBA." (1616937984)
+01:04:21.240 --> 01:04:25.200
+Also, you can combine template also. Mm. Hmm.
+
+292 "Eng. Socrates Romay, MBA." (1616937984)
+01:04:25.200 --> 01:04:31.522
+Just in case they need it. Uh, I, uh, uh, W, what.
+
+293 "Eng. Socrates Romay, MBA." (1616937984)
+01:04:31.522 --> 01:04:36.137
+Just in case they need it you can create multiple template.
+
+294 "Aian Denis" (3928268288)
+01:04:36.137 --> 01:04:39.680
+And now also combining 1 component.
+
+295 "Eng. Socrates Romay, MBA." (1616937984)
+01:04:39.680 --> 01:04:45.900
+Yes, that you can apply the replay host name or whatever together.
+
+296 "Eng. Socrates Romay, MBA." (1616937984)
+01:04:45.900 --> 01:04:53.699
+In 1 template provisioning 1 time, you have to provision it 3 times, for instance, right right. Yeah.
+
+297 "Aian Denis" (3928268288)
+01:04:53.699 --> 01:05:05.010
+Yeah, absolutely yeah, yeah, you can apply in order so you can have, you can open a to a single flow. You can have multiple templates associated with it.
+
+298 "Aian Denis" (3928268288)
+01:05:05.010 --> 01:05:25.010
+Push them all. Yes. Yes. Good point. Good point. So, yeah, I mean, like, you can create multiple templates and then in in the template editor, you can a create a composite templates in that composite template. You can put whatever templates that you can.
+
+299 "Aian Denis" (3928268288)
+01:05:25.010 --> 01:05:45.010
+You have already created into this, a composite template and then you provision explain to you a get push in 1 goal. So yeah, so and each dimension as that will save you some time. So that's 1 advantage of the DNA center.
+
+300 "Aian Denis" (3928268288)
+01:05:45.010 --> 01:05:56.820
+And then if you look at your DNA center, you might already have observed. Some of the composite has been created.
+
+301 "" (0)
+01:05:58.000 --> 01:06:01.329
+Okay, so I'll separate zones.
+
+302 "" (0)
+01:06:01.329 --> 01:06:23.400
+What is a fabric fabric zone is say a construct that will allow you to a divide a large a separate into smaller and more manageable Micro.
+
+303 "" (0)
+01:06:23.400 --> 01:06:29.620
+Segments so a, um.
+
+304 "" (0)
+01:06:29.620 --> 01:06:45.250
+Use the fabric sites that you have created. Uh, and it is like a fabric zone is a child of the parent fabric site.
+
+305 "" (0)
+01:06:45.250 --> 01:06:52.450
+And a lot of properties that you have.
+
+306 "" (0)
+01:06:52.450 --> 01:07:06.070
+Credit for a pocket site is screen to get inherited into a fabric zone. So what this does is that to make.
+
+307 "" (0)
+01:07:06.070 --> 01:07:14.350
+A, your fabric side more manageable into a a smaller segment.
+
+308 "" (0)
+01:07:14.350 --> 01:07:20.980
+So, fabric zone is use in all 3 s**.
+
+309 "" (0)
+01:07:20.980 --> 01:07:40.980
+And in the in the initial design and implementation for the shift, we ran into a challenge whereby you will have a large number of extended notes. These are Kevin switches and everything is.
+
+310 "" (0)
+01:07:40.980 --> 01:07:58.600
+Contain in a single fabric site, so these, the large number of devices exceeds the publish a scale number of DNA center appliance that that that is supported at that time.
+
+311 "" (0)
+01:07:58.600 --> 01:08:17.680
+So, the solution that we came up with, and then the ones that we are deployed is to create for fabric zones and, uh, to locate your devices into these of fabric zones.
+
+312 "" (0)
+01:08:17.680 --> 01:08:24.910
+So, let's say, um, I mean, that's, um.
+
+313 "" (0)
+01:08:24.910 --> 01:08:44.910
+No, it's a 500 is a typo. I mean, like during the deployment, like, we do not deploy more than 500 extended notes at the time. And so, like, uh, we do not, uh, deployed devices in multiple zones simultaneously.
+
+314 "" (0)
+01:08:44.910 --> 01:08:54.100
+And, uh, so, like, a, uh, we do not change the IP address pool in all 4 zones.
+
+315 "" (0)
+01:08:54.100 --> 01:09:01.570
+At once so that allow us to on board all these devices.
+
+316 "" (0)
+01:09:01.570 --> 01:09:06.760
+Into a, um, into the single fabric site.
+
+317 "" (0)
+01:09:06.760 --> 01:09:17.890
+Mostly so I'm going to talk about a fabric zones, uh, in detail right? So, in a fabric zone.
+
+318 "" (0)
+01:09:17.890 --> 01:09:21.070
+It's in a fabric site.
+
+319 "" (0)
+01:09:21.070 --> 01:09:41.070
+There are certain devices that cannot be put into a fabric zone. They have to lift in the parent site and that includes your control plane note and border, which is, in your case it is 1 that also improves the.
+
+320 "" (0)
+01:09:41.070 --> 01:09:58.000
+So, if you go into your fabric side, if you take a look at your topology, you'll find that you are a border control plane and W, they only exist in your parent site.
+
+321 "" (0)
+01:09:58.000 --> 01:10:18.000
+Okay, and so, as I mentioned that the fabric zone inherited some, uh, characteristics of your fabric side. So, what you need to create is you, are you in the fabric site level, you create your, you are created your.
+
+322 "" (0)
+01:10:18.000 --> 01:10:37.659
+A default gateway in your parent's fabric site, and after that, you can create your fabric zone and, uh, locate your some of these, uh, IP address pools into your fabric zone.
+
+323 "" (0)
+01:10:37.659 --> 01:10:42.699
+Right so, a, um, the, um.
+
+324 "" (0)
+01:10:42.699 --> 01:11:02.559
+Uh, the edges and then extended note, they can be provision into fabric zone and then, like, when, when you on boarded, uh, Kevin switches, the Kevin switches is going to be at the same fabric zone as your.
+
+325 "" (0)
+01:11:02.559 --> 01:11:08.919
+Right. So if I mentioned that, um.
+
+326 "" (0)
+01:11:08.919 --> 01:11:17.409
+The only the borders and then W are in the.
+
+327 "" (0)
+01:11:17.409 --> 01:11:37.409
+Um, parent fabric side. So what are you going to see here? Is that with the fabric zone? Right? I'm showing fabric zone 1 and fabric zone. 2. if I create multiple, a IP address pools, each, the, the edges of each fabric zone.
+
+328 "" (0)
+01:11:37.409 --> 01:11:55.329
+Does not have to keep track of all the other IP address pools that it does not use it. It only need to a on board some IP address pool that is going to be relevant to that IP address pool. So.
+
+329 "" (0)
+01:11:55.329 --> 01:12:02.919
+Uh, to translate into scalability, uh, terms, is that we make these more scalable.
+
+330 "" (0)
+01:12:02.919 --> 01:12:22.919
+Okay, so now, what does the fabric zone looks like in the, in the, in the ships? So what I'm showing here is on the right for example, we have the create 4 fabric zones factories, 1, 2, 3, 4.
+
+331 "" (0)
+01:12:22.919 --> 01:12:30.129
+And then, uh, like a certain decks we go to different zones.
+
+332 "" (0)
+01:12:30.129 --> 01:12:48.219
+Okay and, uh, so again, right I mean, you are fabric zones is going to be your hopes and the, the cabin switches that are connecting to the hub that going to belong to the same fabric zone.
+
+333 "" (0)
+01:12:48.219 --> 01:12:59.199
+So, if you go to your hierarchy, you are going to see that the different decks are listed under different zones.
+
+334 "" (0)
+01:13:03.189 --> 01:13:23.189
+Okay, now to a to to edit to create a fabric zone, right? So you go to your fabric site and then go to a more actions and then go to add the fabric zones. Right? So, and.
+
+335 "" (0)
+01:13:23.189 --> 01:13:39.999
+That you're going to pick, uh, where the fabric zone is going to reside, right? So, in your case, you're going to go to the hierarchy and pick whatever deck as that fabric zone is going to a, a cover.
+
+336 "" (0)
+01:13:39.999 --> 01:13:59.999
+Right and then and then you create it and then now in the you also need to, after you create the fabric zone, right? I mean, you also need to allocate the VMs into the fabric zone. Right? So to do that.
+
+337 "" (0)
+01:13:59.999 --> 01:14:17.559
+To the fabric side, you go to the virtual network and then you select the, your you select where that fabric zone is right? Because as I, as we just created that fabric zone and then you just, like, pick that fabric zone.
+
+338 "" (0)
+01:14:17.559 --> 01:14:26.139
+And then, like, in in it, right? You can just like a, uh.
+
+339 "" (0)
+01:14:26.139 --> 01:14:38.469
+Create a appropriate a, any cast gateway, which is like, the, uh, your address pools, uh, into these these right.
+
+340 "" (0)
+01:14:38.469 --> 01:15:00.599
+Okay, so that's finished the fabric zone discussion and now I'm going to go into layer to retrain that 1. I believe this is also a kind of a unique in your environment and then.
+
+341 "" (0)
+01:15:00.599 --> 01:15:03.789
+Have been covered in your training.
+
+342 "" (0)
+01:15:03.789 --> 01:15:16.659
+So, I'm going to compare the typical layer. 3, virtual network was layer 2, virtual network. So you have been seeing most often is, uh.
+
+343 "" (0)
+01:15:16.659 --> 01:15:28.329
+Virtual network in the latest original network, you have any cast gateway, which is like, the Gateway is on each separate edges.
+
+344 "" (0)
+01:15:28.329 --> 01:15:47.979
+And when you configure DNA center, when you are assigned the just pull to the separate, the any cast gateway configuration is automated. And then the traffic going out into your Ren is always through the layer 3 border.
+
+345 "" (0)
+01:15:47.979 --> 01:16:07.979
+And, of course, that IP address pull you a predefined in the global level, and reserve into each place in in a typical virtual network layer to flooding is not enabled therefore, the traffic, which.
+
+346 "" (0)
+01:16:07.979 --> 01:16:21.099
+For broadcast a new unique cast and multicast traffic they're not flooded across a fabric. So these are the ready commonly seen in a, uh, enterprise network.
+
+347 "" (0)
+01:16:21.099 --> 01:16:27.519
+Now, going to a, a.
+
+348 "" (0)
+01:16:27.519 --> 01:16:41.559
+Layer 2, virtual network and then, does that mean for it is gateway outside of the fabric with a layer to border? Uh, we implement this, uh, to a 3 ships.
+
+349 "" (0)
+01:16:41.559 --> 01:16:54.099
+In this case, the gateway for the subnet of the client's subnet could be a firewall or a router that is connecting to our layer to border.
+
+350 "" (0)
+01:16:54.099 --> 01:17:14.099
+Uh, the gateway configuration, they are not automated by DNA center, right? It could be your Fortinet firewall and things like that. So, I mean, it has, it's not under the control of DNA center because of the, the, if you use gateway as the firewall as the gateway, that's.
+
+351 "" (0)
+01:17:14.099 --> 01:17:28.119
+I can be used to inspect traffic into or the traffic going out of that. Firewall and by default layer to flooding is enabled.
+
+352 "" (0)
+01:17:28.119 --> 01:17:31.389
+Across the fabric for that.
+
+353 "" (0)
+01:17:31.389 --> 01:17:49.539
+Okay, uh, this feature is, uh, the layer 2. uh, what I'm talking about is the layer 2. uh, this feature is introduced in 233 wireless support.
+
+354 "" (0)
+01:17:49.539 --> 01:18:02.559
+Is introduced in 235 for DNA center and 710. so, in the version that you're running in right now we only support Wired.
+
+355 "" (0)
+01:18:02.559 --> 01:18:13.749
+In a pure implementation it does not need to have 3 virtual network.
+
+356 "" (0)
+01:18:13.749 --> 01:18:23.499
+Create it prior, so because of that, uh, you do not have the overhead of 3.
+
+357 "" (0)
+01:18:23.499 --> 01:18:43.499
+The association, so a, in order to get into a layer to creation workflow, you need to turn on the new SD access button. I'm going to show you a step by step, but later on in the in the slides, I'm going to have.
+
+358 "" (0)
+01:18:43.499 --> 01:18:56.259
+And when you do a layer to hand off that virtual network, it is listed under the layer 2 hand off tab under the vxlan again I'm going to go through the workflows.
+
+359 "" (0)
+01:18:56.259 --> 01:19:03.069
+Okay, so you can't use that. What I'm just talking about is the.
+
+360 "" (0)
+01:19:03.069 --> 01:19:11.439
+And I, a layer 2, virtual network without layer 3 Association.
+
+361 "" (0)
+01:19:11.439 --> 01:19:23.889
+Not to confuse the things too much. We also nowadays you can also create a only segment with the 3 VN Association.
+
+362 "" (0)
+01:19:23.889 --> 01:19:43.889
+So, this a feature that was created a, uh, starting at 202 when you created that, it's you out to flooding. It's also going to get enabled. Um, it's going to get associated with the.
+
+363 "" (0)
+01:19:43.889 --> 01:20:03.889
+In that case that you will need to create a dummy L3 pool. So, uh, the, the alpha handoff is going to list a little bit differently in the borders. So so I'm going to show it here. Uh.
+
+364 "" (0)
+01:20:03.889 --> 01:20:12.669
+How so in case that someone might have some questions later on you say no, how come I can do this, uh, here as well. So.
+
+365 "" (0)
+01:20:12.669 --> 01:20:15.789
+Just for this slide is just for your information.
+
+366 "" (0)
+01:20:15.789 --> 01:20:37.079
+Now, I'm going to talk about compare the and and focus mainly on the. So, as I just mentioned that in the within that pure only exists and then you do not see our.
+
+367 "" (0)
+01:20:37.079 --> 01:20:57.079
+Dna flooding is going to get enabled the Gateway is going to be outside of the fabric and the traffic can be inspected by the firewall when the firewall is used as a gateway DNA center is not going to create a.
+
+368 "" (0)
+01:20:57.079 --> 01:21:17.079
+Pool for you and I guess that's 1 consideration, right? Because everything is flooded in that the V land. So we suggest that to limit that number of and holes into that V land. So.
+
+369 "" (0)
+01:21:17.079 --> 01:21:30.549
+Using a, it as a reference that we suggest not to a, put the number of number of end hosts in that data more than a slash 24.
+
+370 "" (0)
+01:21:30.549 --> 01:21:35.649
+Of course, that depends on what type of endpoints you have on that.
+
+371 "" (0)
+01:21:35.649 --> 01:21:47.919
+Okay, so so, in this case, I think that, uh, on the 3 ships we deployed on some of the.
+
+372 "" (0)
+01:21:47.919 --> 01:21:51.099
+The V line, right?
+
+373 "" (0)
+01:21:51.099 --> 01:22:07.899
+Okay, so I'm going to go into the workflow on how to upgrade right? 1st of all in the 2 in the DNA center right? Go to the fabric side.
+
+374 "" (0)
+01:22:07.899 --> 01:22:11.439
+And then you turn on the preview and you access.
+
+375 "" (0)
+01:22:11.439 --> 01:22:22.629
+Now, you a click on the layer 2 tab, and then go to create 2 virtual network link right? You click on that.
+
+376 "" (0)
+01:22:22.629 --> 01:22:31.149
+And then you now you attack in the Vila name, the Vila number and destiny. The weather is a voice or data.
+
+377 "" (0)
+01:22:31.149 --> 01:22:46.749
+Now, if you use 265, and then if you are also your switches support, uh, 710 and above, you can have the option of enable a fabric wireless.
+
+378 "" (0)
+01:22:46.749 --> 01:22:51.939
+The next step is going to be a.
+
+379 "" (0)
+01:22:51.939 --> 01:23:07.959
+You associate the fabric zone site and zone, like, say, if you have a create a fabric zones, you can go to the fabric side and then pick the fabric zone where you want this to reside.
+
+380 "" (0)
+01:23:07.959 --> 01:23:27.959
+And then, once you create it and you go back to the same screen, it's going to see that and you create it. Right? You can see that no is going to get associated any cast. Gateway is not going to be there because we are not we do not have, uh, associated.
+
+381 "" (0)
+01:23:27.959 --> 01:23:35.229
+L2 flooding is enabled and then you're going to see that the gateway outside of the fabric is.
+
+382 "" (0)
+01:23:35.229 --> 01:23:50.139
+Now, if we want to hand off for these, the go to the fabric site, we select, uh, our border and then you click on the configured.
+
+383 "" (0)
+01:23:50.139 --> 01:24:11.459
+And then on the tab above, you're going to select the hand off and then underneath you're going to see a V land link you're going to click on that and you're going to select the interface that these are. I mean, this, this VM is going to get get.
+
+384 "" (0)
+01:24:11.459 --> 01:24:31.459
+Turn off for, in this case, it's going to be the interface that you connect the firewall with, select that select to enable the layer to hand off and then select the extended the V land interface. So that will allow you to create and also hand it off.
+
+385 "" (0)
+01:24:31.459 --> 01:24:36.396
+Any questions before I continue.
+
+386 "Aian Denis" (3928268288)
+01:24:36.396 --> 01:24:39.969
+Oh, okay.
+
+387 "Aian Denis" (3928268288)
+01:24:43.629 --> 01:24:48.969
+Okay, so I'm going to go into inaugural use cases.
+
+388 "Aian Denis" (3928268288)
+01:24:48.969 --> 01:25:08.969
+So, for these 3 ships, we implement for inaugural use cases in it. So these are the time this other use case when the ship goes, when it goes to different ports and connect to a external service provider.
+
+389 "Aian Denis" (3928268288)
+01:25:08.969 --> 01:25:20.259
+For the ships, so we have, I'm going to go to a use case 1. this is called sure to connectivity.
+
+390 "Aian Denis" (3928268288)
+01:25:20.259 --> 01:25:26.919
+So, what the requirement is, is that when the shift.
+
+391 "Aian Denis" (3928268288)
+01:25:26.919 --> 01:25:30.609
+Is doc, uh, um, uh.
+
+392 "Aian Denis" (3928268288)
+01:25:30.609 --> 01:25:50.609
+A provider is going to provide a router for Internet access, and that provider is going to give a subnet for the ship to use and that provider is going to be at the default gateway for that particular network segment. And so that's.
+
+393 "Aian Denis" (3928268288)
+01:25:50.609 --> 01:26:10.609
+Segment right, because it's the inaugural that segment does not need to have access to all the other other segments on this shift. Right? So they require both wire and wireless to be able to use that segment. Right? It could be a reporter. It could be whatever by using that segment.
+
+394 "Aian Denis" (3928268288)
+01:26:10.609 --> 01:26:22.749
+So, how do we, how do we do that? Right? We create a, the 1, we just talk about and in this case, we use a dummy IP address pool, right?
+
+395 "Aian Denis" (3928268288)
+01:26:22.749 --> 01:26:42.749
+Remember the layer 2 segment with our street association that is the 1 that we use here. And then again, once we enable this, this layer to segment layer, 2 flooding is going to get enabled as we mentioned. And also, another thing is that, in order.
+
+396 "Aian Denis" (3928268288)
+01:26:42.749 --> 01:27:02.749
+For the end host to get a I T, addresses, we need to disable the and snooping on the the ports that are connecting to these end holes for them to get ity addresses. And then because.
+
+397 "Aian Denis" (3928268288)
+01:27:02.749 --> 01:27:22.749
+We do not use 2 dot 1 X on these, uh, wired host. Uh, we statically assigned a port for a, and holds to that particular. So a full wireless users to access this.
+
+398 "Aian Denis" (3928268288)
+01:27:22.749 --> 01:27:42.749
+We created a on it, and then once the, once the ship is stock, we turn on that the, and, um, and, uh, that the wireless users to use it right? So when.
+
+399 "Aian Denis" (3928268288)
+01:27:42.749 --> 01:27:53.769
+Then when the event is over, we turn off the and then turn off the pool within the.
+
+400 "Aian Denis" (3928268288)
+01:27:53.769 --> 01:27:57.129
+Okay, so that's youth case 1.
+
+401 "Aian Denis" (3928268288)
+01:27:57.129 --> 01:28:06.279
+Use case too is similar to use case 1 of.
+
+402 "Aian Denis" (3928268288)
+01:28:06.279 --> 01:28:16.479
+But the main difference is that sure router is giving us a something that that is smaller.
+
+403 "Aian Denis" (3928268288)
+01:28:16.479 --> 01:28:20.619
+Then the numbers of clients on the ship.
+
+404 "Aian Denis" (3928268288)
+01:28:20.619 --> 01:28:23.919
+So, in that case.
+
+405 "Aian Denis" (3928268288)
+01:28:23.919 --> 01:28:27.129
+Uh, we need to do a net.
+
+406 "Aian Denis" (3928268288)
+01:28:27.129 --> 01:28:31.059
+And, uh, um.
+
+407 "Aian Denis" (3928268288)
+01:28:31.059 --> 01:28:44.679
+And that net, according to our design is going to be done in the fusion louder because that is the only place that we have a layer 3 device that is net capable.
+
+408 "Aian Denis" (3928268288)
+01:28:44.679 --> 01:29:03.399
+So, in this solution, we configure at the HTP server on the fusion and we also created a dedicated for it and a, um.
+
+409 "Aian Denis" (3928268288)
+01:29:03.399 --> 01:29:08.829
+Um, also created a, uh, V, land.
+
+410 "Aian Denis" (3928268288)
+01:29:08.829 --> 01:29:12.579
+That resides on these the N.
+
+411 "Aian Denis" (3928268288)
+01:29:12.579 --> 01:29:16.089
+Now, from, uh, this V land.
+
+412 "Aian Denis" (3928268288)
+01:29:16.089 --> 01:29:25.599
+Going to the fusion, we just do the traditional layer 3 hand off just like what you normally do to a fabric.
+
+413 "Aian Denis" (3928268288)
+01:29:25.599 --> 01:29:45.599
+Now, for a, um, for, uh, the connectivity between the partial router into the fusion on the green link, the green links, I'll recreate the out to hand off from the.
+
+414 "Aian Denis" (3928268288)
+01:29:45.599 --> 01:29:54.819
+Off on the order to the fusion, right? So, a, um, um, the.
+
+415 "Aian Denis" (3928268288)
+01:29:54.819 --> 01:29:58.209
+From the client perspective.
+
+416 "Aian Denis" (3928268288)
+01:29:58.209 --> 01:30:16.269
+The client's default Gateway is on the edge, like any other, um, FDA, uh, violence that is that you have been seen. Um, and so it is say the client's on boarded just as.
+
+417 "Aian Denis" (3928268288)
+01:30:16.269 --> 01:30:36.269
+In any other clients, uh, just let them on board into this specific Zealand for inaugural use cases. So, uh, both, uh, wired and wireless are supported. And then again, just like, previously we created a special SS ID.
+
+418 "Aian Denis" (3928268288)
+01:30:36.269 --> 01:30:46.419
+Uh, for the inaugural use case, and then, uh, uh, disable that says ID when, uh, when the event is over.
+
+419 "Aian Denis" (3928268288)
+01:30:46.419 --> 01:31:02.559
+So, this is similar to all the other, uh, deployments for, but we use a kind of clever way to bridge, uh, our, uh.
+
+420 "Aian Denis" (3928268288)
+01:31:02.559 --> 01:31:08.289
+The short louder into our solution to provide that connectivity using that.
+
+421 "Aian Denis" (3928268288)
+01:31:08.289 --> 01:31:22.569
+Um, this the use case number 3 is very similar to the 1 that I just discussed in use case number.
+
+422 "Aian Denis" (3928268288)
+01:31:22.569 --> 01:31:30.099
+To, uh, the only difference is that, uh, the, the, the.
+
+423 "Aian Denis" (3928268288)
+01:31:30.099 --> 01:31:43.329
+Gateway outside of the to the north bank is not through the, uh, on short router. In this case. It is through the.
+
+424 "Aian Denis" (3928268288)
+01:31:43.329 --> 01:32:03.329
+Approval so, again, the same requirement, right? Whatever a new will give us is, is IP address pools that are smaller than the ones that we actually have in our segment. And in this case, we are going to configure the and that on the.
+
+425 "Aian Denis" (3928268288)
+01:32:03.329 --> 01:32:09.159
+Solution so the VIP address for the clients are getting out, uh.
+
+426 "Aian Denis" (3928268288)
+01:32:09.159 --> 01:32:17.979
+By diffusion router and then then it's going to do a net. So the thing to use less address.
+
+427 "Aian Denis" (3928268288)
+01:32:17.979 --> 01:32:34.059
+Then, uh, get into, uh, we are going to use more addresses than what would give us. And but still each of these clients and when they get a on boarded to have Internet access.
+
+428 "Aian Denis" (3928268288)
+01:32:34.059 --> 01:32:54.059
+And same, same, same deal, right? We equate for the wireless user and then when the event is over, we can disable the I mean, the address pools and so maybe we can remove them or like, we don't we don't.
+
+429 "Aian Denis" (3928268288)
+01:32:54.059 --> 01:33:03.099
+Then we can use that. Okay, so, this, uh, this design also accommodate both wired.
+
+430 "Aian Denis" (3928268288)
+01:33:03.099 --> 01:33:10.059
+Wireless okay any questions. So before I move on.
+
+431 "Aian Denis" (3928268288)
+01:33:10.059 --> 01:33:21.309
+I know that that I'm going into a design, uh, but, uh, hopefully these kind of cleared.
+
+432 "Aian Denis" (3928268288)
+01:33:21.309 --> 01:33:31.959
+And she's also illustrate some of the of the use cases that originally she or said this, or this weren't inventory in our world. And we understand that in our rules are done not but.
+
+433 "Aian Denis" (3928268288)
+01:33:31.959 --> 01:33:43.839
+In case, some of these cases show up again or a different application or a different use case. I mean, so you guys these are multiple examples of work flows inside these fabrics that we're gonna get into more details later, but just.
+
+434 "Aian Denis" (3928268288)
+01:33:43.839 --> 01:33:53.499
+Just don't get through all because of the inaugural statement. We don't want our rules are done. Just try to understand the workflow on how things were implemented.
+
+435 "Aian Denis" (3928268288)
+01:33:53.499 --> 01:34:04.989
+Yep, thank you for the comment. Okay, so I'm going to go into a use case.
+
+436 "Aian Denis" (3928268288)
+01:34:04.989 --> 01:34:11.379
+So this is, uh, in this case.
+
+437 "Aian Denis" (3928268288)
+01:34:11.379 --> 01:34:27.459
+Um, interval, give Internet access interval is going to that the HTP server and, uh, whatever a new GIFs is is enough for the clients in this subnet and the gateway.
+
+438 "Aian Denis" (3928268288)
+01:34:27.459 --> 01:34:30.609
+Of this subnet is on the.
+
+439 "Aian Denis" (3928268288)
+01:34:30.609 --> 01:34:34.059
+It's on the on.
+
+440 "Aian Denis" (3928268288)
+01:34:34.059 --> 01:34:43.959
+Right so so this is a remember that the way outside the fabric, uh, uh.
+
+441 "Aian Denis" (3928268288)
+01:34:43.959 --> 01:34:48.249
+Uh, discussion we have, so this is exactly that.
+
+442 "Aian Denis" (3928268288)
+01:34:48.249 --> 01:35:08.249
+The only thing I want to highlight is that, in this case, we only support why host for these segments the reason being that right now you are not I mean, like, you're not in the 2365yetand then also the, um.
+
+443 "Aian Denis" (3928268288)
+01:35:08.249 --> 01:35:24.069
+As version is not 710 so, in order to provide support, uh, we will, we will, uh, only support a wire holes for use case.
+
+444 "Aian Denis" (3928268288)
+01:35:24.069 --> 01:35:35.199
+4, okay, so that, that concludes the use cases and then I'm going to talk about a DNA center upgrade.
+
+445 "Aian Denis" (3928268288)
+01:35:35.199 --> 01:35:55.199
+Right. So, uh, you, what you deploy in DNA center is the air gap. So, in air gap, what it means that the DNA center does not have access to, uh, the Internet to be able to do an upgrade on line. So, whenever we.
+
+446 "Aian Denis" (3928268288)
+01:35:55.199 --> 01:36:15.199
+An upgrade is going to be an air gap upgrade. Right? So, um, uh, so we are going to use a file. I mean, I mean, you might, if you go to the Cisco website, you might see a file, but the is for the, uh, re, image of the.
+
+447 "Aian Denis" (3928268288)
+01:36:15.199 --> 01:36:26.499
+And then, like, the, uh, the pin file is going to be a, uh, used for a DNA center upgrade, uh, in the air gap, uh, environment.
+
+448 "Aian Denis" (3928268288)
+01:36:26.499 --> 01:36:48.959
+So, to do the preparation, right? We just want to make sure that you are minimum. This is going to be a minimum requirements are satisfied. So a, you do at the dash H2 it and then, uh.
+
+449 "Aian Denis" (3928268288)
+01:36:48.959 --> 01:37:08.649
+That the partition is going to be all cleared and if if for some reason that the, uh, we are running out of the spaces on it, uh, open the case with tag and then ask them to help to clean up some of the spaces before we start the upgrade.
+
+450 "Aian Denis" (3928268288)
+01:37:08.649 --> 01:37:30.659
+So, because it's a gap, right? I mean, by design is the air gap, uh, implementation. So, uh, in the past, we have seen that, uh, the, um, uh, the, uh, the DNA center for some reason, has access to Internet and that is not by design.
+
+451 "Aian Denis" (3928268288)
+01:37:30.659 --> 01:37:50.659
+We just want to make sure that the firewall is blocking the excess of DNA center into into Internet and the user with the Super admin role can perform the software upgrade. And before we.
+
+452 "Aian Denis" (3928268288)
+01:37:50.659 --> 01:38:10.659
+The upgrade make a backup all of it, and also for the upgrade. Right? And I think I could take at least 67 hours for it. So, DNA center is a control plane. So meaning that during the upgrade, your network is not going to be impacting.
+
+453 "Aian Denis" (3928268288)
+01:38:10.659 --> 01:38:30.659
+Or the switching routing in the fact that it's going to continue, even though the DNA center is going to going undergoing upgrade process is just during that time, you will not be able to a perform, uh, actions on the DNA center. So.
+
+454 "Aian Denis" (3928268288)
+01:38:30.659 --> 01:38:44.979
+During the upgrade, you might be able to, uh, run some of the things that we suggest not to launch any applications inside DNA center while the upgrade is in place.
+
+455 "Aian Denis" (3928268288)
+01:38:44.979 --> 01:39:06.029
+And also, before the upgrade you run and all our tool, this is an auditing to, uh, to verify the health of the DNA center. And so, like, we have a documentation on how to run this tool. And then, like, the ones.
+
+456 "Aian Denis" (3928268288)
+01:39:06.029 --> 01:39:26.029
+Run this to, and then you take a look at the report and then if if that say anything that they, it flags as an issue, I raised that tech case to adjust these issues before we start the, uh, the upgrade. And also, I think that is recommended.
+
+457 "Aian Denis" (3928268288)
+01:39:26.029 --> 01:39:42.579
+But, uh, I mean, like network changes, you open a proactive tech case so that, uh, the tech is aware of it. And in case, there are some issues that can jump in, uh, to help quickly.
+
+458 "Aian Denis" (3928268288)
+01:39:42.579 --> 01:39:45.819
+Now, you download the.
+
+459 "Aian Denis" (3928268288)
+01:39:45.819 --> 01:40:05.819
+Uh, the image, uh, from, uh, uh, Cisco, right? I mean, it to obtain that, uh, that, uh, that, uh, air gap, a image, you can open the tech case and ask them to provide you a link to a, uh, so that you can download the image. So, you.
+
+460 "Aian Denis" (3928268288)
+01:40:05.819 --> 01:40:18.879
+Download your image and then you, you're most likely you're going to put into some type of USB right? Because someone is going to go on to the ship and then a copy into the DNA center.
+
+461 "Aian Denis" (3928268288)
+01:40:18.879 --> 01:40:25.149
+But because of the file size, right? It's about 37 gig file.
+
+462 "Aian Denis" (3928268288)
+01:40:25.149 --> 01:40:45.149
+Okay, so you download the image to the DNA center so you're going to verified the integrity the check some of the DNA center binary image, and make sure that that.
+
+463 "Aian Denis" (3928268288)
+01:40:45.149 --> 01:41:05.149
+Nothing nothing is prompted. So, what I'm showing here is the, the commands to verify that are 4 different platforms and also we also want to make sure that the image is genuine and then you can run the commands to verify the signature.
+
+464 "Aian Denis" (3928268288)
+01:41:05.149 --> 01:41:16.869
+And, uh, so in, as I mentioned, right with DNA center is a 3 no cluster. So, um, so basically it's 3.
+
+465 "Aian Denis" (3928268288)
+01:41:16.869 --> 01:41:25.209
+Dna center appliance appear as 1 so you are going to a, um.
+
+466 "Aian Denis" (3928268288)
+01:41:25.209 --> 01:41:37.299
+Check the run, run this catalog server command to check where the catalog server is being run at that time.
+
+467 "Aian Denis" (3928268288)
+01:41:37.299 --> 01:41:57.299
+So, you're looking to find that appliance and then you're going to upload that image using either a CPU as FTP, uh, to the appliance that is currently running. The, that that that the catalog server is.
+
+468 "Aian Denis" (3928268288)
+01:41:57.299 --> 01:42:05.139
+Is running on and then after you finished the copy also verify the integrity again.
+
+469 "Aian Denis" (3928268288)
+01:42:05.139 --> 01:42:26.519
+Okay, so after you finish copying, you add the permission to execute the file and then you execute the file. Right? And then after you finish executing, you're going to wait.
+
+470 "Aian Denis" (3928268288)
+01:42:26.519 --> 01:42:34.569
+That there's a message saying that the, the installation is successful, right?
+
+471 "Aian Denis" (3928268288)
+01:42:34.569 --> 01:42:44.439
+So this is through your when you s. S. H into, uh, the DNA center.
+
+472 "Aian Denis" (3928268288)
+01:42:48.099 --> 01:43:08.099
+Okay, so after you, after the file has been uploaded, the bin file has been uploaded and verified and installed successfully. You log into the DNA center and then, like, you're going to go to the upper right hand side. You see.
+
+473 "Aian Denis" (3928268288)
+01:43:08.099 --> 01:43:20.169
+That a little cloud, uh, screen click on that and then you're going to see the system update you click on update and once you click on the update, the DNA center is going to.
+
+474 "Aian Denis" (3928268288)
+01:43:20.169 --> 01:43:39.309
+Get into the maintenance mode and then so it's going to you see a status bar going from the lab to the right and then after the after and finished the system update and it's going to get you back to the.
+
+475 "Aian Denis" (3928268288)
+01:43:39.309 --> 01:43:59.309
+What is the system update is completed now you're going to see underneath you're going to see the system packages up to date and then underneath you are going to see application updates. Right? So, you.
+
+476 "Aian Denis" (3928268288)
+01:43:59.309 --> 01:44:19.309
+You have an option of, like, uh, installing updating certain applications, but our recommendation is to update all the packages. Right? So, uh, so that your system is up to date on both your system.
+
+477 "Aian Denis" (3928268288)
+01:44:19.309 --> 01:44:32.620
+Uh, application a system as well as your individual application packages. So you are, you are, um, DNA center it's all complete.
+
+478 "Aian Denis" (3928268288)
+01:44:32.620 --> 01:44:42.430
+Okay, so that is that is, uh, the, uh, that DNA center upgrade.
+
+479 "Aian Denis" (3928268288)
+01:44:42.430 --> 01:44:48.160
+So, I am now going into a a work flow.
+
+480 "Aian Denis" (3928268288)
+01:44:48.160 --> 01:44:51.364
+So, I'm going to.
+
+481 "Aian Denis" (3928268288)
+01:44:51.364 --> 01:44:55.571
+Hey, Here's what you asked about this is what you asked about, right?
+
+482 "Alicia Greyner" (2871030528)
+01:44:55.571 --> 01:44:59.470
+How to replace, for instance common switch, right? Yes, thank you.
+
+483 "Ravi" (2491750912)
+01:44:59.470 --> 01:45:10.870
+Yep, yep, yep I have a quick question on the update. Um, we have 3 different notes. Right? So do we need to do them individually or? Um.
+
+484 "Ravi" (2491750912)
+01:45:10.870 --> 01:45:23.110
+It works for the DNA center you do not need to do it. Individually. You do it 1 and then it's going to get all upgraded at the same time.
+
+485 "Ravi" (2491750912)
+01:45:26.590 --> 01:45:33.370
+So, DNA center is not, I mean, like, in a DNA center, a, um.
+
+486 "Ravi" (2491750912)
+01:45:33.370 --> 01:45:39.910
+A cluster all 3 appliance, they are adding as a master at the same time.
+
+487 "Ravi" (2491750912)
+01:45:39.910 --> 01:45:43.030
+So, meaning that when you upgrade 1.
+
+488 "Ravi" (2491750912)
+01:45:43.030 --> 01:45:46.965
+They all, they all get upgraded at the same time.
+
+489 "Ravi" (2491750912)
+01:45:46.965 --> 01:45:50.920
+So you don't need to do individually, got it. Thank you.
+
+490 "Ravi" (2491750912)
+01:45:50.920 --> 01:45:59.530
+Sure. Okay. So Kevin switches. Right? So what I am a workflow.
+
+491 "Ravi" (2491750912)
+01:45:59.530 --> 01:46:04.510
+Will do for us, is that to allow us to replace.
+
+492 "Ravi" (2491750912)
+01:46:04.510 --> 01:46:24.510
+Like, for, like, hardware equipment without deleting it and we onboarded again. So that will, uh, what it will carry over or the configurations or the licenses. The system names.
+
+493 "Ravi" (2491750912)
+01:46:24.510 --> 01:46:38.770
+To the new device. So again, as I, as I mentioned, it needs to be like to, like, you cannot replace a 7,560 was say a 99,300. it has to be identical.
+
+494 "Ravi" (2491750912)
+01:46:38.770 --> 01:46:48.940
+Right. So, most most likely that we might run in the situation, we need to replace that device as it goes bad or whatever. Right?
+
+495 "Ravi" (2491750912)
+01:46:48.940 --> 01:47:04.390
+So to do that, right you go to your inventory, uh, go to a hamburger provision inventory and then select that device and make sure that device is as a, uh.
+
+496 "Ravi" (2491750912)
+01:47:04.390 --> 01:47:22.000
+Um, unreachable, right because if it is reachable, it's going to create a problem for us because, like, say, so you might want to replace a device. It is bad on certain ports but DNA center can still reach it in. Um.
+
+497 "Ravi" (2491750912)
+01:47:22.000 --> 01:47:33.190
+But before that, make sure that you make it unreachable, either shut it down or and pocket and everything in the DNA center, and make sure that that it is in the unreachable state.
+
+498 "Ravi" (2491750912)
+01:47:33.190 --> 01:47:44.590
+Right. So once it's unreachable, you select it go to action, go to, uh, device replacement and then from that mark for replacement.
+
+499 "Ravi" (2491750912)
+01:47:44.590 --> 01:47:55.450
+And then it's going to ask you to confirm whether you want to mark and then you say, if you and then you mark the market, right?
+
+500 "Ravi" (2491750912)
+01:47:55.450 --> 01:48:16.860
+Now, so now, once your market, you replace you remove the device to the place and now you connect your new Kevin switches using the same connections right? Whatever connections is, was connected. You going to use the same.
+
+501 "Ravi" (2491750912)
+01:48:16.860 --> 01:48:26.372
+Connection as the old device, and then you initiate the and play device and plug and play.
+
+502 "Alicia Greyner" (2871030528)
+01:48:26.372 --> 01:48:29.530
+Yes.
+
+503 "Alicia Greyner" (2871030528)
+01:48:29.530 --> 01:48:36.760
+Do I need an initial configuration in the, uh, on the switch that I am logging in the new 1?
+
+504 "Alicia Greyner" (2871030528)
+01:48:36.760 --> 01:48:58.080
+The new 1 no, you don't need any initial configuration. Actually what I'm showing here is that I kind of make it small. It's a bit hard to see I want to fit everything into the screen. So what it does is that delete that will end up bad. Ideally, all the certificates.
+
+505 "Alicia Greyner" (2871030528)
+01:48:58.080 --> 01:49:18.080
+All the configurations and all the certificates and clean everything. Yeah. Clean everything and then reload it. And, I mean, do you want to save anything? No, you don't want to save anything you want to reload yes, I want to. So, what it does is that in the.
+
+506 "Alicia Greyner" (2871030528)
+01:49:18.080 --> 01:49:34.180
+That Kevin switches into play. So once Kevin switches is say, I get into the plug and play is going to get a IP address. Um.
+
+507 "Alicia Greyner" (2871030528)
+01:49:34.180 --> 01:49:48.190
+Hmm, it's going to, uh, contact that DNA center. Dna center is going to get to this screen at the end of December. It's going to put in plug and play ready to claim them.
+
+508 "Alicia Greyner" (2871030528)
+01:49:48.190 --> 01:49:53.050
+Okay, so now you, you, you clean this thing.
+
+509 "Alicia Greyner" (2871030528)
+01:49:53.050 --> 01:49:56.050
+And now once, um.
+
+510 "Alicia Greyner" (2871030528)
+01:49:56.050 --> 01:50:07.570
+Once you put that device into in play again, right? You select the device to be replaced. You go to action.
+
+511 "Alicia Greyner" (2871030528)
+01:50:07.570 --> 01:50:27.570
+Go to, I mean, wait till it is in the ready for okay, once you plug it in right? And the way to the status it is in the ready for replacement status right? And then now, you.
+
+512 "Alicia Greyner" (2871030528)
+01:50:27.570 --> 01:50:33.130
+To actions, replacement device and replace device.
+
+513 "Alicia Greyner" (2871030528)
+01:50:33.130 --> 01:50:43.150
+So, you click on that now, DNA center is going to show you the screen it's going to show you.
+
+514 "Alicia Greyner" (2871030528)
+01:50:43.150 --> 01:51:03.150
+That is unclaimed device showing up here right? Remember that we just clean up the 7,560. we just say, get get a DNA center is going to see that and that device is going to show it up here. Right? So we're going to select.
+
+515 "Alicia Greyner" (2871030528)
+01:51:03.150 --> 01:51:06.520
+That device and go to next.
+
+516 "Alicia Greyner" (2871030528)
+01:51:06.520 --> 01:51:14.500
+So, what DNA center is does is going to claim this new 3560 you plug in.
+
+517 "Alicia Greyner" (2871030528)
+01:51:14.500 --> 01:51:30.730
+And it's going to ask you, do you want to do it? Now? Do we want to do it later? If you want to click on later you can schedule a date and time to do it if you want to do it now. And then you can go go to next.
+
+518 "Alicia Greyner" (2871030528)
+01:51:30.730 --> 01:51:46.030
+It's going to give you a summary, right? So, it's going to say that while your 40 device is in this old serial number, now you're going to replace device with this new serial number and you click replace.
+
+519 "Alicia Greyner" (2871030528)
+01:51:46.030 --> 01:52:08.730
+And then once you click the place, and then it's going to show you the screen, and then you can click on monitor replacement status. If you click on that, it's going to show that, uh, this, uh, device is in progress. Right? The replacement is.
+
+520 "Alicia Greyner" (2871030528)
+01:52:08.730 --> 01:52:16.420
+In progress as you are curious to see what is doing and you click on the in progress.
+
+521 "Alicia Greyner" (2871030528)
+01:52:16.420 --> 01:52:36.420
+Uh, status is going to show you step by step what it is doing, right? So, it's going to show you is being claimed, and it's going to check for the readiness it's going to provision the it's going to go through all the steps. If you want to see additional.
+
+522 "Alicia Greyner" (2871030528)
+01:52:36.420 --> 01:52:56.420
+You click on the refresh screen and then it's going to show you everything com, get finished to the completion. Right? So, once everything is done, you're going to see that the new device, uh, showing up in the inventory screen with the new serial number. Right? So, uh, basically.
+
+523 "Alicia Greyner" (2871030528)
+01:52:56.420 --> 01:53:08.260
+You don't need to do anything to regarding the configuration the system name, the fabric rules DNA center in this workflow has done everything for you.
+
+524 "Alicia Greyner" (2871030528)
+01:53:08.260 --> 01:53:12.929
+Okay, so this is the Kevin switch. Uh, and.
+
+525 "Jonathan Pellon" (3543400192)
+01:53:12.929 --> 01:53:13.452
+The question.
+
+526 "Alejandro Power" (781094656)
+01:53:13.452 --> 01:53:23.260
+Before I move on to AP, a quick question. The only work we replacing the same exact switch. Correct we'd have to be the same model.
+
+527 "Alejandro Power" (781094656)
+01:53:23.260 --> 01:53:37.510
+Exactly, exactly. It has to be it has to be the exact same model, right? You cannot replace it with something else. I mean, we are working on a, um.
+
+528 "Alejandro Power" (781094656)
+01:53:37.510 --> 01:53:47.271
+A new feature will allow you to replace with something else, but before that, uh, right now.
+
+529 "Jonathan Pellon" (3543400192)
+01:53:47.271 --> 01:53:53.929
+For lack of replacement. Okay. Hi, Jonathan. I have a question.
+
+530 "Jonathan Pellon" (3543400192)
+01:53:53.929 --> 01:53:57.130
+Huh.
+
+531 "Jonathan Pellon" (3543400192)
+01:53:57.130 --> 01:54:04.930
+Okay, with this process, is there any configuration or anything that has to be done on ice.
+
+532 "Jonathan Pellon" (3543400192)
+01:54:04.930 --> 01:54:14.620
+Is that anything that needs to be done on ice? No, it should be up. It should be updated to automatically.
+
+533 "Jonathan Pellon" (3543400192)
+01:54:14.620 --> 01:54:26.691
+I mean, like, all the, all the serial numbers, it should be reflected DNA center is going to use the rest API to a contact ice and to update.
+
+534 "Jonathan Pellon" (3543400192)
+01:54:26.691 --> 01:54:32.830
+Those information in the eyes accordingly. Perfect. Thank you. That was my that was my question. Thanks.
+
+535 "Jonathan Pellon" (3543400192)
+01:54:32.830 --> 01:54:37.750
+Cool Thank you.
+
+536 "Jonathan Pellon" (3543400192)
+01:54:37.750 --> 01:54:57.750
+Okay, so I'm going to go to AP this case. I'm going to just say, 9,920. so, again, that is similar very similar workflow. Right? Um, just like a make sure that the AP is not a reachable. You go to action a mark and mark for replacement.
+
+537 "Jonathan Pellon" (3543400192)
+01:54:57.750 --> 01:55:02.560
+And then you're going to click on Mark here.
+
+538 "Jonathan Pellon" (3543400192)
+01:55:02.560 --> 01:55:24.090
+And now you replace the AP, right? Remove the AP connecting the new AP into it and send it to a factory default. I mean, if you, if you, if you get a AP that is used somewhere else, you just send it to a factory default. And then you just like.
+
+539 "Jonathan Pellon" (3543400192)
+01:55:24.090 --> 01:55:41.860
+On the on the device on the switch side disconnected the AP right. Make sure that it is showing up as a in the neighbor, right? You might need to shut no shot and things like that and make sure that the AP comes in.
+
+540 "Jonathan Pellon" (3543400192)
+01:55:41.860 --> 01:55:50.050
+Right so the AP is going to once it's a factory default, right? If AP is going to use his, uh, plug and play.
+
+541 "Jonathan Pellon" (3543400192)
+01:55:50.050 --> 01:56:10.050
+Right. So wait for this, a piece is going to get into a ready for replacement state right? And then you select the AP go to action device replacement and.
+
+542 "Jonathan Pellon" (3543400192)
+01:56:10.050 --> 01:56:31.380
+Replace device, right. It's pretty much the similar similar workflow that we have seen again because your AP just came online and, uh, so it is in unclaimed status. Uh, we select that. We click on next and start to claim it.
+
+543 "Jonathan Pellon" (3543400192)
+01:56:31.380 --> 01:56:38.440
+Again, uh, that There'll be an option of a schedule replacement. Now we click on next.
+
+544 "Jonathan Pellon" (3543400192)
+01:56:38.440 --> 01:56:58.440
+Now, now it's showing us the old serial number and the new serial number that will become in. So, everything looks good at that end. We click on replaced and then we click on monitor replacement status to see what is going on. And at this point, the AP should show.
+
+545 "Jonathan Pellon" (3543400192)
+01:56:58.440 --> 01:57:18.440
+As in progress, as is a replacement status, if you click on that, it's going to go through that all the steps. Right? And then click on the refresh as needed and at that point, right? So you're going to.
+
+546 "Jonathan Pellon" (3543400192)
+01:57:18.440 --> 01:57:30.220
+In the inventory screen that that the new, uh, AP, serial number is going to come in using the old.
+
+547 "Jonathan Pellon" (3543400192)
+01:57:30.220 --> 01:57:36.640
+Ap name. Okay. So, again, so, uh, everything is, um.
+
+548 "Jonathan Pellon" (3543400192)
+01:57:36.640 --> 01:57:40.009
+Is as he has been except the.
+
+549 "Ed" (569571584)
+01:57:40.009 --> 01:57:43.330
+Serial number.
+
+550 "Ed" (569571584)
+01:57:43.330 --> 01:58:01.390
+Uh, I have a question, um, for example, if we replaced the, the carbon switch and in, this is, for example, um, an old switch, right that we have been, you know, keeping that replacement. Uh, once we push for the replacement, this is going to update as well, the iOS, but this is something we have to do after we replace it.
+
+551 "Ed" (569571584)
+01:58:01.390 --> 01:58:21.390
+The replacement, I mean, like the is that the replay, I mean, we want the switch hardware to be the same and then the versions, if.
+
+552 "Ed" (569571584)
+01:58:21.390 --> 01:58:29.500
+Correctly the version numbers is going to get push during the plug and play, uh, process.
+
+553 "Ed" (569571584)
+01:58:29.500 --> 01:58:50.670
+Okay, to be in the same version as before. Yeah. And if you, if you, if you replace a cabin switch, the H. P. you do not you do not need to replace the AP. You'll plug it in. It will just it will just show up.
+
+554 "Ed" (569571584)
+01:58:50.670 --> 01:59:02.380
+So you don't need to run and I may workflow for the AP. You just if you replace a, the switch, you just run a, and may work flow for the switch.
+
+555 "Ed" (569571584)
+01:59:05.800 --> 01:59:25.800
+Okay, so I understand that only I only cover 2, uh, 2, um, hardware platforms. I actually wrote a documentation in on that covers or the typical a.
+
+556 "Ed" (569571584)
+01:59:25.800 --> 01:59:45.800
+A hardware platform, including 9,300, including 9,400, replacing a supervisor module was pacing a chassis or replacing a line card, replacing a border, replacing a few, uh, things like that. So, I think that if you're interested, you can, I mean, you can take a look.
+
+557 "Ed" (569571584)
+01:59:45.800 --> 01:59:48.460
+That as well.
+
+558 "Ed" (569571584)
+01:59:48.460 --> 02:00:08.460
+So, with that, I conclude my presentation. Is there any, any questions or anything that I have not covered? I, I understand that. I do not have time to show the but but other than that, I any other questions.
+
+559 "Ed" (569571584)
+02:00:08.460 --> 02:00:10.832
+Then things like that.
+
+560 "Alicia Greyner" (2871030528)
+02:00:10.832 --> 02:00:16.540
+Um.
+
+561 "Alicia Greyner" (2871030528)
+02:00:16.540 --> 02:00:25.252
+This was amazing to my personal opinion was very good presentation, but this, this, this was kind of an overview right?
+
+562 "Aian Denis" (3928268288)
+02:00:25.252 --> 02:00:28.570
+I am, uh, are we going to go more in depth?
+
+563 "Aian Denis" (3928268288)
+02:00:28.570 --> 02:00:33.430
+Right off the the.
+
+564 "Aian Denis" (3928268288)
+02:00:33.430 --> 02:00:40.810
+The plan the plan is to, uh, probably, uh, a series of designs. I was chatting with him on the background. Um.
+
+565 "Aian Denis" (3928268288)
+02:00:40.810 --> 02:00:46.030
+Like I said, I'm, I'm going to try to engage, uh, 1 of the data center.
+
+566 "Aian Denis" (3928268288)
+02:00:46.030 --> 02:00:52.270
+Architects the equivalent of but for data center, right? So we go over the same with with right?
+
+567 "Aian Denis" (3928268288)
+02:00:52.270 --> 02:01:02.320
+And, uh, how many it also mentioned on the background that he would, he would like to see you and I probably can sync up later. If we can come up with something. He said, I'd like to see a little bit of, uh.
+
+568 "Aian Denis" (3928268288)
+02:01:02.320 --> 02:01:10.030
+Traffic flows how they so basically they we can help, uh, alicia's team to understand how.
+
+569 "Aian Denis" (3928268288)
+02:01:10.030 --> 02:01:30.030
+Traffic flows inside the fabrics, so a ton of common troubleshooting, they know if they have a problem with a specific application. Okay. Where to look for is this a micro segmentation and micro segmentation upon what it belongs to, uh, is this topic being, uh, white listed? Very nice. I mean, it's, it's, it's, uh.
+
+570 "Aian Denis" (3928268288)
+02:01:30.030 --> 02:01:33.100
+It is being applied to the profit that those, those kinds of things.
+
+571 "Aian Denis" (3928268288)
+02:01:33.100 --> 02:01:38.626
+That's the thing I took, these notes was pinging me on the background, uh, all that.
+
+572 "Alicia Greyner" (2871030528)
+02:01:38.626 --> 02:01:42.550
+Anything you want to see specific.
+
+573 "Alicia Greyner" (2871030528)
+02:01:42.550 --> 02:01:48.400
+Um, more more details about ACA, um.
+
+574 "Alicia Greyner" (2871030528)
+02:01:48.400 --> 02:01:52.390
+In regards to to configuration itself.
+
+575 "Alicia Greyner" (2871030528)
+02:01:52.390 --> 02:01:57.700
+Or is that all like a board, uh, how to configure it? Uh.
+
+576 "Alicia Greyner" (2871030528)
+02:01:57.700 --> 02:02:00.850
+And a board as needed.
+
+577 "Alicia Greyner" (2871030528)
+02:02:00.850 --> 02:02:06.220
+Troubleshooting, how can we, uh, logging into the.
+
+578 "Alicia Greyner" (2871030528)
+02:02:06.220 --> 02:02:11.500
+Aca, and and troubleshoot a problem like, what are the.
+
+579 "Alicia Greyner" (2871030528)
+02:02:11.500 --> 02:02:18.561
+At least some cases that we can use as an example to troubleshoot.
+
+580 "Aian Denis" (3928268288)
+02:02:18.561 --> 02:02:22.480
+A problem from your experience.
+
+581 "Aian Denis" (3928268288)
+02:02:22.480 --> 02:02:26.260
+Okay, okay I hear I mean, I.
+
+582 "Aian Denis" (3928268288)
+02:02:26.260 --> 02:02:30.940
+When hamlet mentioned, she probably we can, because that's part of the.
+
+583 "Aian Denis" (3928268288)
+02:02:30.940 --> 02:02:38.230
+Oh, the Nick, if I recall correctly, the flows basically the high level falls we, we can, we can put something together.
+
+584 "Aian Denis" (3928268288)
+02:02:38.230 --> 02:02:43.180
+And I'll go through those and also some basic troubleshooting. Um.
+
+585 "Aian Denis" (3928268288)
+02:02:43.180 --> 02:02:59.020
+Activities that we know they might run into based on our experience, but Alicia, what I was going to say is the, what the face that comes behind, right? The ask the experts, we can also leverage those guys as well. Right? We can, we can these guys can show us.
+
+586 "Aian Denis" (3928268288)
+02:02:59.020 --> 02:03:14.590
+Typical or troubleshooting scenarios, how how do I or should issues with with the specific port right? So, because at the end of day is that she she was is engaged with new deployments. So I will probably.
+
+587 "Aian Denis" (3928268288)
+02:03:14.590 --> 02:03:26.740
+Leverage keyhole on his team to start the conversation. And then at that point, we'll go transition to the next phase, which is ask the experts. The, the, the, um.
+
+588 "Aian Denis" (3928268288)
+02:03:26.740 --> 02:03:46.240
+The buckets, I mean, the credits that you guys own, or we can have similar sessions right now, with guys that came from tech guys, that sole role is to answer questions that you might have. I mean, they can, they can have presentations to it. Right? So, it's not that they're going to only answer your questions. They can also.
+
+589 "Aian Denis" (3928268288)
+02:03:46.240 --> 02:03:51.820
+Present something we can, and we have a we have enough credits for a lot of sessions with this guy so we can.
+
+590 "Aian Denis" (3928268288)
+02:03:51.820 --> 02:04:00.790
+Have the 1st, 18 now we go through basic troubleshooting centers within SDA. How do I start? How do I provision the portal?
+
+591 "Aian Denis" (3928268288)
+02:04:00.790 --> 02:04:06.722
+Cool. It's it's the perfect segue.
+
+592 "Alicia Greyner" (2871030528)
+02:04:06.722 --> 02:04:14.950
+Do we agree? Yes, but I am. So so here's the thing, right? We don't have the experience.
+
+593 "Alicia Greyner" (2871030528)
+02:04:14.950 --> 02:04:20.980
+With the deployment, so I honestly, I'm not sure if we're if we're missing or not.
+
+594 "Alicia Greyner" (2871030528)
+02:04:20.980 --> 02:04:25.070
+Anything else that we should know about FDA.
+
+595 "Alicia Greyner" (2871030528)
+02:04:30.966 --> 02:04:45.190
+I mean, this presentation was great, but, um, if you ask me, if you ask me, okay, what else? What else do you think we we should see or know.
+
+596 "Alicia Greyner" (2871030528)
+02:04:45.190 --> 02:04:51.691
+I don't I don't have the information, right because we don't have the experience. We don't know if we're missing something else from the.
+
+597 "Aian Denis" (3928268288)
+02:04:51.691 --> 02:05:00.100
+Implementation as well. Okay. Okay. I have what.
+
+598 "Aian Denis" (3928268288)
+02:05:00.100 --> 02:05:04.330
+Shared he said that I like them to see traffic flows.
+
+599 "Aian Denis" (3928268288)
+02:05:04.330 --> 02:05:07.660
+That's 1 thing, let's let's you handle it and I.
+
+600 "Aian Denis" (3928268288)
+02:05:07.660 --> 02:05:16.570
+Probably have a session, we can probably have a session and include a couple of, uh, tablets engineers that have been more involved in these deployments.
+
+601 "Aian Denis" (3928268288)
+02:05:16.570 --> 02:05:23.184
+So, we can come up with probably a list of things. Like all of us believe that you should.
+
+602 "Alicia Greyner" (2871030528)
+02:05:23.184 --> 02:05:24.373
+At least have a.
+
+603 "Aian Denis" (3928268288)
+02:05:24.373 --> 02:05:40.360
+Your belt before before you take ownership. Okay because okay. At this point, we get it to a point where we're going to review the things we're going to review specifics to your to your, to your deployment. But but at this point, now we need to start.
+
+604 "Aian Denis" (3928268288)
+02:05:40.360 --> 02:05:49.450
+Yes, we need to log into the council when we start looking around when to start reviewing documentation. Um, I can share the recommendation with you again, but.
+
+605 "Aian Denis" (3928268288)
+02:05:49.450 --> 02:05:56.740
+Um, yeah, that services team, when they did this deployments, they shared with I believe you guys have right? The.
+
+606 "Aian Denis" (3928268288)
+02:05:56.740 --> 02:06:05.800
+The names and the, the, the, the implementation plan, right? Basically how things were implemented we need to start reviewing those things. Right?
+
+607 "Aian Denis" (3928268288)
+02:06:05.800 --> 02:06:13.600
+And start getting familiar with the, the, the theoretical knowledge that we we achieved and to okay.
+
+608 "Aian Denis" (3928268288)
+02:06:13.600 --> 02:06:18.430
+This was done, this is how this was done and the only way we can do that.
+
+609 "Aian Denis" (3928268288)
+02:06:18.430 --> 02:06:22.630
+Is by logging in, by checking the configuration by, by, um.
+
+610 "Aian Denis" (3928268288)
+02:06:22.630 --> 02:06:32.740
+Poking around basically right but again, I, I have like 2 or 3 topics. The traffic flows 1 of them. Another 1 that I mentioned just to keep in mind is a, let's.
+
+611 "Aian Denis" (3928268288)
+02:06:32.740 --> 02:06:37.210
+Let's bring up to the attention activities that have.
+
+612 "Aian Denis" (3928268288)
+02:06:37.210 --> 02:06:44.950
+Major impacts like integration between DNA and i's certificate inspiration. Those things that potentially.
+
+613 "Aian Denis" (3928268288)
+02:06:44.950 --> 02:06:48.820
+We need to have what can be done environment so they're based on our experience, right?
+
+614 "Aian Denis" (3928268288)
+02:06:48.820 --> 02:06:58.395
+I think we can put something together. Uh, let me sync up with tablet again to get a list of everything. He would like to get us a knowledge transfer.
+
+615 "Alicia Greyner" (2871030528)
+02:06:58.395 --> 02:07:01.630
+And we'll have a follow up session to this 1.
+
+616 "Alicia Greyner" (2871030528)
+02:07:01.630 --> 02:07:05.050
+Thank you. Okay.
+
+617 "Alicia Greyner" (2871030528)
+02:07:05.050 --> 02:07:10.900
+Also, we didn't receive the, we receive them.
+
+618 "Alicia Greyner" (2871030528)
+02:07:10.900 --> 02:07:15.607
+Um, a recorder session for.
+
+619 "Aian Denis" (3928268288)
+02:07:15.607 --> 02:07:20.860
+Hey, I didn't receive it. Yes, I sent them to I sent them. Yeah.
+
+620 "Aian Denis" (3928268288)
+02:07:20.860 --> 02:07:24.375
+I sent them it was a document with the URLs and.
+
+621 "Alicia Greyner" (2871030528)
+02:07:24.375 --> 02:07:25.706
+I can look it up at my email.
+
+622 "Aian Denis" (3928268288)
+02:07:25.706 --> 02:07:34.270
+There again, but I might send it. They send it to me directly. Please sure. Sure. I'll do that for sure. Yeah. I asked to the.
+
+623 "Aian Denis" (3928268288)
+02:07:34.270 --> 02:07:40.900
+So, apart from basically the partner, a bottom, and he said, yeah, we shared them with all the students during the class, or at the end of the class.
+
+624 "Aian Denis" (3928268288)
+02:07:40.900 --> 02:07:45.751
+But you sent them I believe it was a word document with each 1 of the sessions links on on the password.
+
+625 "Alicia Greyner" (2871030528)
+02:07:45.751 --> 02:07:49.073
+To log into each 1 of them I think I believe he was a word.
+
+626 "Aian Denis" (3928268288)
+02:07:49.073 --> 02:07:52.930
+It wasn't a video of of the training.
+
+627 "Aian Denis" (3928268288)
+02:07:52.930 --> 02:07:57.527
+It was a word document with the link to the videos right? So you click on the link into the.
+
+628 "Alicia Greyner" (2871030528)
+02:07:57.527 --> 02:07:59.128
+I believe each 1 of them.
+
+629 "Aian Denis" (3928268288)
+02:07:59.128 --> 02:08:01.113
+How like a password? What's possible?
+
+630 "Alicia Greyner" (2871030528)
+02:08:01.113 --> 02:08:08.270
+Okay, do you mind send that to me because I, we, we have a short amount of the engineers.
+
+631 "Aian Denis" (3928268288)
+02:08:08.270 --> 02:08:12.211
+That could assist and as, you know, I didn't so.
+
+632 "Alicia Greyner" (2871030528)
+02:08:12.211 --> 02:08:13.910
+Okay, perfect. I'll, I'll.
+
+633 "Aian Denis" (3928268288)
+02:08:13.910 --> 02:08:16.045
+Sure.
+
+634 "Ravi" (2491750912)
+02:08:16.045 --> 02:08:20.114
+Oh, thank you. Randy. Oh, you Hi, Robert. You had you had it? Yeah.
+
+635 "Alicia Greyner" (2871030528)
+02:08:20.114 --> 02:08:22.193
+I have the email, I just forward it.
+
+636 "Aian Denis" (3928268288)
+02:08:22.193 --> 02:08:25.690
+Perfect. Perfect. All right. Cool. Thank you. Very much.
+
+637 "Aian Denis" (3928268288)
+02:08:25.690 --> 02:08:29.110
+All righty. Okay. Okay. So, let me let me.
+
+638 "Aian Denis" (3928268288)
+02:08:29.110 --> 02:08:36.910
+Let's sync up, uh, I have a session with him later, Monday. I don't know if you want to join us so we can hash this out as soon as possible.
+
+639 "Aian Denis" (3928268288)
+02:08:36.910 --> 02:08:40.473
+Yes, have to follow up what.
+
+640 "Alicia Greyner" (2871030528)
+02:08:40.473 --> 02:08:42.965
+All of the things we'd like we'd like to see.
+
+641 "Aian Denis" (3928268288)
+02:08:42.965 --> 02:08:47.213
+On the on these sessions. Okay, thank you. Thank you. So.
+
+642 "Alicia Greyner" (2871030528)
+02:08:47.213 --> 02:08:50.650
+Thank you team appreciate it. Javier. Omar, thank you. Guys.
+
+643 "Alicia Greyner" (2871030528)
+02:08:50.650 --> 02:08:57.116
+Oh, I'm sorry, I, I, I didn't let the team talk to anyone in this call.
+
+644 "Ed" (569571584)
+02:08:57.116 --> 02:09:01.150
+Questions.
+
+645 "Ed" (569571584)
+02:09:01.150 --> 02:09:06.296
+Um, can we get the, uh, the slides and and for for the.
+
+646 "Aian Denis" (3928268288)
+02:09:06.296 --> 02:09:13.840
+For recommendation yeah, you mean that that the slide for this presentation.
+
+647 "Aian Denis" (3928268288)
+02:09:13.840 --> 02:09:18.171
+Yes, okay, sure I'll, I'll, I'll send it to.
+
+648 "Aian Denis" (3928268288)
+02:09:18.171 --> 02:09:21.940
+To a, and then he can pass, you can pass along.
+
+649 "Aian Denis" (3928268288)
+02:09:21.940 --> 02:09:29.749
+Perfect yeah, send to me and I'll send it over to the team to yeah, I'll send it to us.
+
+650 "Ed" (569571584)
+02:09:29.749 --> 02:09:32.860
+Together with with a link to the recording section. Okay.
+
+651 "Ed" (569571584)
+02:09:32.860 --> 02:09:42.088
+Hello.
+
+652 "Jonathan Pellon" (3543400192)
+02:09:44.648 --> 02:09:47.710
+Anything else.
+
+653 "Jonathan Pellon" (3543400192)
+02:09:47.710 --> 02:09:56.440
+No, we're good. I'm good. Thanks for the presentation and yeah, we're looking forward to the next step, which is what you were talking about with a.
+
+654 "Jonathan Pellon" (3543400192)
+02:09:56.440 --> 02:10:01.570
+With what's happening under the hood troubleshooting things like.
+
+655 "Jonathan Pellon" (3543400192)
+02:10:01.570 --> 02:10:06.284
+You know, even multicast has a big part on how this whole fabric functions and.
+
+656 "Aian Denis" (3928268288)
+02:10:06.284 --> 02:10:11.290
+The FDA and everything, so, I mean.
+
+657 "Aian Denis" (3928268288)
+02:10:11.290 --> 02:10:19.720
+To be fair, Jonathan, I mean, we can go over how the flows work, but that's what I've been covered. A lot of it should have been covered during the training sessions. Right?
+
+658 "Aian Denis" (3928268288)
+02:10:19.720 --> 02:10:22.930
+How how so, uh.
+
+659 "Aian Denis" (3928268288)
+02:10:22.930 --> 02:10:33.730
+So, just to be on it to be fair, right? These presentations, what I'm expecting, or I'll try to push from from from the CX team, right? In these cases, how things were implemented.
+
+660 "Aian Denis" (3928268288)
+02:10:33.730 --> 02:10:38.110
+In your in your environment, right then we need to digest that information.
+
+661 "Aian Denis" (3928268288)
+02:10:38.110 --> 02:10:42.490
+Together with the theory we learn from from the training sessions, right? And then we can start.
+
+662 "Aian Denis" (3928268288)
+02:10:42.490 --> 02:10:49.840
+The 3rd phase in my mind, right which is basically have these sessions with experts what we can ask them this question. Okay I know how this implemented, but.
+
+663 "Aian Denis" (3928268288)
+02:10:49.840 --> 02:10:57.820
+How do I publish it to your point on session? Okay multicast. I know how multitask works. This is my point here is my, my, my fault.
+
+664 "Aian Denis" (3928268288)
+02:10:57.820 --> 02:11:02.967
+Where do I start by troubleshooting session? Those kinds of conversations I think will come up.
+
+665 "Jonathan Pellon" (3543400192)
+02:11:02.967 --> 02:11:07.090
+Naturally, when we start putting 2 and 2 together, right?
+
+666 "Jonathan Pellon" (3543400192)
+02:11:07.090 --> 02:11:16.870
+Yeah, yeah, I agree. I wasn't I wasn't part of that training, but I was over at building out Granger so I've had a chance to look at that stuff, but I'm pretty sure that there's.
+
+667 "Jonathan Pellon" (3543400192)
+02:11:16.870 --> 02:11:23.832
+There was a lot of useful information there that pertains to this and you know what we could use and build upon with, with whatever.
+
+668 "Aian Denis" (3928268288)
+02:11:23.832 --> 02:11:27.400
+You know, question we might have next, right? I agree.
+
+669 "Aian Denis" (3928268288)
+02:11:27.400 --> 02:11:32.950
+Awesome. Awesome. All right perfect. All right let's see how many you want to get together? Uh, hopefully on Monday.
+
+670 "Aian Denis" (3928268288)
+02:11:32.950 --> 02:11:37.180
+And, um, but we can form.
+
+671 "Aian Denis" (3928268288)
+02:11:37.180 --> 02:11:43.770
+The the next session to see what what would be the, the most interest for the team. Okay. Thank you.
+
+672 "Jonathan Pellon" (3543400192)
+02:11:43.770 --> 02:11:44.567
+All right Thank you.
+
+673 "Ed" (569571584)
+02:11:44.567 --> 02:11:46.548
+Bye bye guys have a.
+
+674 "Jonathan Pellon" (3543400192)
+02:11:46.548 --> 02:11:57.460
+Thank you guys. Thanks everyone. Thank you. Bye. Hey, talk to you in 15 yeah. Yeah we'll talk in 15.

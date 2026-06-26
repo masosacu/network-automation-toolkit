@@ -1,0 +1,17 @@
+config firewall policy
+delete 1
+end
+config system interface
+edit internal
+unset role
+next
+end
+config firewall address
+delete internal
+end
+config system dhcp server
+delete 1
+end
+config system virtual-switch
+delete internal
+end

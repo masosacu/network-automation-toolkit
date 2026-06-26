@@ -1,0 +1,4 @@
+config system global
+set admin-forticloud-sso-login disable
+end
+

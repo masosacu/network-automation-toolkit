@@ -1,0 +1,3 @@
+serial_number,problem_description,contact_name,contact_email,contact_phone,street,city,state,zip,country
+FDO1234ABCD,Device not powering on,Manuel Sosa,manuel@email.com,3055551212,123 Main St,Miami,FL,33101,US
+FCW9876XYZ1,Port failure,Manuel Sosa,manuel@email.com,3055551212,123 Main St,Miami,FL,33101,US
