@@ -67,3 +67,48 @@
 2026-06-26 14:52:17,183 INFO Connected (version 2.0, client Cisco-1.25)
 2026-06-26 14:52:18,755 INFO Authentication (password) successful!
 2026-06-26 14:52:20,958 INFO SUCCESS 10.143.0.198
+2026-07-01 12:26:29,491 INFO Connected (version 2.0, client Cisco-1.25)
+2026-07-01 12:26:31,716 INFO Authentication (password) successful!
+2026-07-01 12:26:34,051 INFO SUCCESS 10.99.10.31
+2026-07-01 12:26:34,223 INFO Connected (version 2.0, client Cisco-1.25)
+2026-07-01 12:26:35,471 INFO Authentication (password) successful!
+2026-07-01 12:26:37,807 INFO SUCCESS 10.99.10.32
+2026-07-01 12:26:37,994 INFO Connected (version 2.0, client Cisco-1.25)
+2026-07-01 12:26:39,247 INFO Authentication (password) successful!
+2026-07-01 12:26:41,603 INFO SUCCESS 10.99.10.33
+2026-07-01 12:26:41,774 INFO Connected (version 2.0, client Cisco-1.25)
+2026-07-01 12:26:43,260 INFO Authentication (password) successful!
+2026-07-01 12:26:45,626 INFO SUCCESS 10.99.10.34
+2026-07-01 12:26:45,796 INFO Connected (version 2.0, client Cisco-1.25)
+2026-07-01 12:26:47,054 INFO Authentication (password) successful!
+2026-07-01 12:26:49,439 INFO SUCCESS 10.99.10.35
+2026-07-01 12:26:49,651 INFO Connected (version 2.0, client Cisco-1.25)
+2026-07-01 12:26:50,925 INFO Authentication (password) successful!
+2026-07-01 12:26:53,255 INFO SUCCESS 10.99.10.23
+2026-07-01 12:26:53,434 INFO Connected (version 2.0, client Cisco-1.25)
+2026-07-01 12:26:54,890 INFO Authentication (password) successful!
+2026-07-01 12:26:57,318 INFO SUCCESS 10.99.10.24
+2026-07-01 12:26:57,484 INFO Connected (version 2.0, client Cisco-1.25)
+2026-07-01 12:26:58,744 INFO Authentication (password) successful!
+2026-07-01 12:27:01,066 INFO SUCCESS 10.99.10.21
+2026-07-01 12:27:01,239 INFO Connected (version 2.0, client Cisco-1.25)
+2026-07-01 12:27:02,470 INFO Authentication (password) successful!
+2026-07-01 12:27:04,855 INFO SUCCESS 10.99.10.22
+2026-07-01 12:27:05,034 INFO Connected (version 2.0, client Cisco-1.25)
+2026-07-01 12:27:06,276 INFO Authentication (password) successful!
+2026-07-01 12:27:08,646 INFO SUCCESS 10.99.10.25
+2026-07-01 12:27:08,828 INFO Connected (version 2.0, client Cisco-1.25)
+2026-07-01 12:27:09,802 INFO Auth banner: b'\r\n----------------------------------------------------------------------------\r\nNORWEGIAN CRUISE LINE HOLDINGS LTD.\r\nOCEANIA CRUISES\r\nREGENT SEVEN SEAS CRUISES\r\n----------------------------------------------------------------------------\r\n\r\nWARNING: THIS SYSTEM IS FOR THE USE OF\r\nNCLH EMPLOYEES AND AUTHORIZED CONTRACTORS.\r\n\r\nANY USE OTHER THAN NORMAL BUSINESS IS STRICTLY FORBIDDEN.\r\n\r\nAll Miami-Dade County, State of Florida and United States GSA Regulations\r\nand laws apply and will be enforced to the fullest extent of the law.\r\n\r\nThis system is CERT Certified and Monitored by Security.\r\n\r\n----------------------------------------------------------------------------\r\n\r\n'
+2026-07-01 12:27:10,136 INFO Authentication (password) successful!
+2026-07-01 12:27:12,743 INFO SUCCESS 10.99.10.10
+2026-07-01 12:27:12,897 INFO Connected (version 1.99, client Cisco-1.25)
+2026-07-01 12:27:14,221 INFO Authentication (password) successful!
+2026-07-01 12:27:16,669 INFO SUCCESS 10.99.10.11
+2026-07-01 12:27:16,844 INFO Connected (version 2.0, client Cisco-1.25)
+2026-07-01 12:27:17,899 INFO Auth banner: b'C\r\nWARNING: THIS SYSTEM IS FOR THE USE OF NCL EMPLOYEES AND\r\nAUTHORIZED CONTRACTORS. ANY USE OTHER THAN NORMAL BUSINESS\r\nIS STRICTLY FORBIDDEN.\r\nAll Miami-Dade County, State of Florida and United States GSA Regulations\r\nand laws apply and will be enforced to the fullest extent of the law.\r\nThis system is CERT Certified and Monitored by Security.\r\n'
+2026-07-01 12:27:18,239 INFO Authentication (password) successful!
+2026-07-01 12:27:20,718 INFO SUCCESS 10.99.10.12
+2026-07-01 12:27:20,905 INFO Connected (version 1.99, client Cisco-1.25)
+2026-07-01 12:27:22,249 INFO Auth banner: b'C\r\nWARNING: THIS SYSTEM IS FOR THE USE OF NCL EMPLOYEES AND\r\nAUTHORIZED CONTRACTORS. ANY USE OTHER THAN NORMAL BUSINESS\r\nIS STRICTLY FORBIDDEN.\r\nAll Miami-Dade County, State of Florida and United States GSA Regulations\r\nand laws apply and will be enforced to the fullest extent of the law.\r\nThis system is CERT Certified and Monitored by Security.\r\n'
+2026-07-01 12:27:22,569 INFO Authentication (password) successful!
+2026-07-01 12:27:25,159 INFO SUCCESS 10.99.10.15

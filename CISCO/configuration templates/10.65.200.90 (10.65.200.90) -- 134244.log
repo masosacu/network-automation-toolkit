@@ -1,0 +1,446 @@
+﻿
+
+##########################################################################
+#####################  SHIPLAB-PRESTAGING-NAT-RT01  ######################
+##########################################################################
+
+WARNING: THIS SYSTEM IS FOR THE USE OF NCL EMPLOYEES AND
+AUTHORIZED CONTRACTORS. ANY USE OTHER THAN NORMAL BUSINESS
+IS STRICTLY FORBIDDEN.
+
+All Miami-Dade County, State of Florida and United States GSA Regulations
+and laws apply and will be enforced to the fullest extent of the law.
+
+This system is CERT Certified and Monitored by Security.
+
+LOCATION: GEE RACK
+
+
+SHIPLAB-PRESTAGING-NAT-RT01#
+SHIPLAB-PRESTAGING-NAT-RT01#term len 0
+SHIPLAB-PRESTAGING-NAT-RT01#show run
+Building configuration...
+
+  
+Current configuration : 11874 bytes
+!
+! Last configuration change at 16:42:18 UTC Mon Jul 6 2026 by neteng
+!
+version 15.7
+service timestamps debug datetime msec
+service timestamps log datetime msec
+service password-encryption
+!
+hostname SHIPLAB-PRESTAGING-NAT-RT01
+!
+boot-start-marker
+boot system flash flash:/c800-universalk9-mz.SPA.157-3.M4a.bin
+boot system flash 
+boot system flash c800-universalk9-mz.SPA.157-3.M4a.bin
+boot-end-marker
+!
+!
+no logging console
+!
+aaa new-model
+!
+!
+aaa authentication login default group tacacs+ local
+aaa authentication login consoleport local
+aaa authentication enable default group tacacs+ enable
+aaa authorization exec default group tacacs+ local if-authenticated 
+aaa authorization commands 15 default group tacacs+ local if-authenticated 
+!
+!
+!
+!
+!
+!
+aaa session-id common
+service-module wlan-ap 0 bootimage autonomous
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+
+
+!
+!
+!
+!
+ip domain name shiplab.ncl.com
+ip cef
+no ipv6 cef
+!
+!
+!
+!
+!
+multilink bundle-name authenticated
+!
+!
+!
+!
+!
+!
+!
+license udi pid C881W-A-K9 sn FTX181481DA
+!
+!
+vtp domain shiplab
+vtp mode transparent
+username nclchk privilege 15 password 7 00260601277B1F0507725E0A
+username neteng privilege 15 password 7 1536252D502478327B217468
+!
+redundancy
+!
+!
+!
+!
+!
+vlan 10,20,30 
+!
+vlan 112
+ name PRE-FWs-WAN
+!
+vlan 200
+ name OOB
+!
+vlan 843
+ name JADE-PRE-DD
+!
+vlan 844
+ name JAD-200
+!
+vlan 860
+ name PRE-GSC
+!
+vlan 873
+ name PREP-GEM
+!
+vlan 876
+ name ESCAPE
+!
+vlan 877
+ name PREP-JEWEL
+!
+vlan 878
+ name CiscoRouters
+!
+vlan 879
+ name Genoa-SiteOffice
+!
+vlan 880
+ name PREP-EPIC
+!
+vlan 888
+ name PREP-MARINER
+!
+vlan 1000-1001 
+!
+! 
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+interface FastEthernet0
+ switchport trunk native vlan 1000
+ switchport mode trunk
+ no ip address
+!
+interface FastEthernet1
+ switchport access vlan 888
+ no ip address
+!
+interface FastEthernet2
+ switchport access vlan 1001
+ no ip address
+!
+interface FastEthernet3
+ switchport mode trunk
+ no ip address
+!
+interface FastEthernet4
+ no ip address
+ duplex auto
+ speed auto
+!
+interface Wlan-GigabitEthernet0
+ description Internal switch interface connecting to the embedded AP
+ no ip address
+!
+interface wlan-ap0
+ description Embedded Service module interface to manage the embedded AP
+ no ip address
+!
+interface Vlan1
+ no ip address
+!
+interface Vlan112
+ description FW-PRE-STAGE-WAN
+ ip address 10.29.254.249 255.255.255.240 secondary
+ ip address 10.142.254.249 255.255.255.240 secondary
+ ip address 10.19.254.249 255.255.255.240
+ ip nat inside
+ no ip virtual-reassembly in
+!
+interface Vlan200
+ ip address 10.65.200.90 255.255.255.0
+ ip nat outside
+ ip virtual-reassembly in
+!
+interface Vlan843
+ description JADE-PRE-DD
+ ip address 10.43.0.1 255.255.255.0
+ ip nat inside
+ no ip virtual-reassembly in
+!
+interface Vlan844
+ ip address 10.43.200.1 255.255.255.0
+ ip nat inside
+ no ip virtual-reassembly in
+!
+interface Vlan860
+ ip address 10.142.0.200 255.255.255.0
+ ip nat inside
+ no ip virtual-reassembly in
+!
+interface Vlan873
+ description GEM-PRE-STAGE
+ ip address 10.27.0.250 255.255.255.0
+ ip nat inside
+ no ip virtual-reassembly in
+!
+interface Vlan876
+ ip address 10.66.0.2 255.255.255.0
+ ip nat inside
+ no ip virtual-reassembly in
+!
+interface Vlan877
+ description NAVIGATOR-PRE-STAGE
+ ip address 10.29.0.1 255.255.255.0
+ ip nat inside
+ no ip virtual-reassembly in
+!
+interface Vlan879
+ ip address 10.124.0.1 255.255.255.0
+ ip nat inside
+ no ip virtual-reassembly in
+!
+interface Vlan880
+ ip address 10.53.200.1 255.255.255.0
+ ip nat inside
+ no ip virtual-reassembly in
+!
+interface Vlan888
+ ip address 10.19.0.1 255.255.255.0
+ ip nat inside
+ no ip virtual-reassembly in
+!
+interface Vlan1000
+ ip address 10.65.0.90 255.255.255.0
+ ip nat outside
+ no ip virtual-reassembly in
+!
+ip forward-protocol nd
+no ip http server
+no ip http secure-server
+!
+!
+ip nat inside source list 100 interface Vlan1000 overload
+ip nat inside source list 101 interface Vlan200 overload
+ip nat inside source static tcp 10.124.0.2 22 10.65.0.90 28002 extendable
+ip nat inside source static tcp 10.124.0.10 22 10.65.0.90 28210 extendable
+ip nat inside source static tcp 10.124.0.20 22 10.65.0.90 28220 extendable
+ip nat inside source static tcp 10.124.0.250 22 10.65.0.90 28250 extendable
+ip nat inside source static tcp 10.124.0.2 443 10.65.0.90 48002 extendable
+ip nat inside source static tcp 10.124.0.10 443 10.65.0.90 48010 extendable
+ip nat inside source static tcp 10.124.0.20 443 10.65.0.90 48220 extendable
+ip nat inside source static tcp 10.124.0.250 443 10.65.0.90 48250 extendable
+ip nat inside source static tcp 10.142.0.10 22 10.65.0.91 2022 extendable
+ip nat inside source static tcp 10.142.0.7 22 10.65.0.91 2222 extendable
+ip nat inside source static tcp 10.142.0.8 22 10.65.0.91 2322 extendable
+ip nat inside source static tcp 10.142.0.5 22 10.65.0.91 2422 extendable
+ip nat inside source static tcp 10.142.0.6 22 10.65.0.91 2522 extendable
+ip nat inside source static tcp 10.66.1.105 22 10.65.200.90 2222 extendable
+ip nat inside source static tcp 10.29.0.2 443 10.65.200.90 2901 extendable
+ip nat inside source static tcp 10.29.0.2 22 10.65.200.90 2902 extendable
+ip nat inside source static tcp 10.29.0.47 443 10.65.200.90 2947 extendable
+ip nat inside source static tcp 10.29.0.48 443 10.65.200.90 2948 extendable
+ip nat inside source static tcp 10.29.0.47 22 10.65.200.90 2957 extendable
+ip nat inside source static tcp 10.29.0.48 22 10.65.200.90 2958 extendable
+ip nat inside source static tcp 10.29.254.241 443 10.65.200.90 2967 extendable
+ip nat inside source static tcp 10.29.254.241 22 10.65.200.90 2977 extendable
+ip nat inside source static tcp 10.19.0.47 443 10.65.200.90 6052 extendable
+ip nat inside source static tcp 10.19.0.48 443 10.65.200.90 6053 extendable
+ip nat inside source static tcp 10.19.0.47 22 10.65.200.90 6054 extendable
+ip nat inside source static tcp 10.19.0.48 22 10.65.200.90 6055 extendable
+ip nat inside source static tcp 10.19.254.241 443 10.65.200.90 6056 extendable
+ip nat inside source static tcp 10.19.254.241 22 10.65.200.90 6057 extendable
+ip nat inside source static tcp 10.66.1.101 22 10.65.200.90 7021 extendable
+ip nat inside source static tcp 10.66.0.1 22 10.65.200.90 7022 extendable
+ip nat inside source static tcp 10.66.0.7 22 10.65.200.90 7023 extendable
+ip nat inside source static tcp 10.66.0.8 22 10.65.200.90 7024 extendable
+ip nat inside source static tcp 10.66.0.17 22 10.65.200.90 7025 extendable
+ip nat inside source static tcp 10.66.0.27 22 10.65.200.90 7026 extendable
+ip nat inside source static tcp 10.66.0.18 22 10.65.200.90 7027 extendable
+ip nat inside source static tcp 10.66.0.28 22 10.65.200.90 7028 extendable
+ip nat inside source static tcp 10.66.0.99 443 10.65.200.90 7029 extendable
+ip nat inside source static tcp 10.66.0.250 443 10.65.200.90 7030 extendable
+ip nat inside source static tcp 10.66.0.99 22 10.65.200.90 7031 extendable
+ip nat inside source static tcp 10.66.0.47 22 10.65.200.90 7032 extendable
+ip nat inside source static tcp 10.66.0.48 22 10.65.200.90 7033 extendable
+ip nat inside source static tcp 10.66.0.250 22 10.65.200.90 7034 extendable
+ip nat inside source static tcp 10.66.0.248 22 10.65.200.90 7035 extendable
+ip nat inside source static tcp 10.66.0.249 22 10.65.200.90 7036 extendable
+ip nat inside source static tcp 10.66.0.250 443 10.65.200.90 7043 extendable
+ip nat inside source static tcp 10.66.0.9 443 10.65.200.90 7044 extendable
+ip nat inside source static tcp 10.66.0.10 443 10.65.200.90 7045 extendable
+ip nat inside source static tcp 10.66.0.11 443 10.65.200.90 7046 extendable
+ip nat inside source static tcp 10.66.0.99 123 10.65.200.90 7047 extendable
+ip nat inside source static tcp 10.66.200.9 443 10.65.200.90 7048 extendable
+ip nat inside source static tcp 10.66.200.10 443 10.65.200.90 7049 extendable
+ip nat inside source static tcp 10.66.200.11 443 10.65.200.90 7050 extendable
+ip nat inside source static tcp 10.66.0.95 443 10.65.200.90 7051 extendable
+ip nat inside source static tcp 10.66.0.47 443 10.65.200.90 7052 extendable
+ip nat inside source static tcp 10.66.0.48 443 10.65.200.90 7053 extendable
+ip nat inside source static tcp 10.66.0.49 443 10.65.200.90 7054 extendable
+ip nat inside source static tcp 10.66.0.209 443 10.65.200.90 7055 extendable
+ip nat inside source static tcp 10.66.0.210 443 10.65.200.90 7056 extendable
+ip nat inside source static tcp 10.66.0.211 443 10.65.200.90 7057 extendable
+ip nat inside source static tcp 10.66.254.241 541 10.65.200.90 7058 extendable
+ip nat inside source static tcp 10.66.0.210 22 10.65.200.90 7066 extendable
+ip nat inside source static tcp 10.66.0.9 22 10.65.200.90 20122 extendable
+ip nat inside source static tcp 10.66.0.10 22 10.65.200.90 20222 extendable
+ip nat inside source static tcp 10.66.0.11 22 10.65.200.90 22100 extendable
+ip nat inside source static tcp 10.66.0.11 22 10.65.200.90 22103 extendable
+ip route 0.0.0.0 0.0.0.0 10.65.200.1
+ip route 10.3.1.0 255.255.255.0 10.3.0.1
+ip route 10.21.1.0 255.255.255.0 10.21.0.1
+ip route 10.21.200.0 255.255.255.0 10.21.0.1
+ip route 10.25.0.0 255.255.255.0 10.25.0.1
+ip route 10.26.0.0 255.255.255.0 10.26.0.1
+ip route 10.26.200.0 255.255.255.0 10.26.0.1
+ip route 10.27.0.0 255.255.255.0 10.27.0.1
+ip route 10.66.0.0 255.255.255.0 10.66.0.1
+ip route 10.66.1.0 255.255.255.0 10.66.0.1
+ip route 10.66.200.0 255.255.255.0 10.66.0.1
+ip route 10.66.254.0 255.255.255.0 10.66.0.1
+ip route 10.71.0.0 255.255.255.0 10.71.0.1
+ip route 172.22.78.0 255.255.254.0 10.15.0.1
+ip route 192.168.80.11 255.255.255.255 10.15.0.1
+ip route 192.168.80.12 255.255.255.255 10.15.0.1
+ip ssh version 2
+!
+ipv6 ioam timestamp
+!
+tacacs server SHIPLABISE
+ address ipv4 10.65.0.10
+ key 7 11183E300D025355001021
+access-list 101 permit ip 10.53.0.0 0.0.0.255 any
+access-list 101 permit ip 10.15.0.0 0.0.0.255 any
+access-list 101 permit ip 10.53.200.0 0.0.0.255 any
+access-list 101 permit ip 10.21.0.0 0.0.0.255 any
+access-list 101 permit ip 10.26.0.0 0.0.0.255 any
+access-list 101 permit ip 10.28.0.0 0.0.0.255 any
+access-list 101 permit ip 10.27.0.0 0.0.0.255 any
+access-list 101 permit ip 10.27.254.240 0.0.0.15 any
+access-list 101 permit ip 10.25.254.240 0.0.0.15 any
+access-list 101 permit ip 10.43.0.0 0.0.0.255 any
+access-list 101 permit ip 10.43.254.240 0.0.0.15 any
+access-list 101 permit ip 10.71.0.0 0.0.0.255 any
+access-list 101 permit ip 10.66.0.0 0.0.0.255 any
+access-list 101 permit ip 10.66.200.0 0.0.0.255 any
+access-list 101 permit ip 10.66.254.0 0.0.0.255 any
+access-list 101 permit ip 10.66.1.0 0.0.0.255 any
+access-list 101 permit ip 10.19.0.0 0.0.0.255 any
+access-list 101 permit ip 10.19.254.0 0.0.0.255 any
+access-list 101 permit ip 10.29.254.0 0.0.0.255 any
+access-list 101 permit ip 10.29.0.0 0.0.0.255 any
+access-list 101 permit ip 10.142.254.0 0.0.0.255 any
+!
+!
+!
+control-plane
+!
+!
+!
+mgcp behavior rsip-range tgcp-only
+mgcp behavior comedia-role none
+mgcp behavior comedia-check-media-src disable
+mgcp behavior comedia-sdp-force disable
+!
+mgcp profile default
+!
+!
+!
+!
+!
+banner motd ^C
+
+##########################################################################
+#####################  SHIPLAB-PRESTAGING-NAT-RT01  ######################
+##########################################################################
+
+WARNING: THIS SYSTEM IS FOR THE USE OF NCL EMPLOYEES AND
+AUTHORIZED CONTRACTORS. ANY USE OTHER THAN NORMAL BUSINESS
+IS STRICTLY FORBIDDEN.
+
+All Miami-Dade County, State of Florida and United States GSA Regulations
+and laws apply and will be enforced to the fullest extent of the law.
+
+This system is CERT Certified and Monitored by Security.
+
+LOCATION: GEE RACK
+
+^C
+!
+line con 0
+ privilege level 15
+ login authentication consoleport
+ no modem enable
+line aux 0
+line 2
+ no activation-character
+ no exec
+ transport preferred none
+ transport input all
+ stopbits 1
+line vty 0 4
+ logging synchronous
+ transport input ssh
+line vty 5 15
+ logging synchronous
+ transport input ssh
+!
+scheduler allocate 20000 1000
+ntp server 10.65.0.1
+!
+!
+!
+!
+!
+!
+!
+end
+
+SHIPLAB-PRESTAGING-NAT-RT01#exit
