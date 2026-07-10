@@ -1,0 +1,41 @@
+# FTGT - FortiGate
+-------------------
+
+= Troubleshoot
+
+! Ping
+execute ping
+
+you can use ping-options to choose the source
+execute ping-options source x.x.x.x
+execute ping-options repeat-count xxx
+execute ping x.x.x.x
+
+ICMP protocol 1
+
+! ARP
+get system arp
+get system arp | grep 10.100.230.1
+get system arp | grep ec:e5
+
+! DNS
+execute nslookup (is no always working, check)
+diagnose firewall fqdn list
+
+
+
+
+
+
+# FAZ - FortiAnalyzer
+----------------------
+
+! To rebuild DataBase
+execute sql-local rebuild-db
+
+! To schedule start-time
+https://community.fortinet.com/t5/FortiAnalyzer/Technical-Note-FortiAnalyzer-SQL-database-rebuild-start-time/ta-p/192363
+
+
+! To get the TAC support file
+execute tac report

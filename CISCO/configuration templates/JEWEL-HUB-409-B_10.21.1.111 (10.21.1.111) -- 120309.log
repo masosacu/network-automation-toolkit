@@ -1,0 +1,5348 @@
+﻿
+##########################################################################
+####################### JEWEL-HUB-409-B ################################
+##########################################################################
+
+WARNING: THIS SYSTEM IS FOR THE USE OF NCL EMPLOYEES AND
+AUTHORIZED CONTRACTORS. ANY USE OTHER THAN NORMAL BUSINESS
+IS STRICTLY FORBIDDEN.
+
+All Miami-Dade County, State of Florida and United States GSA Regulations
+and laws apply and will be enforced to the fullest extent of the law.
+
+This system is CERT Certified and Monitored by Security.
+
+--------------------------------------------------------------------------
+
+JEWEL-HUB-409-B |    LOCATED ON  Server room. DC. MID Near cabin 9594                   FSD-09-4-029
+
+--------------------------------------------------------------------------
+
+
+JEWEL-HUB-409-B#term len 0
+JEWEL-HUB-409-B#
+JEWEL-HUB-409-B#show run
+Building configuration...
+
+Current configuration : 154404 bytes
+!
+! Last configuration change at 17:07:11 EDT Thu Jul 9 2026
+! NVRAM config last updated at 17:07:11 EDT Thu Jul 9 2026
+!
+version 17.12
+service timestamps debug datetime msec
+service timestamps log datetime msec
+service password-encryption
+service call-home
+platform punt-keepalive disable-kernel-core
+!
+hostname JEWEL-HUB-409-B
+!
+!
+vrf definition ITV
+ rd 1.1.1.1:1
+ !
+ address-family ipv4
+ exit-address-family
+!
+vrf definition Mgmt-vrf
+ !
+ address-family ipv4
+ exit-address-family
+ !
+ address-family ipv6
+ exit-address-family
+!
+vrf definition VOICE
+ rd 2.2.2.2:2
+ !
+ address-family ipv4
+ exit-address-family
+!
+logging buffered 9046
+no logging console
+aaa new-model
+!
+!
+aaa group server radius dnac-client-radius-group
+ server name dnac-radius_10.21.0.9
+ server name dnac-radius_10.21.0.11
+ ip radius source-interface Loopback0
+!
+aaa group server tacacs+ dnac-network-tacacs-group
+ server name dnac-tacacs_10.21.0.9
+ server name dnac-tacacs_10.21.0.11
+ ip tacacs source-interface Loopback0
+!
+aaa authentication login default local
+aaa authentication login dnac-cts-list group dnac-client-radius-group local
+aaa authentication login VTY_authen group dnac-network-tacacs-group local
+aaa authentication dot1x default group dnac-client-radius-group
+aaa authorization exec default local 
+aaa authorization exec VTY_author group dnac-network-tacacs-group local if-authenticated 
+aaa authorization network default group dnac-client-radius-group 
+aaa authorization network dnac-cts-list group dnac-client-radius-group 
+aaa accounting update newinfo periodic 2880
+aaa accounting identity default start-stop group dnac-client-radius-group
+aaa accounting exec default start-stop group dnac-network-tacacs-group
+!
+!
+aaa server radius dynamic-author
+ client 10.21.0.9 server-key 7 01022131411B5E56257644
+ client 10.21.0.10 server-key 7 11183E300D025355001021
+ client 10.21.0.11 server-key 7 105F2E2C1F074A52083E20
+!
+aaa session-id common
+clock timezone EST -5 0
+clock summer-time EDT recurring
+boot system bootflash:packages.conf
+power redundancy-mode combined
+power supply autoLC shutdown
+power supply autoLC priority 1 2 3 4 7 8 9 10
+!
+!
+!
+!
+!
+!
+!
+!
+!
+ip multicast-routing 
+ip multicast-routing vrf ITV 
+ip multicast-routing vrf VOICE 
+ip name-server 10.21.50.24 10.24.50.26
+ip domain lookup source-interface Loopback0
+ip domain name jewel.ncl.com
+!
+ip dhcp pool webuidhcp
+!
+!
+!
+login on-success log
+udld enable
+
+vtp mode off
+!
+!
+!
+!
+!
+!
+!
+!
+access-session mac-move deny
+device-tracking tracking
+!
+device-tracking policy IPDT_POLICY
+ no protocol udp
+ tracking enable
+!
+!
+crypto pki trustpoint SLA-TrustPoint
+ enrollment pkcs12
+ revocation-check crl
+ hash sha256
+!
+crypto pki trustpoint TP-self-signed-4254494488
+ enrollment selfsigned
+ subject-name cn=IOS-Self-Signed-Certificate-4254494488
+ revocation-check none
+ rsakeypair TP-self-signed-4254494488
+ hash sha512
+!
+crypto pki trustpoint DNAC-CA
+ enrollment mode ra
+ enrollment terminal
+ usage ssl-client
+ revocation-check crl none
+ source interface Loopback0
+ hash sha512
+!
+!
+crypto pki certificate chain SLA-TrustPoint
+ certificate ca 01
+  30820321 30820209 A0030201 02020101 300D0609 2A864886 F70D0101 0B050030 
+  32310E30 0C060355 040A1305 43697363 6F312030 1E060355 04031317 43697363 
+  6F204C69 63656E73 696E6720 526F6F74 20434130 1E170D31 33303533 30313934 
+  3834375A 170D3338 30353330 31393438 34375A30 32310E30 0C060355 040A1305 
+  43697363 6F312030 1E060355 04031317 43697363 6F204C69 63656E73 696E6720 
+  526F6F74 20434130 82012230 0D06092A 864886F7 0D010101 05000382 010F0030 
+  82010A02 82010100 A6BCBD96 131E05F7 145EA72C 2CD686E6 17222EA1 F1EFF64D 
+  CBB4C798 212AA147 C655D8D7 9471380D 8711441E 1AAF071A 9CAE6388 8A38E520 
+  1C394D78 462EF239 C659F715 B98C0A59 5BBB5CBD 0CFEBEA3 700A8BF7 D8F256EE 
+  4AA4E80D DB6FD1C9 60B1FD18 FFC69C96 6FA68957 A2617DE7 104FDC5F EA2956AC 
+  7390A3EB 2B5436AD C847A2C5 DAB553EB 69A9A535 58E9F3E3 C0BD23CF 58BD7188 
+  68E69491 20F320E7 948E71D7 AE3BCC84 F10684C7 4BC8E00F 539BA42B 42C68BB7 
+  C7479096 B4CB2D62 EA2F505D C7B062A4 6811D95B E8250FC4 5D5D5FB8 8F27D191 
+  C55F0D76 61F9A4CD 3D992327 A8BB03BD 4E6D7069 7CBADF8B DF5F4368 95135E44 
+  DFC7C6CF 04DD7FD1 02030100 01A34230 40300E06 03551D0F 0101FF04 04030201 
+  06300F06 03551D13 0101FF04 05300301 01FF301D 0603551D 0E041604 1449DC85 
+  4B3D31E5 1B3E6A17 606AF333 3D3B4C73 E8300D06 092A8648 86F70D01 010B0500 
+  03820101 00507F24 D3932A66 86025D9F E838AE5C 6D4DF6B0 49631C78 240DA905 
+  604EDCDE FF4FED2B 77FC460E CD636FDB DD44681E 3A5673AB 9093D3B1 6C9E3D8B 
+  D98987BF E40CBD9E 1AECA0C2 2189BB5C 8FA85686 CD98B646 5575B146 8DFC66A8 
+  467A3DF4 4D565700 6ADF0F0D CF835015 3C04FF7C 21E878AC 11BA9CD2 55A9232C 
+  7CA7B7E6 C1AF74F6 152E99B7 B1FCF9BB E973DE7F 5BDDEB86 C71E3B49 1765308B 
+  5FB0DA06 B92AFE7F 494E8A9E 07B85737 F3A58BE1 1A48A229 C37C1E69 39F08678 
+  80DDCD16 D6BACECA EEBC7CF9 8428787B 35202CDC 60E4616A B623CDBD 230E3AFB 
+  418616A9 4093E049 4D10AB75 27E86F73 932E35B5 8862FDAE 0275156F 719BB2F0 
+  D697DF7F 28
+        quit
+crypto pki certificate chain TP-self-signed-4254494488
+ certificate self-signed 01
+  30820330 30820218 A0030201 02020101 300D0609 2A864886 F70D0101 0D050030 
+  31312F30 2D060355 04030C26 494F532D 53656C66 2D536967 6E65642D 43657274 
+  69666963 6174652D 34323534 34393434 3838301E 170D3236 30333034 31343335 
+  32375A17 0D333630 33303331 34333532 375A3031 312F302D 06035504 030C2649 
+  4F532D53 656C662D 5369676E 65642D43 65727469 66696361 74652D34 32353434 
+  39343438 38308201 22300D06 092A8648 86F70D01 01010500 0382010F 00308201 
+  0A028201 0100F607 1CAE4E56 00E342C4 67092935 1351DA2A D001CDDB EA328389 
+  D8D2A5FB B172425D 0D4A7BA2 10A3BE84 1C9EA5B8 B815BD71 F9902AA7 2D970893 
+  84E26DE4 58644CC2 424D21F0 BB497AA8 F4FA6B71 1937EB4D 00954804 8579E07A 
+  C6640136 6F0869E1 925B5167 EDACAFEA 73615DF6 CE1D46D9 04E2B55A B49D0183 
+  AC222B4D 1F7CD799 3447A2C4 5F329981 FAC9CE43 55D9B551 EE12FDAB 50ED76D8 
+  13B02889 7A6A5954 29AEAECD F5036D34 FC49A379 83896AAA 8E23D77B AABD1E78 
+  C0AF6E51 E5F38AA6 48BD6B84 721243E8 9D4068A5 1599C365 7287861D 9C47AA76 
+  E4E20468 83E8DB44 878DF63D 8AFA3D41 BC46F780 1CFBCD15 359A1B66 C9FBCE72 
+  CB66BFFB 6D4D0203 010001A3 53305130 1D060355 1D0E0416 0414B818 03E69C73 
+  FCE779D7 90D146FB 3B62203B 11EB301F 0603551D 23041830 168014B8 1803E69C 
+  73FCE779 D790D146 FB3B6220 3B11EB30 0F060355 1D130101 FF040530 030101FF 
+  300D0609 2A864886 F70D0101 0D050003 82010100 DE354975 4343DC62 95DA1B27 
+  BAA5A31B 4B09DE9F ACE78AE7 E808C0B8 24FD595A 8D3B2081 55D30A25 0818E72B 
+  CB9F2900 9C4CC8A2 72A07C78 FEB884E5 70FCE41F BF10457F A8DEDF0C BA4FBBE4 
+  658F411E 3B8467B1 E4A11093 C524BE0D 12DDE06F 0912AB49 E3D8BB3E 1500509A 
+  D548B492 E9344517 3C9350BC 29D631D7 4CCE8D0B 05947004 73613041 237EF945 
+  BA5E55EF E3D3DCF8 E51212E9 E9B41D17 77B627C7 71B65CD7 CDF46286 C2D45FEB 
+  9E8344D9 1DD14964 336C87A2 411D8939 51988E60 127F05D8 B64807A2 269ED77A 
+  9FF56B12 A3F68B96 F46E77F4 5D37EA49 9C65172B 569664C1 191F7535 E9C79CE6 
+  5E862000 50A85DA1 A6253ACB 67DFCCD7 74D1A403
+        quit
+crypto pki certificate chain DNAC-CA
+ certificate ca 696AE56145FA40AAF568A78ACEAA537B25D34A33
+  308203A5 3082028D A0030201 02021469 6AE56145 FA40AAF5 68A78ACE AA537B25 
+  D34A3330 0D06092A 864886F7 0D01010B 05003062 312D302B 06035504 030C2466 
+  37663765 3237662D 32303830 2D643666 622D3236 31382D33 64343235 62303637 
+  34393931 16301406 0355040A 0C0D4369 73636F20 53797374 656D7331 19301706 
+  0355040B 0C104369 73636F20 444E4120 43656E74 6572301E 170D3235 30313134 
+  30333038 32325A17 0D323731 30313130 33303832 325A3062 312D302B 06035504 
+  030C2466 37663765 3237662D 32303830 2D643666 622D3236 31382D33 64343235 
+  62303637 34393931 16301406 0355040A 0C0D4369 73636F20 53797374 656D7331 
+  19301706 0355040B 0C104369 73636F20 444E4120 43656E74 65723082 0122300D 
+  06092A86 4886F70D 01010105 00038201 0F003082 010A0282 010100B5 6DB76010 
+  15D0E452 391F941F D6BFA4CE F54A2F74 2E83F976 40C64835 3A82B202 EDDE7BCC 
+  B3A85A5D D1332BB1 4FFEA13D 39685692 B55D3D56 847A2339 E6911D4B 9BC7444A 
+  7A43A4A6 3773B361 F20CC1B0 05C8ACE1 D8EC562D E1F6D592 0B76055F 078758B1 
+  A4A83048 7E9715D1 EAB9435F 572F48DB 040472D1 79D6D9CA C7E8A797 DA465948 
+  1FD68FFD 5ECBF30A 77FECF37 474BA5DA 7ADE8FA6 B22466F9 59709432 0FD0AB61 
+  52AA5907 0B97A7A1 60FE46F3 7853BA07 B5290CE7 D123CA7C 45D2CA26 5978BDE6 
+  C0C4539C A3B4FF71 62D6C97B 28661E65 A358C489 68D0C557 6D8EDB59 E0F58B0D 
+  01EBCFC6 359E0460 763A745D BBF1B1CE 668E72FC B309FC09 B3B16502 03010001 
+  A3533051 301D0603 551D0E04 16041429 9740AF18 40F24A33 5674716F 656CD630 
+  0D3B8D30 1F060355 1D230418 30168014 299740AF 1840F24A 33567471 6F656CD6 
+  300D3B8D 300F0603 551D1301 01FF0405 30030101 FF300D06 092A8648 86F70D01 
+  010B0500 03820101 006D9493 32F45986 400D8187 78E12159 397A8A01 94E6D4A0 
+  0870A37A D4CC1FF9 F21C4DCE 02BD579D 382E6E3A 79B80E7E 03E5CEF8 402C946E 
+  490FDA9A 3FF2B3F1 6997A4F3 E91AEAF0 4185A154 67C7260F 4C471A75 85F6DEC9 
+  D5B7F617 F0F4F259 16CAA895 1CB84B6E 69A65247 53B3BDD6 F566CCB7 E255F089 
+  4EB297CB ADA56D15 BFF5DDB1 DC11BA12 CB13B4F9 95B17173 4574127A E21D2FFE 
+  5E2916D5 A4DF9E34 024C4ADE 9B8F13E1 770496A1 9F335464 4559BF81 029D09B8 
+  C28C61D5 EC99D9DF 5F0D7FEC 371AF0B4 27629C80 426839B6 D8521716 A46A5AE9 
+  B5EE10A2 E5FEC3CD 0E589ED3 48C59B63 B8D6C8A3 CAD8C998 9118CAE4 75FBBB08 
+  2E0025F7 CBE6F824 14
+        quit
+!
+cts authorization list dnac-cts-list
+!
+license boot level network-advantage addon dna-advantage
+service-template DEFAULT_LINKSEC_POLICY_MUST_SECURE
+ linksec policy must-secure
+service-template DEFAULT_LINKSEC_POLICY_SHOULD_SECURE
+ linksec policy should-secure
+service-template DEFAULT_CRITICAL_VOICE_TEMPLATE
+ voice vlan
+service-template DEFAULT_CRITICAL_DATA_TEMPLATE
+service-template webauth-global-inactive
+ inactivity-timer 3600 
+archive
+ log config
+  logging enable
+  notify syslog contenttype plaintext
+memory free low-watermark processor 134335
+!
+diagnostic bootup level minimal
+!
+spanning-tree mode rapid-pvst
+spanning-tree loopguard default
+spanning-tree portfast bpduguard default
+spanning-tree extend system-id
+spanning-tree vlan 801 priority 4096
+!
+macro name NOT-IN-USE
+ 
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ no cdp enable
+ spanning-tree bpduguard enable
+@
+!
+errdisable recovery cause udld
+errdisable recovery cause bpduguard
+errdisable recovery cause security-violation
+errdisable recovery cause channel-misconfig
+errdisable recovery cause pagp-flap
+errdisable recovery cause dtp-flap
+errdisable recovery cause link-flap
+errdisable recovery cause sfp-config-mismatch
+errdisable recovery cause gbic-invalid
+errdisable recovery cause psecure-violation
+errdisable recovery cause port-mode-failure
+errdisable recovery cause dhcp-rate-limit
+errdisable recovery cause pppoe-ia-rate-limit
+errdisable recovery cause mac-limit
+errdisable recovery cause storm-control
+errdisable recovery cause inline-power
+errdisable recovery cause arp-inspection
+errdisable recovery cause loopback
+errdisable recovery interval 60
+!
+enable secret 9 $14$5Eg2$YFHcBhiHDqu7LU$c7T213CDQ5bTG54VBkmooAlsgSUYExtCfvGf1RGpUVE
+!
+username ncladmin privilege 15 secret 9 $9$QE8labq6zAg/RU$qx9C.pU0f2UilHs4B6FfdGrMjUkC.bTr7S8/3ujesVw
+username dnaservice privilege 15 secret 9 $9$aMJ2Ker9lDrqoE$pXCHO/S1nn.SS6v6OVdOcrctEzmhQZ0fYz2pzZXIq/.
+username netswi privilege 15 secret 9 $9$HkupzZc/lGKRBI$BTLREQ3Zrh3.pl1LSYkvSyPs4VmzZk7jdTHk4uuO9zI
+username netmgr privilege 15 secret 9 $9$Xnic3LVxlSziB.$0WpzEW38BX2OMpYJt1PoN8RsGBl5zFhO/rRM8G1STcQ
+!
+redundancy
+ mode sso
+crypto engine compliance shield disable
+!
+!
+!
+!
+!
+transceiver type all
+ monitoring
+!
+vlan 9
+ name Printer
+!
+vlan 10
+ name USERS_PC
+!
+vlan 30
+ name MICROS
+!
+vlan 57
+ name Digital_Signage
+!
+vlan 80
+ name QCI_EMBARK
+!
+vlan 124
+ name Mobilitysys
+!
+vlan 590
+ name VOICE_SERVERS
+!
+vlan 801
+ name WAPS
+!
+vlan 999
+ name DNULL
+!
+vlan 1000
+ name MGMT-VLAN
+!
+vlan 1111
+ name P2P-HUB409B-GLOBAL
+!
+vlan 1511
+ name P2P-HUB409B-VOICE
+!
+vlan 1711
+ name P2P-HUB409B-ITV
+!
+lldp run
+!
+class-map match-any system-cpp-police-ewlc-control
+  description EWLC Control 
+class-map match-any system-cpp-police-topology-control
+  description Topology control
+class-map match-any system-cpp-police-sw-forward
+  description Sw forwarding, L2 LVX data packets, LOGGING, Transit Traffic
+class-map match-any system-cpp-default
+  description EWLC Data, Inter FED Traffic 
+class-map match-any system-cpp-police-sys-data
+  description Openflow, Exception, EGR Exception, NFL Sampled Data, RPF Failed
+class-map match-any system-cpp-police-punt-webauth
+  description Punt Webauth
+class-map match-any system-cpp-police-l2lvx-control
+  description L2 LVX control packets
+class-map match-any system-cpp-police-forus
+  description Forus Address resolution and Forus traffic
+class-map match-any system-cpp-police-multicast-end-station
+  description MCAST END STATION
+class-map match-any system-cpp-police-high-rate-app
+  description High Rate Applications 
+class-map match-any system-cpp-police-multicast
+  description MCAST Data
+class-map match-any system-cpp-police-l2-control
+  description L2 control
+class-map match-any system-cpp-police-dot1x-auth
+  description DOT1X Auth
+class-map match-any system-cpp-police-data
+  description ICMP redirect, ICMP_GEN and BROADCAST
+class-map match-any system-cpp-police-stackwise-virt-control
+  description Stackwise Virtual OOB
+class-map match-any non-client-nrt-class
+class-map match-any system-cpp-police-routing-control
+  description Routing control and Low Latency
+class-map match-any system-cpp-police-protocol-snooping
+  description Protocol snooping
+class-map match-any system-cpp-police-dhcp-snooping
+  description DHCP snooping
+class-map match-any system-cpp-police-ios-routing
+  description L2 control, Topology control, Routing control, Low Latency
+class-map match-any system-cpp-police-system-critical
+  description System Critical and Gold Pkt
+class-map match-any system-cpp-police-ios-feature
+  description ICMPGEN,BROADCAST,ICMP,L2LVXCntrl,ProtoSnoop,PuntWebauth,MCASTData,Transit,DOT1XAuth,Swfwd,LOGGING,L2LVXData,ForusTraffic,ForusARP,McastEndStn,Openflow,Exception,EGRExcption,NflSampled,RpfFailed
+!
+!
+policy-map system-cpp-policy
+!
+! 
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+interface Loopback0
+ description GLOBAL-VRF
+ ip address 10.21.1.111 255.255.255.255
+ ip pim passive
+ ip ospf 1 area 4092
+!
+interface Loopback1
+ description VOICE-VRF
+ vrf forwarding VOICE
+ ip address 172.16.254.111 255.255.255.255
+ ip pim passive
+ ip ospf 2 area 4092
+!
+interface Loopback2
+ description ITV-VRF
+ vrf forwarding ITV
+ ip address 172.21.254.111 255.255.255.255
+ ip pim passive
+ ip ospf 3 area 4092
+!
+interface Port-channel1
+ description UPLINK-TO-VSL-CORE
+ switchport trunk native vlan 1000
+ switchport trunk allowed vlan 1-800,802-4094
+ switchport mode trunk
+ speed nonegotiate
+ spanning-tree link-type point-to-point
+!
+interface GigabitEthernet0/0
+ vrf forwarding Mgmt-vrf
+ no ip address
+ shutdown
+ negotiation auto
+!
+interface GigabitEthernet1/0/1
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet1/0/2
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet1/0/3
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet1/0/4
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet1/0/5
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet1/0/6
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet1/0/7
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet1/0/8
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet1/0/9
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet1/0/10
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet1/0/11
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet1/0/12
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet1/0/13
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet1/0/14
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet1/0/15
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet1/0/16
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet1/0/17
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet1/0/18
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet1/0/19
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet1/0/20
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet1/0/21
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet1/0/22
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet1/0/23
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet1/0/24
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet1/0/25
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet1/0/26
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet1/0/27
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet1/0/28
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet1/0/29
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet1/0/30
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet1/0/31
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet1/0/32
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet1/0/33
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet1/0/34
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet1/0/35
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet1/0/36
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet1/0/37
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet1/0/38
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet1/0/39
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet1/0/40
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet1/0/41
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet1/0/42
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet1/0/43
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet1/0/44
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet1/0/45
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet1/0/46
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet1/0/47
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet1/0/48
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet2/0/1
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet2/0/2
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet2/0/3
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet2/0/4
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet2/0/5
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet2/0/6
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet2/0/7
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet2/0/8
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet2/0/9
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet2/0/10
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet2/0/11
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet2/0/12
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet2/0/13
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet2/0/14
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet2/0/15
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet2/0/16
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet2/0/17
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet2/0/18
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet2/0/19
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet2/0/20
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet2/0/21
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet2/0/22
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet2/0/23
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet2/0/24
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet2/0/25
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet2/0/26
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet2/0/27
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet2/0/28
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet2/0/29
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet2/0/30
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet2/0/31
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet2/0/32
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet2/0/33
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet2/0/34
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet2/0/35
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet2/0/36
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet2/0/37
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet2/0/38
+ switchport access vlan 590
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet2/0/39
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet2/0/40
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet2/0/41
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet2/0/42
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet2/0/43
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet2/0/44
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet2/0/45
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet2/0/46
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet2/0/47
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet2/0/48
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet3/0/1
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet3/0/2
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet3/0/3
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet3/0/4
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet3/0/5
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet3/0/6
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet3/0/7
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet3/0/8
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet3/0/9
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet3/0/10
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet3/0/11
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet3/0/12
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet3/0/13
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet3/0/14
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet3/0/15
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet3/0/16
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet3/0/17
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet3/0/18
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet3/0/19
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet3/0/20
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet3/0/21
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet3/0/22
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet3/0/23
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet3/0/24
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet3/0/25
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet3/0/26
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet3/0/27
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet3/0/28
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet3/0/29
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet3/0/30
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet3/0/31
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet3/0/32
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet3/0/33
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet3/0/34
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet3/0/35
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet3/0/36
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet3/0/37
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet3/0/38
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet3/0/39
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet3/0/40
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet3/0/41
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet3/0/42
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet3/0/43
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet3/0/44
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet3/0/45
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet3/0/46
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet3/0/47
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet3/0/48
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet4/0/1
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet4/0/2
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet4/0/3
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet4/0/4
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet4/0/5
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet4/0/6
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet4/0/7
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet4/0/8
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet4/0/9
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet4/0/10
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet4/0/11
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet4/0/12
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet4/0/13
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet4/0/14
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet4/0/15
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet4/0/16
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet4/0/17
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet4/0/18
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet4/0/19
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet4/0/20
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet4/0/21
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet4/0/22
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet4/0/23
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet4/0/24
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet4/0/25
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet4/0/26
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet4/0/27
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet4/0/28
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet4/0/29
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet4/0/30
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet4/0/31
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet4/0/32
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet4/0/33
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet4/0/34
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet4/0/35
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet4/0/36
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet4/0/37
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet4/0/38
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet4/0/39
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet4/0/40
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet4/0/41
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet4/0/42
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet4/0/43
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet4/0/44
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet4/0/45
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet4/0/46
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet4/0/47
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet4/0/48
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface TwentyFiveGigE5/0/1
+ description UPLINK-TO-VSL-CORE
+ switchport trunk native vlan 1000
+ switchport trunk allowed vlan 1-800,802-4094
+ switchport mode trunk
+ channel-group 1 mode active
+!
+interface TwentyFiveGigE5/0/2
+ device-tracking attach-policy IPDT_POLICY
+!
+interface TwentyFiveGigE5/0/3
+ device-tracking attach-policy IPDT_POLICY
+!
+interface TwentyFiveGigE5/0/4
+ device-tracking attach-policy IPDT_POLICY
+!
+interface HundredGigE5/0/5
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface HundredGigE5/0/6
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface HundredGigE5/0/7
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface HundredGigE5/0/8
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface AppGigabitEthernet5/0/1
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface AppGigabitEthernet5/0/2
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface TwentyFiveGigE6/0/1
+ description UPLINK-TO-VSL-CORE
+ switchport trunk native vlan 1000
+ switchport trunk allowed vlan 1-800,802-4094
+ switchport mode trunk
+ channel-group 1 mode active
+!
+interface TwentyFiveGigE6/0/2
+ device-tracking attach-policy IPDT_POLICY
+!
+interface TwentyFiveGigE6/0/3
+ device-tracking attach-policy IPDT_POLICY
+!
+interface TwentyFiveGigE6/0/4
+ device-tracking attach-policy IPDT_POLICY
+!
+interface HundredGigE6/0/5
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface HundredGigE6/0/6
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface HundredGigE6/0/7
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface HundredGigE6/0/8
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface AppGigabitEthernet6/0/1
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface AppGigabitEthernet6/0/2
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet7/0/1
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet7/0/2
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet7/0/3
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet7/0/4
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet7/0/5
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet7/0/6
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet7/0/7
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet7/0/8
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet7/0/9
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet7/0/10
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet7/0/11
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet7/0/12
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet7/0/13
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet7/0/14
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet7/0/15
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet7/0/16
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet7/0/17
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet7/0/18
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet7/0/19
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet7/0/20
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet7/0/21
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet7/0/22
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet7/0/23
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet7/0/24
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet7/0/25
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet7/0/26
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet7/0/27
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet7/0/28
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet7/0/29
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet7/0/30
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet7/0/31
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet7/0/32
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet7/0/33
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet7/0/34
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet7/0/35
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet7/0/36
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet7/0/37
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet7/0/38
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet7/0/39
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet7/0/40
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet7/0/41
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet7/0/42
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet7/0/43
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet7/0/44
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet7/0/45
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet7/0/46
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet7/0/47
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet7/0/48
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet8/0/1
+ description AP-9-4-181-P
+ switchport access vlan 801
+ switchport mode access
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet8/0/2
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet8/0/3
+ description AP-12-5-155-S
+ switchport access vlan 801
+ switchport mode access
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet8/0/4
+ description AP-9-5-145-P
+ switchport access vlan 801
+ switchport mode access
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet8/0/5
+ description AP-9-5-145-S
+ switchport access vlan 801
+ switchport mode access
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet8/0/6
+ description AP-9-5-113-S
+ switchport access vlan 801
+ switchport mode access
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet8/0/7
+ description AP-12-4-168-P
+ switchport access vlan 801
+ switchport mode access
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet8/0/8
+ description AP-9-5-113-P
+ switchport access vlan 801
+ switchport mode access
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet8/0/9
+ description AP-6-4-220-S
+ switchport access vlan 801
+ switchport mode access
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet8/0/10
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet8/0/11
+ description AP-6-4-242-P
+ switchport access vlan 801
+ switchport mode access
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet8/0/12
+ description AP-7-4-165-S
+ switchport access vlan 801
+ switchport mode access
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet8/0/13
+ description AP-7-5-130-S
+ switchport access vlan 801
+ switchport mode access
+ switchport nonegotiate
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet8/0/14
+ description AP-6-5-145-P
+ switchport access vlan 801
+ switchport mode access
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet8/0/15
+ description AP-9-4-181-S
+ switchport access vlan 801
+ switchport mode access
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet8/0/16
+ description AP-7-4-213-P
+ switchport access vlan 801
+ switchport mode access
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet8/0/17
+ description AP-6-4-180-P
+ switchport access vlan 801
+ switchport mode access
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet8/0/18
+ description AP-7-5-130-P
+ switchport access vlan 801
+ switchport mode access
+ switchport nonegotiate
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet8/0/19
+ description AP-6-4-182-S
+ switchport access vlan 801
+ switchport mode access
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet8/0/20
+ description AP-12-5-150-P
+ switchport access vlan 801
+ switchport mode access
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet8/0/21
+ description AP-7-5-106-M
+ switchport access vlan 801
+ switchport mode access
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet8/0/22
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet8/0/23
+ description AP-6-4-220-P
+ switchport access vlan 801
+ switchport mode access
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet8/0/24
+ description AP-6-5-140-S
+ switchport access vlan 801
+ switchport mode access
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet8/0/25
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ shutdown
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet8/0/26
+ description AP-10-4-212-S
+ switchport access vlan 801
+ switchport mode access
+ switchport nonegotiate
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet8/0/27
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet8/0/28
+ description AP-10-4-181-P
+ switchport access vlan 801
+ switchport mode access
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet8/0/29
+ description AP-12-5-116-P
+ switchport access vlan 801
+ switchport mode access
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet8/0/30
+ description AP-10-4-181-S
+ switchport access vlan 801
+ switchport mode access
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet8/0/31
+ description AP-12-5-132-P
+ switchport access vlan 801
+ switchport mode access
+ switchport nonegotiate
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet8/0/32
+ description AP-10-5-145-S
+ switchport access vlan 801
+ switchport mode access
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet8/0/33
+ description AP-10-4-212-P
+ switchport access vlan 801
+ switchport mode access
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet8/0/34
+ description Charter Micros
+ switchport access vlan 30
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet8/0/35
+ description DS
+ switchport access vlan 57
+ switchport mode access
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control action shutdown
+!
+interface GigabitEthernet8/0/36
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport trunk allowed vlan 1,2,1000
+ switchport mode trunk
+!
+interface GigabitEthernet8/0/37
+ description DS
+ switchport access vlan 57
+ switchport mode access
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control action shutdown
+!
+interface GigabitEthernet8/0/38
+ description DS
+ switchport access vlan 57
+ switchport mode access
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control action shutdown
+!
+interface GigabitEthernet8/0/39
+ description DS
+ switchport access vlan 57
+ switchport mode access
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control action shutdown
+!
+interface GigabitEthernet8/0/40
+ description DS
+ switchport access vlan 57
+ switchport mode access
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control action shutdown
+!
+interface GigabitEthernet8/0/41
+ description DS
+ switchport access vlan 57
+ switchport mode access
+ device-tracking attach-policy IPDT_POLICY
+ shutdown
+ storm-control broadcast level 50.00
+ storm-control action shutdown
+!
+interface GigabitEthernet8/0/42
+ description DS
+ switchport access vlan 57
+ switchport mode access
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control action shutdown
+!
+interface GigabitEthernet8/0/43
+ description NOT-IN-USE
+ switchport access vlan 999
+ device-tracking attach-policy IPDT_POLICY
+ power inline never
+!
+interface GigabitEthernet8/0/44
+ description DS
+ switchport access vlan 57
+ switchport mode access
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control action shutdown
+!
+interface GigabitEthernet8/0/45
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ device-tracking attach-policy IPDT_POLICY
+!
+interface GigabitEthernet8/0/46
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ device-tracking attach-policy IPDT_POLICY
+!
+interface GigabitEthernet8/0/47
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet8/0/48
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface FiveGigabitEthernet9/0/1
+ description AP-9-4-9582
+ switchport access vlan 801
+ switchport mode access
+ switchport nonegotiate
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface FiveGigabitEthernet9/0/2
+ description AP-9-4-9581
+ switchport access vlan 801
+ switchport mode access
+ switchport nonegotiate
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface FiveGigabitEthernet9/0/3
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface FiveGigabitEthernet9/0/4
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface FiveGigabitEthernet9/0/5
+ description AP-9-4-9584
+ switchport access vlan 801
+ switchport mode access
+ switchport nonegotiate
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface FiveGigabitEthernet9/0/6
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface FiveGigabitEthernet9/0/7
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface FiveGigabitEthernet9/0/8
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface FiveGigabitEthernet9/0/9
+ description NOT-IN-USE
+ switchport access vlan 999
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface FiveGigabitEthernet9/0/10
+ description NOT-IN-USE
+ switchport access vlan 999
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface FiveGigabitEthernet9/0/11
+ switchport access vlan 550
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface FiveGigabitEthernet9/0/12
+ switchport access vlan 550
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface FiveGigabitEthernet9/0/13
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface FiveGigabitEthernet9/0/14
+ description NOT-IN-USE
+ switchport access vlan 999
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface FiveGigabitEthernet9/0/15
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface FiveGigabitEthernet9/0/16
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface FiveGigabitEthernet9/0/17
+ description AP-9-4-9583
+ switchport access vlan 801
+ switchport mode access
+ switchport nonegotiate
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface FiveGigabitEthernet9/0/18
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface FiveGigabitEthernet9/0/19
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface FiveGigabitEthernet9/0/20
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface FiveGigabitEthernet9/0/21
+ description AP-9-4-9586
+ switchport access vlan 801
+ switchport mode access
+ switchport nonegotiate
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface FiveGigabitEthernet9/0/22
+ description AP-9-4-9585
+ switchport access vlan 801
+ switchport mode access
+ switchport nonegotiate
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface FiveGigabitEthernet9/0/23
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ shutdown
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface FiveGigabitEthernet9/0/24
+ description AP-9-4-9588
+ switchport access vlan 801
+ switchport mode access
+ switchport nonegotiate
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface FiveGigabitEthernet9/0/25
+ description AP-9-4-9589
+ switchport access vlan 801
+ switchport mode access
+ switchport nonegotiate
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface FiveGigabitEthernet9/0/26
+ description AP-9-4-9590
+ switchport access vlan 801
+ switchport mode access
+ switchport nonegotiate
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface FiveGigabitEthernet9/0/27
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface FiveGigabitEthernet9/0/28
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface FiveGigabitEthernet9/0/29
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ shutdown
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface FiveGigabitEthernet9/0/30
+ switchport access vlan 801
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface FiveGigabitEthernet9/0/31
+ description AP-9-4-9592
+ switchport access vlan 801
+ switchport mode access
+ switchport nonegotiate
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface FiveGigabitEthernet9/0/32
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface FiveGigabitEthernet9/0/33
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface FiveGigabitEthernet9/0/34
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface FiveGigabitEthernet9/0/35
+ description AP-9-4-9594
+ switchport access vlan 801
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface FiveGigabitEthernet9/0/36
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface FiveGigabitEthernet9/0/37
+ description AP-13-4-171-P
+ switchport access vlan 801
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface FiveGigabitEthernet9/0/38
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface FiveGigabitEthernet9/0/39
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface FiveGigabitEthernet9/0/40
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface FiveGigabitEthernet9/0/41
+ description AP-11-4-172-M
+ switchport access vlan 801
+ switchport mode access
+ switchport nonegotiate
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface FiveGigabitEthernet9/0/42
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface FiveGigabitEthernet9/0/43
+ description NOT-IN-USE
+ switchport access vlan 999
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface FiveGigabitEthernet9/0/44
+ description AP-10-4-173-M
+ switchport access vlan 801
+ switchport mode access
+ switchport nonegotiate
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface FiveGigabitEthernet9/0/45
+ description AP-9-4-172-M
+ switchport access vlan 801
+ switchport mode access
+ switchport nonegotiate
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface FiveGigabitEthernet9/0/46
+ description AP-15-5-158-S
+ switchport access vlan 801
+ switchport mode access
+ switchport nonegotiate
+ device-tracking attach-policy IPDT_POLICY
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface FiveGigabitEthernet9/0/47
+ description AP-15-5-170-M
+ switchport access vlan 801
+ switchport mode access
+ switchport nonegotiate
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface FiveGigabitEthernet9/0/48
+ description AP-15-5-158-P
+ switchport access vlan 801
+ switchport mode access
+ switchport nonegotiate
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface FiveGigabitEthernet10/0/1
+ description AP70BD.964A.6078
+ switchport access vlan 801
+ switchport mode access
+ switchport nonegotiate
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface FiveGigabitEthernet10/0/2
+ description AP70BD.964B.D604
+ switchport access vlan 801
+ switchport mode access
+ switchport nonegotiate
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface FiveGigabitEthernet10/0/3
+ description AP-10-4-10088
+ switchport access vlan 801
+ switchport mode access
+ switchport nonegotiate
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface FiveGigabitEthernet10/0/4
+ description AP70BD.964B.D634
+ switchport access vlan 801
+ switchport mode access
+ switchport nonegotiate
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface FiveGigabitEthernet10/0/5
+ description AP-10-4-10560
+ switchport access vlan 801
+ switchport mode access
+ switchport nonegotiate
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface FiveGigabitEthernet10/0/6
+ description AP70BD.964B.D79C
+ switchport access vlan 801
+ switchport mode access
+ switchport nonegotiate
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface FiveGigabitEthernet10/0/7
+ description AP-10-4-10562
+ switchport access vlan 801
+ switchport mode access
+ switchport nonegotiate
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface FiveGigabitEthernet10/0/8
+ description AP70BD.964B.D770
+ switchport access vlan 801
+ switchport mode access
+ switchport nonegotiate
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface FiveGigabitEthernet10/0/9
+ description AP70BD.964B.D5EC
+ switchport access vlan 801
+ switchport mode access
+ switchport nonegotiate
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface FiveGigabitEthernet10/0/10
+ description AP70BD.964B.D7A4
+ switchport access vlan 801
+ switchport mode access
+ switchport nonegotiate
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface FiveGigabitEthernet10/0/11
+ description AP-10-4-10566
+ switchport access vlan 801
+ switchport mode access
+ switchport nonegotiate
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface FiveGigabitEthernet10/0/12
+ description AP-10-4-10567
+ switchport access vlan 801
+ switchport mode access
+ switchport nonegotiate
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface FiveGigabitEthernet10/0/13
+ description AP70BD.964B.D520
+ switchport access vlan 801
+ switchport mode access
+ switchport nonegotiate
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface FiveGigabitEthernet10/0/14
+ description AP-10-4-10569
+ switchport access vlan 801
+ switchport mode access
+ switchport nonegotiate
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface FiveGigabitEthernet10/0/15
+ description AP70BD.964B.D08C
+ switchport access vlan 801
+ switchport mode access
+ switchport nonegotiate
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface FiveGigabitEthernet10/0/16
+ description AP-10-4-10571
+ switchport access vlan 801
+ switchport mode access
+ switchport nonegotiate
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface FiveGigabitEthernet10/0/17
+ description AP-10-4-10572
+ switchport access vlan 801
+ switchport mode access
+ switchport nonegotiate
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface FiveGigabitEthernet10/0/18
+ description AP-10-4-10573
+ switchport access vlan 801
+ switchport mode access
+ switchport nonegotiate
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface FiveGigabitEthernet10/0/19
+ description AP70BD.964B.6A64
+ switchport access vlan 801
+ switchport mode access
+ switchport nonegotiate
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface FiveGigabitEthernet10/0/20
+ description AP70BD.964B.D0EC
+ switchport access vlan 801
+ switchport mode access
+ switchport nonegotiate
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface FiveGigabitEthernet10/0/21
+ description AP-10-4-10576
+ switchport access vlan 801
+ switchport mode access
+ switchport nonegotiate
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface FiveGigabitEthernet10/0/22
+ description AP70BD.964B.D1E8
+ switchport access vlan 801
+ switchport mode access
+ switchport nonegotiate
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface FiveGigabitEthernet10/0/23
+ description AP-10-4-10580
+ switchport access vlan 801
+ switchport mode access
+ switchport nonegotiate
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface FiveGigabitEthernet10/0/24
+ description AP70BD.964A.9D74
+ switchport access vlan 801
+ switchport mode access
+ switchport nonegotiate
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface FiveGigabitEthernet10/0/25
+ description AP70BD.964A.6128
+ switchport access vlan 801
+ switchport mode access
+ switchport nonegotiate
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface FiveGigabitEthernet10/0/26
+ description AP70BD.964A.5ED8
+ switchport access vlan 801
+ switchport mode access
+ switchport nonegotiate
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface FiveGigabitEthernet10/0/27
+ description AP-10-4-10061
+ switchport access vlan 801
+ switchport mode access
+ switchport nonegotiate
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface FiveGigabitEthernet10/0/28
+ description AP-10-4-10062
+ switchport access vlan 801
+ switchport mode access
+ switchport nonegotiate
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface FiveGigabitEthernet10/0/29
+ description AP-10-4-10063
+ switchport access vlan 801
+ switchport mode access
+ switchport nonegotiate
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface FiveGigabitEthernet10/0/30
+ description AP-10-4-10064
+ switchport access vlan 801
+ switchport mode access
+ switchport nonegotiate
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface FiveGigabitEthernet10/0/31
+ description AP-10-4-10065
+ switchport access vlan 801
+ switchport mode access
+ switchport nonegotiate
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface FiveGigabitEthernet10/0/32
+ description AP-10-4-10066
+ switchport access vlan 801
+ switchport mode access
+ switchport nonegotiate
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface FiveGigabitEthernet10/0/33
+ description AP-10-4-10067
+ switchport access vlan 801
+ switchport mode access
+ switchport nonegotiate
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface FiveGigabitEthernet10/0/34
+ description AP-10-4-10068
+ switchport access vlan 801
+ switchport mode access
+ switchport nonegotiate
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface FiveGigabitEthernet10/0/35
+ description AP-10-4-10069
+ switchport access vlan 801
+ switchport mode access
+ switchport nonegotiate
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface FiveGigabitEthernet10/0/36
+ description AP-10-4-10070
+ switchport access vlan 801
+ switchport mode access
+ switchport nonegotiate
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface FiveGigabitEthernet10/0/37
+ description AP-10-4-10071
+ switchport access vlan 801
+ switchport mode access
+ switchport nonegotiate
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface FiveGigabitEthernet10/0/38
+ description AP70BD.964B.6C30
+ switchport access vlan 801
+ switchport mode access
+ switchport nonegotiate
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface FiveGigabitEthernet10/0/39
+ description AP70BD.964A.8A14
+ switchport access vlan 801
+ switchport mode access
+ switchport nonegotiate
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface FiveGigabitEthernet10/0/40
+ description AP-10-4-10074
+ switchport access vlan 801
+ switchport mode access
+ switchport nonegotiate
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface FiveGigabitEthernet10/0/41
+ description AP-10-4-10075
+ switchport access vlan 801
+ switchport mode access
+ switchport nonegotiate
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface FiveGigabitEthernet10/0/42
+ description AP-10-4-10076
+ switchport access vlan 801
+ switchport mode access
+ switchport nonegotiate
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface FiveGigabitEthernet10/0/43
+ description AP70BD.964B.E19C
+ switchport access vlan 801
+ switchport mode access
+ switchport nonegotiate
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface FiveGigabitEthernet10/0/44
+ description AP-10-4-10078
+ switchport access vlan 801
+ switchport mode access
+ switchport nonegotiate
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface FiveGigabitEthernet10/0/45
+ description AP-10-4-10079
+ switchport access vlan 801
+ switchport mode access
+ switchport nonegotiate
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface FiveGigabitEthernet10/0/46
+ description AP-10-4-10080
+ switchport access vlan 801
+ switchport mode access
+ switchport nonegotiate
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface FiveGigabitEthernet10/0/47
+ description AP-10-4-10081
+ switchport access vlan 801
+ switchport mode access
+ switchport nonegotiate
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface FiveGigabitEthernet10/0/48
+ description AP-10-4-10082
+ switchport access vlan 801
+ switchport mode access
+ switchport nonegotiate
+ storm-control broadcast level 50.00
+ storm-control multicast level 50.00
+ storm-control action shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface Bluetooth0/4
+ vrf forwarding Mgmt-vrf
+ no ip address
+ shutdown
+ negotiation auto
+ enable
+!
+interface Vlan1
+ no ip address
+ shutdown
+!
+interface Vlan801
+ description WAPS
+ ip address 172.22.20.1 255.255.254.0
+ ip helper-address 10.21.1.1
+ no ip redirects
+ no ip unreachables
+ no ip proxy-arp
+ ip pim passive
+ ip ospf 1 area 4092
+!
+interface Vlan1000
+ description Management
+ ip address 10.21.0.111 255.255.255.0
+ no ip redirects
+ no ip unreachables
+ no ip proxy-arp
+!
+interface Vlan1111
+ description P2P-HUB409B-GLOBAL
+ ip address 10.21.2.42 255.255.255.252
+ no ip redirects
+ ip pim sparse-mode
+ ip ospf message-digest-key 1 md5 7 097C622441031800065B230733727838602C
+ ip ospf network point-to-point
+ ip ospf bfd
+ ip ospf 1 area 4092
+ bfd interval 250 min_rx 250 multiplier 3
+!
+interface Vlan1511
+ description P2P-HUB409B-VOICE
+ vrf forwarding VOICE
+ ip address 172.16.253.42 255.255.255.252
+ no ip redirects
+ ip pim sparse-mode
+ ip ospf message-digest-key 1 md5 7 13353B3F530A0B3826730F1E2D74430C430D
+ ip ospf network point-to-point
+ ip ospf bfd
+ ip ospf 2 area 4092
+ bfd interval 250 min_rx 250 multiplier 3
+!
+interface Vlan1711
+ description P2P-HUB409B-ITV
+ vrf forwarding ITV
+ ip address 172.21.253.42 255.255.255.252
+ no ip redirects
+ ip pim sparse-mode
+ ip ospf message-digest-key 1 md5 7 033477265E092E5E435E3E280F445B075124
+ ip ospf network point-to-point
+ ip ospf bfd
+ ip ospf 3 area 4092
+ bfd interval 250 min_rx 250 multiplier 3
+!
+router ospf 2 vrf VOICE
+ router-id 172.16.254.111
+ auto-cost reference-bandwidth 80000
+ capability vrf-lite
+ area 4092 authentication message-digest
+ area 4092 nssa no-summary
+!
+router ospf 3 vrf ITV
+ router-id 172.21.254.111
+ auto-cost reference-bandwidth 80000
+ capability vrf-lite
+ area 4092 authentication message-digest
+ area 4092 nssa no-summary
+!
+router ospf 1
+ router-id 10.21.1.111
+ auto-cost reference-bandwidth 80000
+ area 4092 authentication message-digest
+ area 4092 nssa no-summary
+ passive-interface Vlan801
+!
+ip forward-protocol nd
+ip http server
+ip http authentication local
+ip http secure-server
+ip http tls-version TLSv1.3 
+ip http client source-interface Loopback0
+ip pim rp-address 10.21.1.1
+ip pim vrf ITV rp-address 172.21.254.1
+ip pim vrf VOICE rp-address 172.16.254.1
+ip ftp source-interface Loopback0
+ip tacacs source-interface Loopback0 
+ip ssh bulk-mode 131072
+ip ssh source-interface Loopback0
+ip ssh server algorithm mac hmac-sha2-512 hmac-sha2-256
+ip ssh server algorithm encryption aes128-ctr aes192-ctr aes256-ctr
+ip ssh server algorithm kex ecdh-sha2-nistp256
+ip ssh server algorithm hostkey rsa-sha2-256 rsa-sha2-512
+ip ssh server algorithm publickey rsa-sha2-256 rsa-sha2-512
+ip ssh client algorithm mac hmac-sha2-512 hmac-sha2-256
+ip scp server enable
+!
+!
+ip access-list standard allow_vty_in
+ 10 permit 167.118.0.0 0.0.255.255
+ 20 permit 10.0.0.0 0.255.255.255
+ 30 permit 172.57.0.0 0.0.255.255
+ 40 deny   any
+!
+ip access-list extended ACL_WEBAUTH_REDIRECT
+ 220 deny ip any host 10.21.0.9
+ 230 deny ip any host 10.21.0.11
+ 500 permit tcp any any eq www
+ 600 permit tcp any any eq 443
+ 700 permit tcp any any eq 8443
+ 800 deny udp any any eq domain
+ 900 deny udp any eq bootpc any eq bootps
+!
+ip radius source-interface Loopback0 
+logging source-interface Loopback0
+logging host 10.21.50.121
+logging host 10.21.0.99
+logging host 10.21.50.122
+!
+snmp-server group SWV3readgroup v3 auth read solarwindsview 
+snmp-server group zenossreadgroup v3 auth read zenossview 
+snmp-server view zenossview iso included
+snmp-server view zenossview mib-2 included
+snmp-server view zenossview system included
+snmp-server view zenossview interfaces included
+snmp-server view zenossview at excluded
+snmp-server view zenossview ip.21 excluded
+snmp-server view zenossview ip.22 excluded
+snmp-server view zenossview chassis included
+snmp-server view solarwindsview iso included
+snmp-server view solarwindsview internet included
+snmp-server view solarwindsview mib-2 included
+snmp-server view solarwindsview system included
+snmp-server view solarwindsview interfaces included
+snmp-server view solarwindsview at excluded
+snmp-server view solarwindsview ip.21 excluded
+snmp-server view solarwindsview ip.22 excluded
+snmp-server view solarwindsview chassis included
+snmp-server trap-source Loopback0
+snmp-server enable traps snmp authentication linkdown linkup coldstart warmstart
+snmp-server enable traps flowmon
+snmp-server enable traps entity-perf throughput-notif
+snmp-server enable traps call-home message-send-fail server-fail
+snmp-server enable traps tty
+snmp-server enable traps eigrp
+snmp-server enable traps ospf state-change
+snmp-server enable traps ospf errors
+snmp-server enable traps ospf retransmit
+snmp-server enable traps ospf lsa
+snmp-server enable traps ospf cisco-specific state-change nssa-trans-change
+snmp-server enable traps ospf cisco-specific state-change shamlink interface
+snmp-server enable traps ospf cisco-specific state-change shamlink neighbor
+snmp-server enable traps ospf cisco-specific errors
+snmp-server enable traps ospf cisco-specific retransmit
+snmp-server enable traps ospf cisco-specific lsa
+snmp-server enable traps bfd
+snmp-server enable traps smart-license
+snmp-server enable traps auth-framework sec-violation
+snmp-server enable traps rep
+snmp-server enable traps aaa_server
+snmp-server enable traps memory bufferpeak
+snmp-server enable traps config-copy
+snmp-server enable traps config
+snmp-server enable traps config-ctid
+snmp-server enable traps energywise
+snmp-server enable traps fru-ctrl
+snmp-server enable traps entity
+snmp-server enable traps flash insertion removal lowspace
+snmp-server enable traps power-ethernet group 1 threshold 80
+snmp-server enable traps power-ethernet group 2 threshold 80
+snmp-server enable traps power-ethernet group 3 threshold 80
+snmp-server enable traps power-ethernet group 4 threshold 80
+snmp-server enable traps power-ethernet group 7 threshold 80
+snmp-server enable traps power-ethernet group 8 threshold 80
+snmp-server enable traps power-ethernet group 9 threshold 80
+snmp-server enable traps power-ethernet group 10 threshold 80
+snmp-server enable traps power-ethernet police
+snmp-server enable traps cpu threshold
+snmp-server enable traps syslog
+snmp-server enable traps udld link-fail-rpt
+snmp-server enable traps udld status-change
+snmp-server enable traps vtp
+snmp-server enable traps vlancreate
+snmp-server enable traps vlandelete
+snmp-server enable traps port-security
+snmp-server enable traps envmon
+snmp-server enable traps stackwise
+snmp-server enable traps mvpn
+snmp-server enable traps pw vc
+snmp-server enable traps ipsla
+snmp-server enable traps dhcp
+snmp-server enable traps event-manager
+snmp-server enable traps ike policy add
+snmp-server enable traps ike policy delete
+snmp-server enable traps ike tunnel start
+snmp-server enable traps ike tunnel stop
+snmp-server enable traps ipsec cryptomap add
+snmp-server enable traps ipsec cryptomap delete
+snmp-server enable traps ipsec cryptomap attach
+snmp-server enable traps ipsec cryptomap detach
+snmp-server enable traps ipsec tunnel start
+snmp-server enable traps ipsec tunnel stop
+snmp-server enable traps ipsec too-many-sas
+snmp-server enable traps ospfv3 state-change
+snmp-server enable traps ospfv3 errors
+snmp-server enable traps ipmulticast
+snmp-server enable traps msdp
+snmp-server enable traps pim neighbor-change rp-mapping-change invalid-pim-message
+snmp-server enable traps bridge newroot topologychange
+snmp-server enable traps stpx inconsistency root-inconsistency loop-inconsistency
+snmp-server enable traps bgp cbgp2
+snmp-server enable traps hsrp
+snmp-server enable traps isis
+snmp-server enable traps cef resource-failure peer-state-change peer-fib-state-change inconsistency
+snmp-server enable traps lisp
+snmp-server enable traps nhrp nhs
+snmp-server enable traps nhrp nhc
+snmp-server enable traps nhrp nhp
+snmp-server enable traps nhrp quota-exceeded
+snmp-server enable traps local-auth
+snmp-server enable traps entity-diag boot-up-fail hm-test-recover hm-thresh-reached scheduled-test-fail
+snmp-server enable traps mpls rfc ldp
+snmp-server enable traps mpls ldp
+snmp-server enable traps mpls rfc traffic-eng
+snmp-server enable traps mpls traffic-eng
+snmp-server enable traps mpls fast-reroute protected
+snmp-server enable traps bulkstat collection transfer
+snmp-server enable traps mac-notification change move threshold
+snmp-server enable traps errdisable
+snmp-server enable traps vlan-membership
+snmp-server enable traps transceiver all
+snmp-server enable traps vrfmib vrf-up vrf-down vnet-trunk-up vnet-trunk-down
+snmp-server enable traps rf
+snmp-server enable traps mpls vpn
+snmp-server enable traps mpls rfc vpn
+snmp-server host 10.21.0.99 version 3 auth SWV3USER 
+tacacs-server timeout 15
+tacacs-server directed-request
+tacacs server dnac-tacacs_10.21.0.9
+ address ipv4 10.21.0.9
+ key 7 001534331E4B535F0B1B46
+ timeout 4
+tacacs server dnac-tacacs_10.21.0.11
+ address ipv4 10.21.0.11
+ key 7 01022131411B5E56257644
+ timeout 4
+!
+radius-server attribute 6 on-for-login-auth
+radius-server attribute 6 support-multiple
+radius-server attribute 8 include-in-access-req
+radius-server attribute 25 access-request include
+radius-server attribute 31 mac format ietf upper-case
+radius-server attribute 31 send nas-port-detail mac-only
+radius-server dead-criteria time 5 tries 3
+radius-server deadtime 3
+!
+radius server dnac-radius_10.21.0.9
+ address ipv4 10.21.0.9 auth-port 1812 acct-port 1813
+ timeout 4
+ retransmit 3
+ automate-tester username dummy ignore-acct-port probe-on
+ pac key 7 06172814565E5140012D18
+!
+radius server dnac-radius_10.21.0.11
+ address ipv4 10.21.0.11 auth-port 1812 acct-port 1813
+ timeout 4
+ retransmit 3
+ automate-tester username dummy ignore-acct-port probe-on
+ pac key 7 06172814565E5140012D18
+!
+!
+!
+control-plane
+ service-policy input system-cpp-policy
+!
+!
+banner motd ^C
+##########################################################################
+####################### JEWEL-HUB-409-B ################################
+##########################################################################
+
+WARNING: THIS SYSTEM IS FOR THE USE OF NCL EMPLOYEES AND
+AUTHORIZED CONTRACTORS. ANY USE OTHER THAN NORMAL BUSINESS
+IS STRICTLY FORBIDDEN.
+
+All Miami-Dade County, State of Florida and United States GSA Regulations
+and laws apply and will be enforced to the fullest extent of the law.
+
+This system is CERT Certified and Monitored by Security.
+
+--------------------------------------------------------------------------
+
+JEWEL-HUB-409-B |    LOCATED ON  Server room. DC. MID Near cabin 9594                   FSD-09-4-029
+
+--------------------------------------------------------------------------
+
+^C
+!
+line con 0
+ exec-timeout 60 0
+ privilege level 15
+ logging synchronous
+ login authentication consoleport
+ stopbits 1
+line aux 0
+line vty 0 4
+ access-class allow_vty_in in
+ exec-timeout 30 0
+ privilege level 15
+ authorization exec VTY_author
+ logging synchronous
+ login authentication VTY_authen
+ transport input ssh
+line vty 5 15
+ access-class allow_vty_in in
+ exec-timeout 30 0
+ privilege level 15
+ logging synchronous
+ transport input ssh
+!
+ntp source Loopback0
+ntp access-group peer allow_vty_in
+ntp access-group serve allow_vty_in
+ntp access-group serve-only allow_vty_in
+ntp access-group query-only allow_vty_in
+ntp server 10.21.0.1
+ntp server 10.21.50.55
+ntp server 10.21.49.55
+!
+!
+!
+!
+!
+event manager applet NCL-AP_Ports_C9115AX-Config authorization bypass
+ event neighbor-discovery interface regexp Ethernet.* cdp add
+ action 1.0 regexp "(C9115AX)" "$_nd_cdp_platform"
+ action 2.0 if $_regexp_result eq "1"
+ action 3.0  cli command "enable"
+ action 4.0  cli command "config t"
+ action 5.0  cli command "default interface $_nd_local_intf_name"
+ action 5.1  cli command "int $_nd_local_intf_name"
+ action 5.2  cli command "description WL-AP"
+ action 5.3  cli command "switchport access vlan 801"
+ action 5.4  cli command "switchport mode access"
+ action 5.5  cli command "switchport nonegotiate"
+ action 5.6  cli command "spanning-tree portfast"
+ action 5.7  cli command "spanning-tree bpduguard enable"
+ action 5.8  cli command "description $_nd_cdp_entry_name"
+ action 6    cli command "end"
+ action 6.1  cli command "write"
+ action 6.2  syslog msg "EEM script configured AP port and saved config"
+ action 7.0 end
+event manager applet NCL-AP_Ports_C9120AX-Config authorization bypass
+ event neighbor-discovery interface regexp Ethernet.* cdp add
+ action 1.0 regexp "(C9120AX)" "$_nd_cdp_platform"
+ action 2.0 if $_regexp_result eq "1"
+ action 3.0  cli command "enable"
+ action 4.0  cli command "config t"
+ action 5.0  cli command "default interface $_nd_local_intf_name"
+ action 5.1  cli command "int $_nd_local_intf_name"
+ action 5.2  cli command "description WL-AP"
+ action 5.3  cli command "switchport access vlan 801"
+ action 5.4  cli command "switchport mode access"
+ action 5.5  cli command "switchport nonegotiate"
+ action 5.6  cli command "spanning-tree portfast"
+ action 5.7  cli command "spanning-tree bpduguard enable"
+ action 5.8  cli command "description $_nd_cdp_entry_name"
+ action 6    cli command "end"
+ action 6.1  cli command "write"
+ action 6.2  syslog msg "EEM script configured AP port and saved config"
+ action 7.0 end
+event manager applet NCL-AP_Ports_C9105AXI-Config authorization bypass
+ event neighbor-discovery interface regexp Ethernet.* cdp add
+ action 1.0 regexp "(C9105AXI)" "$_nd_cdp_platform"
+ action 2.0 if $_regexp_result eq "1"
+ action 3.0  cli command "enable"
+ action 4.0  cli command "config t"
+ action 5.0  cli command "default interface $_nd_local_intf_name"
+ action 5.1  cli command "int $_nd_local_intf_name"
+ action 5.2  cli command "description WL-AP"
+ action 5.3  cli command "switchport access vlan 801"
+ action 5.4  cli command "switchport mode access"
+ action 5.5  cli command "switchport nonegotiate"
+ action 5.6  cli command "spanning-tree portfast"
+ action 5.7  cli command "spanning-tree bpduguard enable"
+ action 5.8  cli command "description $_nd_cdp_entry_name"
+ action 6    cli command "end"
+ action 6.1  cli command "write"
+ action 6.2  syslog msg "EEM script configured AP port and saved config"
+ action 7.0 end
+event manager applet DETECT_CDP_AP_C9124AXI authorization bypass
+ event neighbor-discovery interface regexp .*GigabitEthernet.* cdp add
+ action 1.0 regexp "(C9124AXI)" "$_nd_cdp_platform"
+ action 2.0 if $_regexp_result eq "1"
+ action 3.0  cli command "enable"
+ action 4.0  cli command "conf t"
+ action 5.0  cli command "default interface $_nd_local_intf_name"
+ action 5.1  cli command "interface $_nd_local_intf_name"
+ action 5.2  cli command "description WL-AP"
+ action 5.3  cli command "switchport access vlan 801"
+ action 5.4  cli command "switchport mode access"
+ action 5.5  cli command "switchport nonegotiate"
+ action 5.6  cli command "spanning-tree portfast"
+ action 5.7  cli command "spanning-tree bpduguard enable"
+ action 5.8  cli command "description $_nd_cdp_entry_name"
+ action 6    cli command "end"
+ action 6.1  cli command "write"
+ action 6.4  syslog msg "EEM script configured AP port and saved config"
+ action 7.0 end
+!
+end
+
+JEWEL-HUB-409-B#exit
