@@ -1,0 +1,11 @@
+# predefined script for FGT-VM
+# Type: Jinja
+
+config system interface
+{%- for i in range(0, vm_interface_number|int) %}
+edit port{{i+1}}
+set vdom root
+set type physical
+next
+{%- endfor %}
+end

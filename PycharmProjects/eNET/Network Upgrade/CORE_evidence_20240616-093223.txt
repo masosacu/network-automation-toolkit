@@ -1,0 +1,116 @@
+Date: 2024-06-16
+Time: 09:32:25
+
+Hostname: CORE
+
+
+Command: show ip interface brief | exc unassigned
+
+Interface              IP-Address      OK? Method Status                Protocol
+Ethernet1/0            1.1.1.1         YES manual up                    up      
+Vlan1000               192.168.254.10  YES manual up                    up      
+
+
+Command: show ip route vrf *
+
+Codes: L - local, C - connected, S - static, R - RIP, M - mobile, B - BGP
+       D - EIGRP, EX - EIGRP external, O - OSPF, IA - OSPF inter area 
+       N1 - OSPF NSSA external type 1, N2 - OSPF NSSA external type 2
+       E1 - OSPF external type 1, E2 - OSPF external type 2
+       i - IS-IS, su - IS-IS summary, L1 - IS-IS level-1, L2 - IS-IS level-2
+       ia - IS-IS inter area, * - candidate default, U - per-user static route
+       o - ODR, P - periodic downloaded static route, H - NHRP, l - LISP
+       + - replicated route, % - next hop override
+
+Gateway of last resort is not set
+
+      192.168.254.0/24 is variably subnetted, 2 subnets, 2 masks
+C        192.168.254.0/24 is directly connected, Vlan1000
+L        192.168.254.10/32 is directly connected, Vlan1000
+
+Routing Table: voice
+Codes: L - local, C - connected, S - static, R - RIP, M - mobile, B - BGP
+       D - EIGRP, EX - EIGRP external, O - OSPF, IA - OSPF inter area 
+       N1 - OSPF NSSA external type 1, N2 - OSPF NSSA external type 2
+       E1 - OSPF external type 1, E2 - OSPF external type 2
+       i - IS-IS, su - IS-IS summary, L1 - IS-IS level-1, L2 - IS-IS level-2
+       ia - IS-IS inter area, * - candidate default, U - per-user static route
+       o - ODR, P - periodic downloaded static route, H - NHRP, l - LISP
+       + - replicated route, % - next hop override
+
+Gateway of last resort is not set
+
+      1.0.0.0/8 is variably subnetted, 2 subnets, 2 masks
+C        1.1.1.0/30 is directly connected, Ethernet1/0
+L        1.1.1.1/32 is directly connected, Ethernet1/0
+
+Command: show ip arp
+
+Protocol  Address          Age (min)  Hardware Addr   Type   Interface
+Internet  192.168.254.1           3   0200.4c4f.4f50  ARPA   Vlan1000
+Internet  192.168.254.10          -   aabb.cc80.0100  ARPA   Vlan1000
+
+Command: show interfaces status | inc connected
+
+Et0/0                           connected    1            auto   auto unknown
+Et0/1        SW01-e0/0          connected    trunk        auto   auto unknown
+Et0/2        SW02-e0/0          connected    trunk        auto   auto unknown
+Et0/3                           connected    1            auto   auto unknown
+Et1/0                           connected    routed       auto   auto unknown
+Et1/1                           connected    1            auto   auto unknown
+Et1/2                           connected    1            auto   auto unknown
+Et1/3                           connected    1            auto   auto unknown
+Et2/0                           connected    1            auto   auto unknown
+Et2/1                           connected    1            auto   auto unknown
+Et2/2                           connected    1            auto   auto unknown
+Et2/3                           connected    1            auto   auto unknown
+Et3/0                           connected    1            auto   auto unknown
+Et3/1                           connected    1            auto   auto unknown
+Et3/2                           connected    1            auto   auto unknown
+Et3/3        management         connected    1000         auto   auto unknown
+
+Command: show etherchannel summary
+
+Flags:  D - down        P - bundled in port-channel
+        I - stand-alone s - suspended
+        H - Hot-standby (LACP only)
+        R - Layer3      S - Layer2
+        U - in use      N - not in use, no aggregation
+        f - failed to allocate aggregator
+
+        M - not in use, no aggregation due to minimum links not met
+        m - not in use, port not aggregated due to minimum links not met
+        u - unsuitable for bundling
+        d - default port
+
+        w - waiting to be aggregated
+Number of channel-groups in use: 0
+Number of aggregators:           0
+
+Group  Port-channel  Protocol    Ports
+------+-------------+-----------+-----------------------------------------------
+
+
+Command: show cdp neighbors
+
+Capability Codes: R - Router, T - Trans Bridge, B - Source Route Bridge
+                  S - Switch, H - Host, I - IGMP, r - Repeater, P - Phone, 
+                  D - Remote, C - CVTA, M - Two-port Mac Relay 
+
+Device ID        Local Intrfce     Holdtme    Capability  Platform  Port ID
+SW01             Eth 0/1           140             R S I  Linux Uni Eth 0/0
+RT01.gns3.local  Eth 3/3           165              R B   Linux Uni Eth 0/0
+
+Command: show mac address-table
+
+          Mac Address Table
+-------------------------------------------
+
+Vlan    Mac Address       Type        Ports
+----    -----------       --------    -----
+   1    aabb.cc00.0a00    DYNAMIC     Et0/1
+1000    000c.29fd.0f66    DYNAMIC     Et3/3
+1000    0200.4c4f.4f50    DYNAMIC     Et3/3
+1000    aabb.cc00.0800    DYNAMIC     Et3/3
+1000    aabb.cc80.0a00    DYNAMIC     Et0/1
+Total Mac Addresses for this criterion: 5

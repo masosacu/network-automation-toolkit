@@ -1,0 +1,59 @@
+# Comment: Thi is the table of content of everything that is configured by this provisioning templates
+# Type: CLI
+
+#02.Global Provisioning Template
+#	1.Configuring Global settings
+#	2.Configuring CA Certificates
+#	3.Configuring CA Certificates in VPN settings
+#	4.Configuring NTP settings
+#	5.Configuring FAZ settings
+#	6.Configuring DNS settings
+#	7.Configuring Custom "pre_admin-disclaimer-text" message
+#	8.Configuring Custom "post_admin-disclaimer-text" message
+#	9.Configuring account profiles
+#03.VDOM Provisioning Template
+#	1.Configure system user account profiles
+#	2.Configure log memory setting
+#	3.Configure log setting
+#	4.Configure system settings
+#	5.Configure TACACS+ server
+#	6.Configure TACACS+ user group
+#	7.Configure System admin accounts
+#31.Global_FGT-200G
+#   1.Unassigning interfacs x1, x2, x3 & x4 from #  fortilink to be 
+#     available for use
+#   2.Enabling VDOM mode
+#35.Interfaces_FGT-200G
+#	1.Entering global
+#	2.Entering interface
+#	3.Adding trunks 802.3ad_Trunk01 & 802.3ad_Trunk02 & assigning
+#	  them to the 'x' interfaces
+#	4.Updating the managment interface using variable $(ship_IP)
+#	5.Creating VLAN_900 & updating port8(Legacy VLAN_112) using 
+#	  variable $(ship_IP)
+#	6.Creating VLANs assigned to trunk interface '802.3ad_Trunk01' using 
+#	  variable $(ship_IP)
+#		a.CREW_NETWORK    | vlanid 407
+#		b.DMZ             | vlanid 240
+#		c.DMZ_SURVEIL     | vlanid 230
+#		d.GIFTSHOP        | vlanid 403
+#		e.PAX_NETWORK     | vlanid 406
+#		f.PCI             | vlanid 70
+#		g.QCI_EMBARK      | vlanid 80
+#		h.SVC_BD_IN_950   | vlanid 950
+#		i.VENDOR_DMZ      | vlanid 224
+#		j.VENDOR_DMZ_B    | vlanid 232
+#		k.VENDOR_DMZ_MOS  | vlanid 226
+#		l.VENDOR_DMZ_OT   | vlanid 228
+#		m.VENDOR_DMZ_WIFI | vlanid 488
+#		n.CASINO          | vlanid 899
+#	7.Creating VLANs assigned to trunk interface '802.3ad_Trunk02' using 
+#     variable $(ship_IP)
+#		a.SDA_DMZ_TRANSIT | vlanid 902
+#37.Static Routes_FGT-200G
+#	1.Entering root vdom
+#	2.Entering static routes
+#	3.Creating static routes using variable $(ship_IP) starting with 
+#	  entry '101' as to not overwrite any pre-script configured routes
+#59.HA_config_FGT-200G
+#	1.Configure the HA setting

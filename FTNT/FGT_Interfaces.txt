@@ -1,0 +1,298 @@
+# Interfaces
+# Type: CLI
+
+#---------------------------------------------------------------------
+#35.Interfaces_FGT-200G
+#	1.Entering global
+#	2.Entering interface
+#	3.Adding trunks 802.3ad_Trunk01 & 802.3ad_Trunk02 & assigning
+#	  them to the 'x' interfaces
+#	4.Updating the managment interface using variable $(ship_IP)
+#	5.Creating VLAN_900 & updating port8(Legacy VLAN_112) using 
+#	  variable $(ship_IP)
+#	6.Creating VLANs assigned to trunk interface '802.3ad_Trunk01' using 
+#	  variable $(ship_IP)
+#	7.Creating VLANs assigned to trunk interface '802.3ad_Trunk02' using 
+#     variable $(ship_IP)
+#---------------------------------------------------------------------
+#1.Entering global
+#---------------------------------------------------------------------
+#config global
+#---------------------------------------------------------------------
+#2.Entering interface
+#---------------------------------------------------------------------
+    config system interface
+#---------------------------------------------------------------------
+#3.Adding trunks 802.3ad_Trunk01 & 802.3ad_Trunk02 & assigning
+#  them to the 'x' interfaces
+#---------------------------------------------------------------------
+        edit "802.3ad_Trunk01"
+            set vdom "root"
+            set type aggregate
+            set member "x3" "x1"
+            set description ""
+            set alias "ACI Border Link"
+            set device-identification enable
+            set lldp-reception enable
+            set lldp-transmission enable
+            unset role
+            set snmp-index 140
+            set ip-managed-by-fortiipam disable
+        next
+        edit "802.3ad_Trunk02"
+            set vdom "root"
+            set type aggregate
+            set member "x4" "x2"
+            set alias "Fusion Router Link"
+            set device-identification enable
+            set lldp-reception enable
+            set lldp-transmission enable
+            unset role
+            set snmp-index 141
+            set ip-managed-by-fortiipam disable
+        next
+#---------------------------------------------------------------------
+#4.Updating the managment interface using variable $(ship_IP)
+#---------------------------------------------------------------------
+        edit "mgmt"
+      set vdom "root"
+      set mode static
+      set ip 10.$(ship_IP).0.47 255.255.255.0
+      set allowaccess ping https ssh snmp
+      set trust-ip-1 10.0.0.0/8
+      set dedicated-to management
+      set lldp-reception enable
+      set lldp-transmission enable
+      unset role
+      set snmp-index 131
+        next
+#---------------------------------------------------------------------
+#5.Creating VLAN_900 & updating port8(Legacy VLAN_112) using 
+#  variable $(ship_IP)
+#---------------------------------------------------------------------
+        edit "VLAN_900"
+            set vdom "root"
+            set ip 10.$(ship_IP).254.10 255.255.255.248
+            set allowaccess https ping ssh snmp http fgfm ftm fabric
+            set device-identification enable
+            unset role
+            set snmp-index 142
+            set interface "802.3ad_Trunk02"
+            set vlanid 900
+            set ip-managed-by-fortiipam disable
+        next
+        edit "port8"
+            set vdom "root"
+            set mode static
+            set ip 10.$(ship_IP).254.241 255.255.255.240
+            set allowaccess ping https ssh http fgfm ftm
+            set alias VLAN_112
+            unset role
+            set snmp-index 130
+            set ip-managed-by-fortiipam disable
+        next
+#---------------------------------------------------------------------
+#6.Creating VLANs assigned to trunk interface '802.3ad_Trunk01' using 
+#  variable $(ship_IP)
+#	a.CREW_NETWORK    | vlanid 407
+#	b.DMZ             | vlanid 240
+#	c.DMZ_SURVEIL     | vlanid 230
+#	d.GIFTSHOP        | vlanid 403
+#	e.PAX_NETWORK     | vlanid 406
+#	f.PCI             | vlanid 70
+#	g.QCI_EMBARK      | vlanid 80
+#	h.SVC_BD_IN_950   | vlanid 950
+#	i.VENDOR_DMZ      | vlanid 224
+#	j.VENDOR_DMZ_B    | vlanid 232
+#	k.VENDOR_DMZ_MOS  | vlanid 226
+#	l.VENDOR_DMZ_OT   | vlanid 228
+#	m.VENDOR_DMZ_WIFI | vlanid 488
+#	n.CASINO          | vlanid 899
+#---------------------------------------------------------------------
+        edit "CREW_NETWORK"
+            set vdom "root"
+            set ip 10.155.$(ship_IP).30 255.255.0.0
+            set allowaccess ping
+            set status down
+            set device-identification enable
+            unset role
+            set snmp-index 144
+            set interface "802.3ad_Trunk01"
+            set vlanid 407
+            set ip-managed-by-fortiipam disable
+        next
+        edit "DMZ"
+            set vdom "root"
+            set ip 10.$(ship_IP).240.1 255.255.255.0
+            set allowaccess ping
+            set device-identification enable
+            unset role
+            set snmp-index 145
+            set interface "802.3ad_Trunk01"
+            set vlanid 240
+            set ip-managed-by-fortiipam disable
+        next
+        edit "DMZ_SURVEIL"
+            set vdom "root"
+            set ip 10.$(ship_IP).230.1 255.255.255.0
+            set allowaccess ping
+            set device-identification enable
+            unset role
+            set snmp-index 146
+            set interface "802.3ad_Trunk01"
+            set vlanid 230
+            set ip-managed-by-fortiipam disable
+        next
+        edit "GIFTSHOP"
+            set vdom "root"
+            set ip 10.153.$(ship_IP).30 255.255.255.0
+            set allowaccess ping
+            set status down
+            set device-identification enable
+            unset role
+            set snmp-index 147
+            set interface "802.3ad_Trunk01"
+            set vlanid 403
+            set ip-managed-by-fortiipam disable
+        next
+        edit "PAX_NETWORK"
+            set vdom "root"
+            set ip 10.154.$(ship_IP).30 255.255.0.0
+            set allowaccess ping
+            set status down
+            set device-identification enable
+            unset role
+            set snmp-index 148
+            set interface "802.3ad_Trunk01"
+            set vlanid 406
+            set ip-managed-by-fortiipam disable
+        next
+        edit "PCI"
+            set vdom "root"
+            set ip 10.$(ship_IP).70.1 255.255.255.0
+            set allowaccess ping
+            set device-identification enable
+            unset role
+            set snmp-index 149
+            set interface "802.3ad_Trunk01"
+            set vlanid 70
+            set ip-managed-by-fortiipam disable
+        next
+        edit "QCI_EMBARK"
+            set vdom "root"
+            set dhcp-relay-service enable
+            set dhcp-relay-ip 10.$(ship_IP).254.9
+            set ip 192.168.80.1 255.255.254.0
+            set allowaccess ping
+            set device-identification enable
+            unset role
+            set snmp-index 150
+            set interface "802.3ad_Trunk01"
+            set vlanid 80
+            set ip-managed-by-fortiipam disable
+        next
+        edit "SVC_BD_IN_950"
+            set vdom "root"
+            set vrf 1
+            set ip 10.$(ship_IP).255.14 255.255.255.240
+            set allowaccess ping
+            set device-identification enable
+            unset role
+            set snmp-index 151
+            set interface "802.3ad_Trunk01"
+            set vlanid 950
+            set ip-managed-by-fortiipam disable
+        next
+        edit "VENDOR_DMZ"
+            set vdom "root"
+            set dhcp-relay-service enable
+            set dhcp-relay-ip 10.$(ship_IP).226.24 10.$(ship_IP).226.26
+            set ip 10.$(ship_IP).224.1 255.255.254.0
+            set allowaccess ping
+            set device-identification enable
+            unset role
+            set snmp-index 152
+            set interface "802.3ad_Trunk01"
+            set vlanid 224
+            set ip-managed-by-fortiipam disable
+        next
+        edit "VENDOR_DMZ_B"
+            set vdom "root"
+            set dhcp-relay-service enable
+            set dhcp-relay-ip 10.$(ship_IP).226.24 10.78.226.26
+            set ip 10.$(ship_IP).232.1 255.255.254.0
+            set allowaccess ping
+            set device-identification enable
+            unset role
+            set snmp-index 153
+            set interface "802.3ad_Trunk01"
+            set vlanid 232
+            set ip-managed-by-fortiipam disable
+        next
+        edit "VENDOR_DMZ_MOS"
+            set vdom "root"
+            set dhcp-relay-service enable
+            set dhcp-relay-ip 10.$(ship_IP).226.24 10.$(ship_IP).226.26
+            set ip 10.$(ship_IP).226.1 255.255.254.0
+            set allowaccess ping
+            set device-identification enable
+            unset role
+            set snmp-index 154
+            set interface "802.3ad_Trunk01"
+            set vlanid 226
+            set ip-managed-by-fortiipam disable
+        next
+        edit "VENDOR_DMZ_OT"
+            set vdom "root"
+            set ip 10.$(ship_IP).228.1 255.255.254.0
+            set allowaccess ping
+            set device-identification enable
+            unset role
+            set snmp-index 155
+            set interface "802.3ad_Trunk01"
+            set vlanid 228
+            set ip-managed-by-fortiipam disable
+        next
+        edit "VENDOR_DMZ_WIFI"
+            set vdom "root"
+            set dhcp-relay-service enable
+            set dhcp-relay-ip 10.$(ship_IP).226.24 10.78.226.26
+            set ip 172.18.88.1 255.255.252.0
+            set allowaccess ping
+            set device-identification enable
+            unset role
+            set snmp-index 156
+            set interface "802.3ad_Trunk01"
+            set vlanid 488
+            set ip-managed-by-fortiipam disable
+        next
+        edit "CASINO"
+            set vdom "root"
+            set ip 10.$(ship_IP).254.34 255.255.255.248
+            set allowaccess ping
+            unset role
+            set snmp-index 157
+            set interface "802.3ad_Trunk01"
+            set vlanid 899
+            set ip-managed-by-fortiipam disable
+        next
+#---------------------------------------------------------------------
+#7.Creating VLANs assigned to trunk interface '802.3ad_Trunk02' using 
+#  variable $(ship_IP)
+#	a.SDA_DMZ_TRANSIT | vlanid 902
+#---------------------------------------------------------------------
+        edit "SDA_DMZ_TRANSIT"
+            set vdom "root"
+            set ip 10.$(ship_IP).254.26 255.255.255.252
+            set allowaccess ping
+            set device-identification enable
+            unset role
+            set snmp-index 143
+            set interface "802.3ad_Trunk02"
+            set vlanid 902
+            set ip-managed-by-fortiipam disable
+        next
+    end
+#---------------------------------------------------------------------
+#End of Line
+#---------------------------------------------------------------------

@@ -1,0 +1,71 @@
+# static routes
+# Type: CLI
+
+#config vdom
+#edit root
+config router static
+edit 1
+set gateway 10.$(ship_IP).254.249
+set device "port8"
+set comment "ROUTE_TO_CORP_OUTSIDE"
+next
+edit 2
+set gateway 10.$(ship_IP).255.1
+set device "SVC_BD_IN_950"
+set comment "ROUTE_TO_ACI_VRF_PBR"
+next
+edit 3
+set dst 10.$(ship_IP).0.0 255.255.0.0
+set gateway 10.$(ship_IP).254.9
+set device "VLAN_900"
+set comment "ROUTE_TO_CORP_INSIDE"
+next
+edit 4
+set dst 192.168.6.0 255.255.255.0
+set gateway 10.$(ship_IP).254.9
+set device "VLAN_900"
+set comment "ROUTE_BACK_TO_PYW"
+next
+edit 5
+set dst 172.18.28.0 255.255.255.0
+set gateway 10.$(ship_IP).254.25
+set device "SDA_DMZ_TRANSIT"
+set comment "ROUTE_BACK_TO_CLOCK_SYSTEM"
+next
+edit 6
+set dst 172.16.0.0 255.255.0.0
+set gateway 10.$(ship_IP).254.9
+set device "VLAN_900"
+set comment "ROUTE_BACK_TO_VOICE"
+next
+edit 7
+set dst 172.21.200.0 255.255.255.0
+set gateway 10.$(ship_IP).254.9
+set device "VLAN_900"
+set comment "ROUTE_BACK_TO_ITV_SERVERS"
+next
+edit 8
+set dst 172.21.202.0 255.255.255.0
+set gateway 10.$(ship_IP).254.9
+set device "VLAN_900"
+set comment "ROUTE_BACK_TO_ITV_ADMIN"
+next
+edit 9
+set dst 172.21.204.0 255.255.255.0
+set gateway 10.$(ship_IP).254.9
+set device "VLAN_900"
+set comment "ROUTE_BACK_TO_ITV_STORAGE"
+next
+edit 10
+set dst 172.30.42.0 255.255.254.0
+set gateway 10.$(ship_IP).254.9
+set device "VLAN_900"
+set comment "ROUTE_BACK_TO_DIG_SIGN"
+next
+edit 11
+set dst 192.168.12.0 255.255.252.0
+set gateway 10.$(ship_IP).254.9
+set device "VLAN_900"
+set comment "ROUTE_BACK_TO_POS"
+next
+end

@@ -1,0 +1,23 @@
+# test for cleanup config for DD firewalls
+# Type: CLI
+
+config firewall policy
+purge
+end
+config system ntp
+set server-mode disable
+end
+config system dhcp server
+delete 1
+delete 2
+delete 3
+end
+config system interface
+edit "fortilink"
+unset member
+next
+delete "fortilink"
+edit lan
+unset role
+next
+end

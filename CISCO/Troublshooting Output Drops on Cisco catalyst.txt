@@ -1,0 +1,27 @@
+
+Troublshooting Output Drops on Cisco catalyst (UADP) Switches
+https://www.youtube.com/watch?v=ifS1pkigRDY&t=95s
+
+https://www.cisco.com/c/en/us/support/docs/switches/catalyst-9600-series-switches/220491-understand-output-drops-on-high-speed-in.html
+
+
+# Identify the Affected Interface
+
+Identify what interfaces are experiency output drops:
+show int  | in proto|Description:|rate|drops:
+show int  | in is up|Description:|rate|drops:
+
+
+To verify the interface to ASIC mappings, you can run the command:
+show platform software fed <switch|active> ifm mappings
+
+
+# Buffer Allocation
+
+Identify which specific queues are expiriencing the drops:
+show platform hardware fed switch 1 qos queue stats interface Twe1/0/33
+
+Para ver el buffer configuration.
+show platform hardware fed switch 1 qos queue config interface Twe1/0/33
+
+

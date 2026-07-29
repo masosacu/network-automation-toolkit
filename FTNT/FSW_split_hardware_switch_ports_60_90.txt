@@ -1,0 +1,20 @@
+# predefined script for splitting 'internal' port
+# Type: CLI
+
+config firewall policy
+purge
+end
+config system interface
+edit internal
+unset role
+next
+end
+config firewall address
+delete internal
+end
+config system dhcp server
+delete 1
+end
+config system virtual-switch
+delete internal
+end

@@ -1,0 +1,169 @@
+# Configured Items: config system global, config certificate ca, config system ntp, config log fortianalyzer setting, config system dns, config system replacemsg admin "pre_admin-disclaimer-text", config system replacemsg admin "post_admin-disclaimer-text" & config system accprofile.
+
+# Type: CLI
+
+#---------------------------------------------------------------------
+#31.Global_FGT-200G
+#   1.Unassigning interfacs x1, x2, x3 & x4 from #  fortilink to be 
+#     available for use
+#   2.Enabling VDOM mode
+#---------------------------------------------------------------------
+#1.Unassigning interfacs x1, x2, x3 & x4 from #  fortilink to be 
+#  available for use
+#---------------------------------------------------------------------
+config system interface
+    edit fortilink
+        unset member
+    next
+end
+#---------------------------------------------------------------------
+#5.Enabling VDOM mode
+#---------------------------------------------------------------------
+config system global
+    set vdom-mode multi-vdom
+end
+#---------------------------------------------------------------------
+#10.Deleting DHCP Management
+#---------------------------------------------------------------------
+config system dhcp server
+delete 2
+end
+#---------------------------------------------------------------------
+#15.Log disk disable
+#---------------------------------------------------------------------
+config system resource-limits
+unset log-disk-quota
+end
+#End of Line
+#---------------------------------------------------------------------
+#-----------------------------------------------------------------------------
+#Global Provisioning Template:
+#	1.Configuring Global settings
+#	2.Configuring CA Certificates
+#	3.Configuring CA Certificates in VPN settings
+#	4.Configuring NTP settings
+#	5.Configuring FAZ settings
+#	6.Configuring DNS settings
+#	7.Configuring Custom "pre_admin-disclaimer-text" message
+#	8.Configuring Custom "post_admin-disclaimer-text" message
+#-----------------------------------------------------------------------------
+#Configuring global settings
+#-----------------------------------------------------------------------------
+config system global
+    set admin-https-ssl-versions tlsv1-3
+    set admin-lockout-duration 900
+    set admintimeout 30
+    set proxy-auth-timeout 5
+    set management-port-use-admin-sport disable
+    set post-login-banner enable
+    set pre-login-banner enable
+end
+#-----------------------------------------------------------------------------
+#Configuring CA Certificates
+#-----------------------------------------------------------------------------
+config certificate ca
+    edit "SHIP-70_CA2"
+        set ca "-----BEGIN CERTIFICATE-----
+MIIDADCCAeigAwIBAgIgQ0I2QzkwNDlFQ0QzQkQyNTU4NEIzMDQ0QjI4NkFGNTEw
+DQYJKoZIhvcNAQEFBQAwKzEWMBQGA1UEChMNRm9ydGluZXQgTHRkLjERMA8GA1UE
+AxMIRm9ydGluZXQwHhcNMjMwNjEyMjEwNzAwWhcNMzMwNjE2MjEwNzAwWjArMRYw
+FAYDVQQKEw1Gb3J0aW5ldCBMdGQuMREwDwYDVQQDEwhGb3J0aW5ldDCCASIwDQYJ
+KoZIhvcNAQEBBQADggEPADCCAQoCggEBAKpFSC9x1veeEkl4CZBRxbdXkRCV47Tj
+THMTroPzl0wOSUtoXM3sUS8cKcvh8Hhu09A66iFL9yg1EVjy4ahGSqDz1JgYhNbe
+M10kbVdVF2Ruq5sazWRETU1Wmz3SXhMpnSY6WAF7g9Y7mYhrvvDVTvTxYHH85Sxt
+qGBX02mFUpzMszE7W37HTFtkuoxtNRDJeopmOZxIwFV7YMbcWOunjMtBXNfhzPNp
+mEYyQFwnkWgCQEQ1FfPsBxbTUsb9EGhZXGEB0SZ550IzTTKxC6qBvLaGgZ4FAuE+
+hFcYi/wU6UeI39JCKG1PQjAiyChgII9EiNDew+8n/z1bj9ZwJQ+oqd0CAwEAAaMQ
+MA4wDAYDVR0TBAUwAwEB/zANBgkqhkiG9w0BAQUFAAOCAQEAVHkF+t+XY4JyLb5Y
+YXRYjBBXnyO5QH9eHcaY8JByiO11vqKPXeTa9wMc3kkPMO0nHQ8XSd0e1wfYumzf
+BbqGgclMDCclDUELMxrqKsagzK88029DLIhS3fAfkK/BOyQ0wEPVV2b4oogiVnWH
+9xTA+f/VLPOIl+5Z28AtcZnkG/kDgX9qztxdlOwgRurJdq+QMGXWduhDTFZCZitC
+x1YcvnXcZslk6UvIGC5kA0PXJKENKua/2XiAdcCHazpy0n5k+aGOeodEgk2Ai5hc
+tm7VfE5h1V9KXsw0yilPgAWFu4KIXpdcHry++nWMl3Z7uYDPdc8XLEH4BkZbstaP
+8pItLg==
+-----END CERTIFICATE-----"
+    next
+    edit "SHIP-70_CA3"
+        set ca "-----BEGIN CERTIFICATE-----
+MIIDUzCCAjugAwIBAgIgMTg2RjA3OTI1RDU5NTM4Q0JBNDY0MTQxRDRBNDVBQjUw
+DQYJKoZIhvcNAQEFBQAwKzEWMBQGA1UEChMNRm9ydGluZXQgTHRkLjERMA8GA1UE
+AxMIRm9ydGluZXQwHhcNMjUwMzEzMjExMDUzWhcNMzUwMzE4MjExMDUzWjArMRYw
+FAYDVQQKEw1Gb3J0aW5ldCBMdGQuMREwDwYDVQQDEwhGb3J0aW5ldDCCASIwDQYJ
+KoZIhvcNAQEBBQADggEPADCCAQoCggEBAJmZlBuzn8Z3ZzucjtFJZ48lNgqNLUgv
++7lvlEKvfH6BTRaELYe28+E8HYa321BjH0Y7B6jEVvtFQEfjbKIWKKcJVPQ8TOEo
+oGJBFEqTEAUZvxGNCTETYyQfCmoI9FhfPskQWmcZyOYrozm6wrKabvq/ALJoMJUP
+Q+Ml3vgLRnJ7/MzL8wcxn8f/FbP7qk8g7WabnB2Npbj/PKKzky6DgzUBpSPrLz+E
+qti43kCKMScqFRNGRIY2XiIcVv+oTK/vz0R6qS5IDE+HmRJ5hALj8OPNmpsvHOI2
+njWJNr03dYMpGoy5hV5HziRqJ0/yB+pgGU5k5W4NN5fgVVm0HFTzt/MCAwEAAaNj
+MGEwHQYDVR0OBBYEFGM1SyI168fPXk2FJYkhIlVP5afkMB8GA1UdIwQYMBaAFGM1
+SyI168fPXk2FJYkhIlVP5afkMA8GA1UdEwEB/wQFMAMBAf8wDgYDVR0PAQH/BAQD
+AgGGMA0GCSqGSIb3DQEBBQUAA4IBAQBOlf6XDGsUuSrp2WvqBV4kouKtlueXu/qZ
+N2/OAzTel9BOi1IhEo6E03FHdNfBbDzAjCYjz/gOcLmxd82oP7GYEra4NJyozQbY
+CK3AbtRhqJAIyhF5mCtdanLPP7KBiOEsgHVdjFVcyv7HMev7I2NIDZEn3keaS1mW
+i7M0hLs9bKFPgqTevUhmE7L5YIe/3KjKnXxBxlMl8AAzhu5TPgYfXrMZirZ2lxwB
+UX3QR/67COfp/4vRviVxJVgDna7lRSLLTYLUEch/kBCtatXwY+ma9RfqhZ96IlVF
+vK8YYxAuV91PBva2eIEvToGlncMAiKgjfly3xS8YXfikrQ7kAQbX
+-----END CERTIFICATE-----"
+    next
+end
+#-----------------------------------------------------------------------------
+#Configuring CA Certificates in VPN settings
+#-----------------------------------------------------------------------------
+config vpn certificate ca
+    edit "SHIP-70_CA2"
+        set range global
+    next
+    edit "SHIP-70_CA3"
+        set range global
+    next
+end
+#-----------------------------------------------------------------------------
+#Configuring NTP settings
+#-----------------------------------------------------------------------------
+config system ntp
+    set ntpsync enable
+    set type custom
+    config ntpserver
+        edit 1
+            set server "ntp.$(ship_NAME_CAP).ncl.com"           
+        next
+        edit 2
+            set server "awsssntp01lv.nclmiami.ncl.com"
+    end
+end
+#-----------------------------------------------------------------------------
+#Configuring FAZ settings
+#-----------------------------------------------------------------------------
+config log fortianalyzer setting
+    set status enable
+    set server "10.$(ship_IP).0.49"
+    set certificate-verification disable
+    set upload-option realtime
+end
+#-----------------------------------------------------------------------------
+#Configuring DNS settings
+#-----------------------------------------------------------------------------
+config system dns
+    set primary 10.$(ship_IP).50.26
+#   set secondary 10.$(ship_IP).50.24
+	set secondary 10.150.162.87
+    set domain "$(ship_NAME_CAP).ncl.com"
+end
+#-----------------------------------------------------------------------------
+#Configuring custom "pre_admin-disclaimer-text" message
+#-----------------------------------------------------------------------------
+config system replacemsg admin "pre_admin-disclaimer-text"
+    set buffer "WARNING: THIS SYSTEM IS FOR THE USE OF NCL EMPLOYEES AND AUTHORIZED CONTRACTORS. ANY USE OTHER THAN NORMAL BUSINESS IS STRICTLY FORBIDDEN."
+end
+#-----------------------------------------------------------------------------
+#Configuring custom "post_admin-disclaimer-text" message
+#-----------------------------------------------------------------------------
+config system replacemsg admin "post_admin-disclaimer-text"
+    set buffer "ALL ACTIVITIES ON THIS SYSTEM ARE LOGGED AND MONITORED.
+
+WARNING: The use of this system may be monitored and recorded for administrative and security reasons. Anyone accessing this system expressly consents to such monitoring. Be advised that if such monitoring reveals unauthorized use or activity, NCL will take such reasonable rule action as it deems appropriate to prevent such unauthorized activity."
+    set format html
+end
+#-----------------------------------------------------------------------------
+#End of Line
+#-----------------------------------------------------------------------------

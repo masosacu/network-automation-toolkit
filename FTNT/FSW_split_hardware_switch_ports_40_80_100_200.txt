@@ -1,0 +1,20 @@
+# split_hardware_switch_ports_40_80_100_200
+# Type: CLI
+
+config firewall policy
+delete 1
+end
+config system interface
+edit lan
+unset role
+next
+end
+config firewall address
+delete lan
+end
+config system dhcp server
+delete 1
+end
+config system virtual-switch
+delete lan
+end
