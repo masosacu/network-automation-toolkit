@@ -1,0 +1,5 @@
+FortiGate 
+Backup configuration
+
+execute backup config ftp <filename> <ftp-server>
+Alternatively, from the GUI: Dashboard → System Information → Configuration → Backup.

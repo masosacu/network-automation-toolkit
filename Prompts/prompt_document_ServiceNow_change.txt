@@ -1,7 +1,30 @@
 # Prompt to document ServiceNow change.
 
 I am creating a ServiceNow change to replace a member switch on a stack of Cisco switches model 2960 in NCLH Navigator ship HUB NAV-HUB407B to remediate PoE issue. Change is related to incident INC0961729.
+
 Could you generate a "Short description ", "Description ", "Justification ", "Implementation plan ", "Backout plan " and "Test plan" for this change?
+
+Ask me any clarifying questions you need before create the change.
+
+---------------------------------------------
+
+I am creating a ServiceNow change to change the domain on GSC from nclmiami.ncl.com to new doamin gsc.ncl.com. Main activities include the following, but also add a note that any need task that apear during the change execution should be added.
+
+1. Update ip domain name con cisco switches.
+2. Remove Forescout IP address on ip helper-address configuration.
+3. Update doamin name on DHCP Server.
+4. Firewall update doamin name.
+5. Firewall create LDAP server for new doamin, using LDAPS.
+6. Firewall Create FSSO Rules for users on the new domain.
+7. Firewall DNS database add new records for Guest Portal. When migration is completed old records must be deleted.
+8. AirWave change hostname to new doamin.
+8. Cisco ISE update fqdn, doamin join, reverse DNS record and Certificates.
+9. DC 10.142.50.26 must be migrated to new domain at the end of the change.
+
+Could you generate a "Short description ", "Description ", "Justification ", "Implementation plan ", "Backout plan " and "Test plan" for this change?
+
+Ask me any clarifying questions you need before create the change.
+
 
 
 

@@ -29,3 +29,44 @@ end
 #---------------------------------------------------------------------
 #End of Line
 #---------------------------------------------------------------------
+
+
+
+#---------------------------------------------------------------------
+#1.Configure the HA setting - POM143
+#---------------------------------------------------------------------
+config system ha
+ set mode a-p
+ set group-name POM143
+ set group-id 143
+ set password xxxxxxxxxxxxx
+ set hbdev "port7" 50 "port8" 60
+ set session-pickup enable
+ set session-pickup-connectionless enable
+ set override disable
+ set priority 200
+! set monitor "port1"
+end
+
+set hbdev ha 200 port1 100
+set hbdev "ha1" 10 "ha2" 20
+
+! set hbdev [interface] [priority]
+! High priority win.
+
+
+! Checking the HA Status:
+# get system ha status
+
+- Display the member checksum:
+# diagnose sys ha checksum show
+
+- Display the checksum for all members:
+# diagnose sys ha checksum cluster
+
+- If the checksum doesn't match try running:
+# diagnose sys ha checksum recalculate
+
+
+
+Set Up a Reserved HA Management Interface <-- Review

@@ -112,3 +112,24 @@
 2026-07-01 12:27:22,249 INFO Auth banner: b'C\r\nWARNING: THIS SYSTEM IS FOR THE USE OF NCL EMPLOYEES AND\r\nAUTHORIZED CONTRACTORS. ANY USE OTHER THAN NORMAL BUSINESS\r\nIS STRICTLY FORBIDDEN.\r\nAll Miami-Dade County, State of Florida and United States GSA Regulations\r\nand laws apply and will be enforced to the fullest extent of the law.\r\nThis system is CERT Certified and Monitored by Security.\r\n'
 2026-07-01 12:27:22,569 INFO Authentication (password) successful!
 2026-07-01 12:27:25,159 INFO SUCCESS 10.99.10.15
+2026-07-30 17:28:23,111 ERROR Timeout: 10.99.88.20
+2026-07-30 17:28:23,258 INFO Connected (version 2.0, client Cisco-1.25)
+2026-07-30 17:28:24,564 INFO Auth banner: b'\r\nWARNING: THIS SYSTEM IS FOR THE USE OF NCL EMPLOYEES AND\r\nAUTHORIZED CONTRACTORS. ANY USE OTHER THAN NORMAL BUSINESS\r\nIS STRICTLY FORBIDDEN.\r\nAll Miami-Dade County, State of Florida and United States GSA Regulations\r\nand laws apply and will be enforced to the fullest extent of the law.\r\nThis system is CERT Certified and Monitored by Security.\r\n'
+2026-07-30 17:28:25,566 INFO Authentication (password) successful!
+2026-07-30 17:28:27,923 INFO SUCCESS 10.99.88.5
+2026-07-30 17:28:28,084 INFO Connected (version 2.0, client Cisco-1.25)
+2026-07-30 17:28:29,407 INFO Auth banner: b'\r\nWARNING: THIS SYSTEM IS FOR THE USE OF NCL EMPLOYEES AND\r\nAUTHORIZED CONTRACTORS. ANY USE OTHER THAN NORMAL BUSINESS\r\nIS STRICTLY FORBIDDEN.\r\nAll Miami-Dade County, State of Florida and United States GSA Regulations\r\nand laws apply and will be enforced to the fullest extent of the law.\r\nThis system is CERT Certified and Monitored by Security.\r\n'
+2026-07-30 17:28:29,671 INFO Authentication (password) successful!
+2026-07-30 17:28:32,035 INFO SUCCESS 10.99.88.6
+2026-07-30 17:28:32,197 INFO Connected (version 2.0, client Cisco-1.25)
+2026-07-30 17:28:33,015 INFO Auth banner: b'CC\r\nWARNING: THIS SYSTEM IS FOR THE USE OF NCL EMPLOYEES AND\r\nAUTHORIZED CONTRACTORS. ANY USE OTHER THAN NORMAL BUSINESS\r\nIS STRICTLY FORBIDDEN.\r\nAll Miami-Dade County, State of Florida and United States GSA Regulations\r\nand laws apply and will be enforced to the fullest extent of the law.\r\nThis system is CERT Certified and Monitored by Security.\r\n'
+2026-07-30 17:28:33,278 INFO Authentication (password) successful!
+2026-07-30 17:28:35,877 INFO SUCCESS 10.99.88.10
+2026-07-30 17:28:45,883 ERROR Timeout: 10.99.88.14
+2026-07-30 17:28:55,889 ERROR Timeout: 10.99.88.12
+2026-07-30 17:29:05,907 ERROR Timeout: 10.99.88.13
+2026-07-30 17:29:15,923 ERROR Timeout: 10.99.88.11
+2026-07-30 17:29:16,148 INFO Connected (version 2.0, client OpenSSH_7.9)
+2026-07-30 17:29:16,677 INFO Auth banner: b'\nUnauthorized access prohibited.  This product or the use of this\nproduct is covered by one or more of the following U.S. Patents:\n9,626,224; 9,613,071; 9,584,403; 9,549,048; 9,438,538; 9,397,951;\n9,363,309; 9,363,248; 9,253,277; 9,191,342; 9,152,574; 9,143,455;\n9,130,991; 9,092,342; 9,036,662; 8,930,650; 8,929,402; 8,929,380;\n8,885,632; 8,811,431; 8,755,381; 8,743,683; 8,738,865; 8,732,423;\n8,725,988; 8,595,314; 8,489,562; 8,473,714; 8,442,052; 8,392,684;\n8,370,583; 8,312,226; 8,307,115; 8,225,072; 8,171,238; 8,095,774;\n7,948,921; 7,945,736; 7,698,431; 7,644,230; 7,630,295; 7,571,344.\nBy using this product, you agree to be bound by the terms of Silver\nPeak Systems Inc. End User License Agreement.\n\nThe End User License Agreement can be viewed at\nhttp://www.silver-peak.com/download/latest/EULA.html\n\n----------------------------------------------------------------------\n -------------------------------------------------------------------------\n NORWEGIAN CRUISE LINE HOLDINGS LTD.\n -------------------------------------------------------------------------\n WARNING: THIS SYSTEM IS FOR THE USE OF NCL EMPLOYEES AND\n AUTHORIZED CONTRACTORS. ANY USE OTHER THAN NORMAL BUSINESS\n IS STRICTLY FORBIDDEN.\n\n All Miami-Dade County, State of Florida, and United States GSA Regulations\n and laws apply and will be enforced to the fullest extent of the law.\n\n This system is CERT Certified and Monitored by Security.\n --------------------------------------------------------------------------\n\n'
+2026-07-30 17:29:17,855 INFO Authentication (keyboard-interactive) successful!
+2026-07-30 17:29:23,929 INFO SUCCESS 10.99.88.51
